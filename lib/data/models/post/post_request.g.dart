@@ -13,7 +13,7 @@ _$_PostRequest _$$_PostRequestFromJson(Map<String, dynamic> json) =>
       contents: json['contents'] as String,
       images:
           (json['images'] as List<dynamic>).map((e) => e as String).toList(),
-      postType: json['postType'] as String,
+      postType: $enumDecode(_$PostTypeEnumMap, json['postType']),
     );
 
 Map<String, dynamic> _$$_PostRequestToJson(_$_PostRequest instance) =>
@@ -22,5 +22,10 @@ Map<String, dynamic> _$$_PostRequestToJson(_$_PostRequest instance) =>
       'title': instance.title,
       'contents': instance.contents,
       'images': instance.images,
-      'postType': instance.postType,
+      'postType': _$PostTypeEnumMap[instance.postType],
     };
+
+const _$PostTypeEnumMap = {
+  PostType.NORMAR: 'NORMAR',
+  PostType.NOTICE: 'NOTICE',
+};

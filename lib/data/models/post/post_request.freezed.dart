@@ -26,7 +26,7 @@ class _$PostRequestTearOff {
       required String title,
       required String contents,
       required List<String> images,
-      required String postType}) {
+      required PostType postType}) {
     return _PostRequest(
       groupId: groupId,
       title: title,
@@ -50,7 +50,7 @@ mixin _$PostRequest {
   String get title => throw _privateConstructorUsedError;
   String get contents => throw _privateConstructorUsedError;
   List<String> get images => throw _privateConstructorUsedError;
-  String get postType => throw _privateConstructorUsedError;
+  PostType get postType => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -68,7 +68,7 @@ abstract class $PostRequestCopyWith<$Res> {
       String title,
       String contents,
       List<String> images,
-      String postType});
+      PostType postType});
 }
 
 /// @nodoc
@@ -107,7 +107,7 @@ class _$PostRequestCopyWithImpl<$Res> implements $PostRequestCopyWith<$Res> {
       postType: postType == freezed
           ? _value.postType
           : postType // ignore: cast_nullable_to_non_nullable
-              as String,
+              as PostType,
     ));
   }
 }
@@ -124,7 +124,7 @@ abstract class _$PostRequestCopyWith<$Res>
       String title,
       String contents,
       List<String> images,
-      String postType});
+      PostType postType});
 }
 
 /// @nodoc
@@ -165,7 +165,7 @@ class __$PostRequestCopyWithImpl<$Res> extends _$PostRequestCopyWithImpl<$Res>
       postType: postType == freezed
           ? _value.postType
           : postType // ignore: cast_nullable_to_non_nullable
-              as String,
+              as PostType,
     ));
   }
 }
@@ -192,7 +192,7 @@ class _$_PostRequest implements _PostRequest {
   @override
   final List<String> images;
   @override
-  final String postType;
+  final PostType postType;
 
   @override
   String toString() {
@@ -237,7 +237,7 @@ abstract class _PostRequest implements PostRequest {
       required String title,
       required String contents,
       required List<String> images,
-      required String postType}) = _$_PostRequest;
+      required PostType postType}) = _$_PostRequest;
 
   factory _PostRequest.fromJson(Map<String, dynamic> json) =
       _$_PostRequest.fromJson;
@@ -251,7 +251,7 @@ abstract class _PostRequest implements PostRequest {
   @override
   List<String> get images;
   @override
-  String get postType;
+  PostType get postType;
   @override
   @JsonKey(ignore: true)
   _$PostRequestCopyWith<_PostRequest> get copyWith =>
