@@ -14,8 +14,10 @@ class DioLogger extends Interceptor {
   static const String tabStep = '    ';
   final bool compact;
   final int maxWidth;
+  final String dioName;
 
-  DioLogger({
+  DioLogger(
+    this.dioName, {
     this.request = true,
     this.requestHeader = true,
     this.requestBody = true,
@@ -28,6 +30,7 @@ class DioLogger extends Interceptor {
 
   @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
+    log('========== $dioName request ==========');
     if (request) {
       _printRequestHeader(options);
     }
@@ -62,6 +65,7 @@ class DioLogger extends Interceptor {
 
   @override
   void onError(DioError err, ErrorInterceptorHandler handler) {
+    log('========== $dioName error ==========');
     if (error) {
       if (err.type == DioErrorType.response) {
         final uri = err.response?.requestOptions.uri;
@@ -84,6 +88,7 @@ class DioLogger extends Interceptor {
 
   @override
   void onResponse(Response response, ResponseInterceptorHandler handler) {
+    log('========== $dioName response ==========');
     _printResponseHeader(response);
     if (responseHeader) {
       final responseHeaders = <String, String>{};
