@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.malmomalmo.momo_flutter">
    <application
-        android:label="momo_flutter"
+        android:label="모모"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
