@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:momo_flutter/app_config.dart';
 import 'package:momo_flutter/data/datasources/local/app_database.dart';
 import 'package:momo_flutter/data/datasources/remote/auth_client_provider.dart';
 import 'package:momo_flutter/data/models/auth/refresh_request.dart';
@@ -9,9 +10,9 @@ final dioProvider = Provider<Dio>((ref) {
   final db = ref.watch(appDatabaseProvider);
   final tokenData = db.getTokenData() ??
       TokenData(
-        accessToken: 'unknown',
-        refreshToken: 'unknown',
-        accessTokenType: 'unknown',
+        accessToken: AppConfig.unknown,
+        refreshToken: AppConfig.unknown,
+        accessTokenType: AppConfig.unknown,
       );
 
   final dio = Dio(
@@ -35,7 +36,7 @@ final dioProvider = Provider<Dio>((ref) {
               .refreshLogin(
             RefreshRequest(
               refreshToken: tokenData.refreshToken,
-              deviceCode: '',
+              deviceCode: AppConfig.deviceCode,
             ),
           )
               .then(
