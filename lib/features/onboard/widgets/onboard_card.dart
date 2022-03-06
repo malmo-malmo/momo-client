@@ -25,9 +25,7 @@ class OnboardingCard extends StatelessWidget {
           const SizedBox(height: 24),
           Text(
             title,
-            style: AppStyles.bold28.copyWith(
-              color: AppColors.gray0,
-            ),
+            style: AppStyles.bold24,
             textAlign: TextAlign.center,
           ),
           const SizedBox(height: 56),

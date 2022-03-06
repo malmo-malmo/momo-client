@@ -38,17 +38,17 @@ abstract class AppTheme {
         backgroundColor: MaterialStateProperty.resolveWith(
           (states) {
             if (states.contains(MaterialState.disabled)) {
-              return AppColors.purple;
+              return AppColors.gray3;
             }
-            return AppColors.gray3;
+            return AppColors.purple;
           },
         ),
         foregroundColor: MaterialStateProperty.resolveWith(
           (states) {
             if (states.contains(MaterialState.disabled)) {
-              return AppColors.gray0;
+              return AppColors.gray5;
             }
-            return AppColors.gray5;
+            return AppColors.gray0;
           },
         ),
         elevation: MaterialStateProperty.all(0),

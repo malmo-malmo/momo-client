@@ -9,6 +9,14 @@ abstract class AppStyles {
     height: 84 / 28,
   );
 
+  static const bold24 = TextStyle(
+    fontSize: 24,
+    fontWeight: AppDimens.bold,
+    color: AppColors.gray0,
+    letterSpacing: -0.24,
+    height: 32 / 24,
+  );
+
   static const bold20 = TextStyle(
     fontSize: 20,
     fontWeight: AppDimens.bold,

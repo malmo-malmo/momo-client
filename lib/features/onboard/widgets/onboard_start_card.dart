@@ -55,20 +55,27 @@ class OnboardStartCard extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 68),
-            loadAsset(AppImages.onboard4Bottom),
+            loadAsset(
+              AppImages.onboard4Bottom,
+              width: 190,
+            ),
             const SizedBox(height: 20),
             Text(
               AppStrings.onboardTitle4,
-              style: AppStyles.bold20.copyWith(color: AppColors.purple),
+              style: AppStyles.bold24.copyWith(
+                color: AppColors.purple,
+              ),
               textAlign: TextAlign.center,
             ),
-            const SizedBox(height: 88),
-            BottomButton(
-              isEnable: true,
-              buttonTitle: AppStrings.startMomo,
-              onPressed: () {},
+            const SizedBox(height: 52),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 36),
+              child: BottomButton(
+                isEnable: true,
+                buttonTitle: AppStrings.startMomo,
+                onPressed: () {},
+              ),
             ),
-            const SizedBox(height: 36),
           ],
         ),
       ),
