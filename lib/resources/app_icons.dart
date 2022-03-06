@@ -22,11 +22,11 @@ abstract class AppIcons {
   static const tabHomeOff = 'assets/icon/tab/tabicon_homegray_32.svg';
   static const tabSearchOn = 'assets/icon/tab/tabicon_searchpurple_32.svg';
   static const tabSearchOff = 'assets/icon/tab/tabicon_searchgray_32.svg';
-  static const tabCalendarOn = 'assets/icon/tab/tabicon_calendarpurple_32.svg';
+  static const tabCalendarOn = 'assets/icon/tab/tabicon_calenderpurple_32.svg';
   static const tabCalendarOff = 'assets/icon/tab/tabicon_calendargray_32.svg';
-  static const tabMyGrupOn = 'assets/icon/tab/tabicon_mymoimpurple_32.svg';
-  static const tabMyGrupOff = 'assets/icon/tab/tabicon_mymoimgray_32.svg';
-  static const tabMyPageOn = 'assets/icon/tab/tabicon_mypagepurple_32.svg';
+  static const tabMyGroupOn = 'assets/icon/tab/tabicon_mymoimpurple_32.svg';
+  static const tabMyGroupOff = 'assets/icon/tab/tabicon_mymoimgray_32.svg';
+  static const tabMyPageOn = 'assets/icon/tab/tabicon_mypagepurple.svg';
   static const tabMyPageOff = 'assets/icon/tab/tabicon_mypagegray_32.svg';
 
   static const onboard1 = 'assets/icon/onboarding/icon_onboard_1.svg';

@@ -15,6 +15,7 @@ abstract class AppColors {
   static const backgroundWhite = Color(0xffffffff);
   static const dimColor = Color(0xff707070);
   static const lineGrayPurple = Color(0xffdcd9e5);
+  static const blur = Color(0x1aa59ad0);
 
   static const gray0 = Color(0xfffdfdfd);
   static const gray1 = Color(0xfff7f7f7);

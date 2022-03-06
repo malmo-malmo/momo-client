@@ -41,6 +41,14 @@ abstract class AppStyles {
     height: 24 / 16,
   );
 
+  static const regular15 = TextStyle(
+    fontSize: 15,
+    fontWeight: AppDimens.regular,
+    color: AppColors.gray6,
+    letterSpacing: -0.15,
+    height: 23 / 15,
+  );
+
   static const regular14 = TextStyle(
     fontSize: 14,
     fontWeight: AppDimens.regular,
@@ -63,5 +71,13 @@ abstract class AppStyles {
     color: AppColors.gray5,
     letterSpacing: -0.11,
     height: 19 / 11,
+  );
+
+  static const regular10 = TextStyle(
+    fontSize: 10,
+    fontWeight: AppDimens.regular,
+    color: AppColors.gray0,
+    letterSpacing: -0.1,
+    height: 18 / 10,
   );
 }

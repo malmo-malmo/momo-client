@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:momo_flutter/features/main/main_page.dart';
 import 'package:momo_flutter/features/onboard/onboard_page.dart';
 
 abstract class AppRoutes {
@@ -8,6 +9,9 @@ abstract class AppRoutes {
     switch (settings.name) {
       case OnboardPage.routeName:
         _page = const OnboardPage();
+        break;
+      case MainPage.routeName:
+        _page = const MainPage();
         break;
       default:
         break;

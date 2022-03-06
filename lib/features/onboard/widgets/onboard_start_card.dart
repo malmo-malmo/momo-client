@@ -20,36 +20,14 @@ class OnboardStartCard extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  SizedBox(
-                    height: 216,
-                    child: AspectRatio(
-                      aspectRatio: 2 / 5,
-                      child: Container(
-                        decoration: const BoxDecoration(
-                          image: DecorationImage(
-                            fit: BoxFit.fitHeight,
-                            alignment: FractionalOffset.centerRight,
-                            image: AssetImage(AppImages.onboard4Right),
-                          ),
-                        ),
-                      ),
-                    ),
+                  const _OnboardSideImage(
+                    AppImages.onboard4Left,
                   ),
-                  Image.asset(AppImages.onboard4Center),
-                  SizedBox(
-                    height: 216,
-                    child: AspectRatio(
-                      aspectRatio: 2 / 5,
-                      child: Container(
-                        decoration: const BoxDecoration(
-                          image: DecorationImage(
-                            fit: BoxFit.fitHeight,
-                            alignment: FractionalOffset.centerLeft,
-                            image: AssetImage(AppImages.onboard4Left),
-                          ),
-                        ),
-                      ),
-                    ),
+                  Image.asset(
+                    AppImages.onboard4Center,
+                  ),
+                  const _OnboardSideImage(
+                    AppImages.onboard4Right,
                   ),
                 ],
               ),
@@ -77,6 +55,34 @@ class OnboardStartCard extends StatelessWidget {
               ),
             ),
           ],
+        ),
+      ),
+    );
+  }
+}
+
+class _OnboardSideImage extends StatelessWidget {
+  const _OnboardSideImage(
+    this.image, {
+    Key? key,
+  }) : super(key: key);
+
+  final String image;
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: 216,
+      child: AspectRatio(
+        aspectRatio: 2 / 5,
+        child: Container(
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              fit: BoxFit.fitHeight,
+              alignment: FractionalOffset.centerLeft,
+              image: AssetImage(image),
+            ),
+          ),
         ),
       ),
     );

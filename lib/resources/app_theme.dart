@@ -60,6 +60,10 @@ abstract class AppTheme {
         textStyle: MaterialStateProperty.all(AppStyles.bold16),
       ),
     ),
+    floatingActionButtonTheme: const FloatingActionButtonThemeData(
+      backgroundColor: AppColors.purple,
+    ),
+    shadowColor: AppColors.blur,
   );
 }
 
