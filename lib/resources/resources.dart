@@ -6,3 +6,4 @@ part './app_images.dart';
 part './app_strings.dart';
 part './app_styles.dart';
 part './app_theme.dart';
+part './app_colors.dart';
