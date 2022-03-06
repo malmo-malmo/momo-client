@@ -1,17 +1,23 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:hive_flutter/hive_flutter.dart';
+import 'package:momo_flutter/data/datasources/local/app_database.dart';
 import 'package:momo_flutter/data/datasources/remote/auth_client_provider.dart';
 import 'package:momo_flutter/data/models/auth/refresh_request.dart';
 import 'package:momo_flutter/data/models/auth/token_data.dart';
 
 final dioProvider = Provider<Dio>((ref) {
-  TokenData tokenData = Hive.box('auth').get('tokenData');
+  final db = ref.watch(appDatabaseProvider);
+  final tokenData = db.getTokenData() ??
+      TokenData(
+        accessToken: 'unknown',
+        refreshToken: 'unknown',
+        accessTokenType: 'unknown',
+      );
 
   final dio = Dio(
     BaseOptions(
       headers: {
-        'Authorization': '${tokenData.accessTokenType} ${tokenData.accessToken}'
+        'Authorization': '${tokenData.accessTokenType} ${tokenData.accessToken}',
       },
       connectTimeout: 10000,
     ),
@@ -26,17 +32,18 @@ final dioProvider = Provider<Dio>((ref) {
           RequestOptions options = error.response!.requestOptions;
 
           authClient
-              .refreshLogin(RefreshRequest(
-                  refreshToken: tokenData.refreshToken, deviceCode: ''))
+              .refreshLogin(
+            RefreshRequest(
+              refreshToken: tokenData.refreshToken,
+              deviceCode: '',
+            ),
+          )
               .then(
             (response) {
-              Hive.box('auth').put('tokenData', response);
-              options.headers['Authorization'] =
-                  '${response.accessTokenType} ${response.accessToken}';
+              db.setTokenData(response);
+              options.headers['Authorization'] = '${response.accessTokenType} ${response.accessToken}';
             },
-          ).then(
-            (e) => dio.fetch(options).then((r) => handler.resolve(r)),
-          );
+          ).then((e) => dio.fetch(options).then((r) => handler.resolve(r)));
         }
         return handler.next(error);
       },
