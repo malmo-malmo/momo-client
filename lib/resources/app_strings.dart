@@ -23,4 +23,9 @@ abstract class AppStrings {
   static const add = '추가';
   static const complete = '완료';
   static const edit = '수정';
+
+  static const onboardTitle1 = '리마인더로\n오늘의 모임을 확인하고';
+  static const onboardTitle2 = '내 모임에서 직접 확인하고\n새로운 모임도 만들어요';
+  static const onboardTitle3 = '모든 일정 관리는\n캘린더 & 타임라인에서!';
+  static const onboardTitle4 = '추천, 내 주변, 학교\n관련 모임까지 한 눈에';
 }

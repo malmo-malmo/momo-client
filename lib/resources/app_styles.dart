@@ -41,19 +41,19 @@ abstract class AppStyles {
     height: 22 / 14,
   );
 
-  static const bold12 = TextStyle(
+  static const regular12 = TextStyle(
     fontSize: 12,
-    fontWeight: AppDimens.bold,
-    color: AppColors.gray6,
+    fontWeight: AppDimens.regular,
+    color: AppColors.gray0,
     letterSpacing: -0.12,
     height: 20 / 12,
   );
 
-  static const regular12 = TextStyle(
-    fontSize: 12,
+  static const regular11 = TextStyle(
+    fontSize: 11,
     fontWeight: AppDimens.regular,
-    color: AppColors.gray6,
-    letterSpacing: -0.12,
-    height: 20 / 12,
+    color: AppColors.gray5,
+    letterSpacing: -0.11,
+    height: 19 / 11,
   );
 }

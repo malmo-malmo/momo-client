@@ -2,9 +2,26 @@ part of 'resources.dart';
 
 abstract class AppTheme {
   static final light = ThemeData(
+    appBarTheme: const AppBarTheme(
+      backgroundColor: Colors.transparent,
+      toolbarHeight: 56,
+      elevation: 0,
+      centerTitle: false,
+      titleSpacing: 0,
+    ),
     fontFamily: 'NanumSquareOTF',
-    inputDecorationTheme: const InputDecorationTheme(
+    textTheme: const TextTheme(
+      subtitle1: AppStyles.regular16,
+    ),
+    scaffoldBackgroundColor: AppColors.backgroundWhite,
+    textSelectionTheme: const TextSelectionThemeData(
+      cursorColor: AppColors.gray6,
+    ),
+    inputDecorationTheme: InputDecorationTheme(
       border: InputBorder.none,
+      hintStyle: AppStyles.regular16.copyWith(
+        color: AppColors.gray4,
+      ),
     ),
     dialogTheme: DialogTheme(
       shape: RoundedRectangleBorder(
@@ -21,17 +38,17 @@ abstract class AppTheme {
         backgroundColor: MaterialStateProperty.resolveWith(
           (states) {
             if (states.contains(MaterialState.disabled)) {
-              return Colors.red;
+              return AppColors.purple;
             }
-            return Colors.blue;
+            return AppColors.gray3;
           },
         ),
         foregroundColor: MaterialStateProperty.resolveWith(
           (states) {
             if (states.contains(MaterialState.disabled)) {
-              return Colors.red;
+              return AppColors.gray0;
             }
-            return Colors.blue;
+            return AppColors.gray5;
           },
         ),
         elevation: MaterialStateProperty.all(0),
@@ -40,6 +57,7 @@ abstract class AppTheme {
             borderRadius: BorderRadius.circular(20),
           ),
         ),
+        textStyle: MaterialStateProperty.all(AppStyles.bold16),
       ),
     ),
   );
@@ -47,8 +65,7 @@ abstract class AppTheme {
 
 class AppScrollBehavior extends ScrollBehavior {
   @override
-  Widget buildViewportChrome(
-      BuildContext context, Widget child, AxisDirection axisDirection) {
+  Widget buildViewportChrome(BuildContext context, Widget child, AxisDirection axisDirection) {
     return child;
   }
 }

@@ -5,9 +5,26 @@ class MainPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
       body: Center(
-        child: Text('메인페이지'),
+        child: Column(
+          children: [
+            const Text('메인페이지'),
+            ElevatedButton(
+              onPressed: () {},
+              child: const Text('활성화'),
+            ),
+            const ElevatedButton(
+              onPressed: null,
+              child: Text('비활성화'),
+            ),
+            TextFormField(
+              decoration: const InputDecoration(
+                hintText: '힌트텍스트',
+              ),
+            )
+          ],
+        ),
       ),
     );
   }
