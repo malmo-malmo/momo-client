@@ -30,4 +30,10 @@ abstract class AppStrings {
   static const onboardTitle2 = '내 모임에서 직접 확인하고\n새로운 모임도 만들어요';
   static const onboardTitle3 = '모든 일정 관리는\n캘린더 & 타임라인에서!';
   static const onboardTitle4 = '추천, 내 주변, 학교\n관련 모임까지 한 눈에';
+
+  static const termsTitle = '약관동의 1/3';
+  static const termsSubTitle = '간단한 약관동의 후 편리한 모임 서비스를\n이용하실 수 있어요 :)';
+  static const privacyPolicy = '개인정보 수집 제공 동의 (필수)';
+  static const thirdPartyPolicy = '제 3자 정보제공 동의 (필수)';
+  static const marketingPolicy = '이벤트 수신 동의 (선택)';
 }
