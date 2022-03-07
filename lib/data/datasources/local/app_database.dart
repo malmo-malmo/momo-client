@@ -12,7 +12,7 @@ class AppDatabase {
 
   TokenData? getTokenData() => Hive.box<TokenData>(authKey).get(tokenDataKey);
 
-  void setTokenData(TokenData tokenData) async {
-    await Hive.box<TokenData>(authKey).put(tokenDataKey, tokenData);
+  void setTokenData(TokenData tokenData) {
+    Hive.box<TokenData>(authKey).put(tokenDataKey, tokenData);
   }
 }

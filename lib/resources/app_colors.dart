@@ -17,6 +17,10 @@ abstract class AppColors {
   static const lineGrayPurple = Color(0xffdcd9e5);
   static const blur = Color(0x1aa59ad0);
 
+  static const kakaoYellow = Color(0xfffee500);
+  static const kakaoIcon = Color(0xff191700);
+  static const kakaoText = Color(0xff191919);
+
   static const gray0 = Color(0xfffdfdfd);
   static const gray1 = Color(0xfff7f7f7);
   static const gray2 = Color(0xfff0f0f0);
