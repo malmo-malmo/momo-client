@@ -2,9 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:momo_flutter/app_config.dart';
-import 'package:momo_flutter/data/datasources/remote/retrofit/user_client.dart';
 import 'package:momo_flutter/resources/resources.dart';
 import 'package:momo_flutter/utils/calculate_offset.dart';
 import 'package:momo_flutter/widgets/input_field/custom_drop_down_list.dart';

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:momo_flutter/features/profile/providers/profile_update_provider.dart';
-import 'package:momo_flutter/providers/user_provider.dart';
+import 'package:momo_flutter/features/profile/provider/profile_update_provider.dart';
+import 'package:momo_flutter/provider/user_provider.dart';
 import 'package:momo_flutter/resources/resources.dart';
 import 'package:momo_flutter/widgets/dialog/confirm_dialog.dart';
 

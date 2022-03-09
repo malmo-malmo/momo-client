@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:momo_flutter/features/profile/providers/category_provider.dart';
+import 'package:momo_flutter/features/profile/provider/category_provider.dart';
 import 'package:momo_flutter/resources/resources.dart';
 import 'package:momo_flutter/widgets/button/category_button.dart';
 

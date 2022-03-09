@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:momo_flutter/features/main/main_bottom_navigation_bar.dart';
+import 'package:momo_flutter/resources/resources.dart';
+import 'package:momo_flutter/utils/load_asset.dart';
+import 'package:momo_flutter/widgets/card/profile_image_card.dart';
+import 'package:momo_flutter/widgets/title/main_title.dart';
+import 'package:momo_flutter/widgets/title/sub_title_row.dart';
 
 class Mypage extends StatelessWidget {
   const Mypage({Key? key}) : super(key: key);
@@ -7,10 +12,98 @@ class Mypage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Text('마이페이지'),
+      bottomNavigationBar: const MainBottomNavigationBar(),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            const SizedBox(height: 40),
+            Align(
+              alignment: Alignment.centerRight,
+              child: InkWell(
+                onTap: () {},
+                child: loadAsset(AppIcons.setting),
+              ),
+            ),
+            const SizedBox(height: 16),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: const [
+                MainTitle('모모님의\n마이페이지'),
+                ProfileImageCard(
+                  img: 'https://file.mk.co.kr/meet/neds/2020/08/image_readtop_2020_864116_15980534304326707.png',
+                  rad: 34,
+                  backgroundColor: AppColors.purple,
+                ),
+              ],
+            ),
+            const SizedBox(height: 30),
+            const GroupCountCard(),
+            const SizedBox(height: 14),
+            const AchievementCard(),
+            const SubTitleRow(
+              title: AppStrings.favoriteCategory,
+              icon: AppIcons.favoriteCategory,
+            ),
+            SizedBox(
+              height: 88,
+              child: ListView.separated(
+                scrollDirection: Axis.horizontal,
+                itemBuilder: (context, index) {
+                  if (index == 0) {
+                    return Padding(
+                      padding: const EdgeInsets.only(bottom: 24),
+                      child: InkWell(
+                        onTap: () {},
+                        child: const CircleAvatar(
+                          radius: 32,
+                          backgroundColor: Color(0xffededed),
+                          child: Icon(
+                            Icons.add,
+                            color: MomoColor.unSelIcon,
+                          ),
+                        ),
+                      ),
+                    );
+                  }
+                  return UserCategoryColumn(
+                    categoryName: userData.categories[index - 1].name,
+                  );
+                },
+                separatorBuilder: (context, index) => const SizedBox(width: 14),
+                itemCount: userData.categories.length + 1,
+              ),
+            ),
+            const SubTitleRow(
+              title: AppStrings.recentGroup,
+              icon: AppIcons.recentGroup,
+            ),
+            SizedBox(
+              height: 200,
+              child: ListView.separated(
+                scrollDirection: Axis.horizontal,
+                itemBuilder: (context, index) {
+                  return GroupCard(
+                    group: GroupInfo(
+                      id: 1,
+                      name: '기초를 위한 영어 회화 모임',
+                      offline: index % 2 == 0,
+                      participantCnt: 10,
+                      startDate: '2021-12-31',
+                      favoriteGroup: index % 2 == 1,
+                    ),
+                    width: 148,
+                    height: 200,
+                    setLike: () {},
+                  );
+                },
+                separatorBuilder: (context, index) => const SizedBox(width: 14),
+                itemCount: 10,
+              ),
+            ),
+            const SizedBox(height: 40),
+          ],
+        ),
       ),
-      bottomNavigationBar: MainBottomNavigationBar(),
     );
   }
 }

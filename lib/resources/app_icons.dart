@@ -36,4 +36,7 @@ abstract class AppIcons {
   static const onboard3 = 'assets/icon/onboarding/icon_onboard_3.svg';
 
   static const search = 'assets/icon/search/icon_search_28.svg';
+  static const setting = 'assets/icon/mypage/icon_setting_28.svg';
+  static const recentGroup = 'assets/icon/search/icon_recentsee_28.svg';
+  static const favoriteCategory = 'assets/icon/mypage/icon_interestcategory_28.svg';
 }

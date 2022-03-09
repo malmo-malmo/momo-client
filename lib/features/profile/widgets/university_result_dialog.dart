@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:momo_flutter/features/profile/providers/university_result_provider.dart';
+import 'package:momo_flutter/features/profile/provider/university_result_provider.dart';
 import 'package:momo_flutter/resources/resources.dart';
 import 'package:momo_flutter/widgets/button/bottom_button.dart';
 import 'package:momo_flutter/widgets/card/empty_item_card.dart';

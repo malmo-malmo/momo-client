@@ -2,16 +2,16 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:momo_flutter/features/onboard/onboard_page.dart';
-import 'package:momo_flutter/features/profile/providers/profile_update_provider.dart';
+import 'package:momo_flutter/features/profile/provider/profile_update_provider.dart';
 import 'package:momo_flutter/features/profile/widgets/nickname_input_field.dart';
 import 'package:momo_flutter/features/profile/widgets/university_input_field.dart';
-import 'package:momo_flutter/providers/user_provider.dart';
+import 'package:momo_flutter/provider/user_provider.dart';
 import 'package:momo_flutter/resources/resources.dart';
 import 'package:momo_flutter/widgets/button/bottom_button.dart';
 import 'package:momo_flutter/widgets/input_field/city_input_field.dart';
 import 'package:momo_flutter/widgets/input_field/district_input_field.dart';
-import 'package:momo_flutter/widgets/text/main_title.dart';
-import 'package:momo_flutter/widgets/text/sub_title.dart';
+import 'package:momo_flutter/widgets/title/main_title.dart';
+import 'package:momo_flutter/widgets/title/sub_title.dart';
 
 class IntroProfilePage extends StatelessWidget {
   const IntroProfilePage({Key? key}) : super(key: key);

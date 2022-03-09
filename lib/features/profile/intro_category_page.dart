@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:momo_flutter/features/intro/widgets/intro_sub_title.dart';
 import 'package:momo_flutter/features/profile/intro_profile_page.dart';
-import 'package:momo_flutter/features/profile/providers/category_provider.dart';
-import 'package:momo_flutter/providers/user_provider.dart';
+import 'package:momo_flutter/features/profile/provider/category_provider.dart';
+import 'package:momo_flutter/provider/user_provider.dart';
 import 'package:momo_flutter/resources/resources.dart';
 import 'package:momo_flutter/widgets/button/bottom_button.dart';
-import 'package:momo_flutter/widgets/card/category_list_card.dart';
-import 'package:momo_flutter/widgets/text/main_title.dart';
+import 'package:momo_flutter/features/profile/widgets/category_list_card.dart';
+import 'package:momo_flutter/widgets/title/main_title.dart';
 
 class IntroCategoryPage extends StatelessWidget {
   const IntroCategoryPage({Key? key}) : super(key: key);

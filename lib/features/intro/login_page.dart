@@ -6,7 +6,7 @@ import 'package:momo_flutter/data/models/auth/login_request.dart';
 import 'package:momo_flutter/data/repositories/auth_repository.dart';
 import 'package:momo_flutter/features/intro/terms_page.dart';
 import 'package:momo_flutter/features/main/main_page.dart';
-import 'package:momo_flutter/providers/user_provider.dart';
+import 'package:momo_flutter/provider/user_provider.dart';
 import 'package:momo_flutter/resources/resources.dart';
 import 'package:momo_flutter/utils/load_asset.dart';
 import 'package:flutter/cupertino.dart';

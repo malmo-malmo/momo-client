@@ -53,4 +53,7 @@ abstract class AppStrings {
   static const nicknameHint = '닉네임을 입력해주세요.';
   static const confirmDuplicate = '중복확인';
   static const universityHint = '재학 중인 학교를 입력해주세요.';
+
+  static const favoriteCategory = '관심 카테고리';
+  static const recentGroup = '최근 본 모임';
 }

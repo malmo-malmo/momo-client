@@ -1,6 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:momo_flutter/app_config.dart';
-import 'package:momo_flutter/data/datasources/remote/retrofit_client_provider.dart';
 import 'package:momo_flutter/data/models/common/category_request.dart';
 import 'package:momo_flutter/data/models/common/code_name_pair.dart';
 import 'package:momo_flutter/data/models/user/user_response.dart';
