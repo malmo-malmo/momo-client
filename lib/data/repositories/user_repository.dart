@@ -5,6 +5,7 @@ import 'package:momo_flutter/data/datasources/remote/retrofit/user_client.dart';
 import 'package:momo_flutter/data/datasources/remote/retrofit_client_provider.dart';
 import 'package:momo_flutter/data/models/common/category_request.dart';
 import 'package:momo_flutter/data/models/common/district_response.dart';
+import 'package:momo_flutter/data/models/common/university_response.dart';
 import 'package:momo_flutter/data/models/user/user_response.dart';
 
 final userRepositoryProvider = Provider<UserRepository>((ref) {
@@ -43,5 +44,9 @@ class UserRepository {
 
   Future<dynamic> updateCategory(CategoryRequest categoryRequest) {
     return favoriteClient.updateCategory(categoryRequest);
+  }
+
+  Future<List<UniversityResponse>> getUniversities(String universityName) {
+    return userClient.getUniversities(universityName);
   }
 }

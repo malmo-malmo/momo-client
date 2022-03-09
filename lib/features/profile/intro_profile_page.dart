@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:momo_flutter/features/profile/widgets/nickname_input_field.dart';
+import 'package:momo_flutter/features/profile/widgets/university_input_field.dart';
 import 'package:momo_flutter/resources/resources.dart';
 import 'package:momo_flutter/widgets/button/bottom_button.dart';
 import 'package:momo_flutter/widgets/text/main_title.dart';
@@ -43,11 +44,12 @@ class IntroProfilePage extends StatelessWidget {
                           const SizedBox(height: 50),
                           const SubTitle(AppStrings.nickname),
                           const SizedBox(height: 16),
-                          const NicknameInputField(color: AppColors.backgroundWhite),
+                          const NicknameInputField(
+                            color: AppColors.backgroundWhite,
+                          ),
                           const SubTitle(AppStrings.university),
                           const SizedBox(height: 16),
-                          UniversityInputBox(
-                              setUniversity: ref.read(userInfoRequestProvider.notifier).setUserUniversity),
+                          const UniversityInputField(),
                           const SubTitle(AppStrings.area),
                           const SizedBox(height: 16),
                           Row(
