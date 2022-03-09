@@ -8,6 +8,7 @@ import 'package:momo_flutter/utils/logger/provider_log.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   AppConfig.initConfig();
+  AppConfig.initCategoryAndLocation();
   KakaoSdk.init(nativeAppKey: AppConfig.kakaoNaitiveAppKey);
   runApp(
     ProviderScope(

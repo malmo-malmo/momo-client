@@ -17,6 +17,8 @@ abstract class AppIcons {
   static const categoryLifeOff = 'assets/icon/category/icon_lifelightgray_64.svg';
   static const categoryStockOn = 'assets/icon/category/icon_stock_64.svg';
   static const categoryStockOff = 'assets/icon/category/icon_stocklightgray_64.svg';
+  static const categorySelfOn = 'assets/icon/category/icon_self_64.svg';
+  static const categorySelfOff = 'assets/icon/category/icon_selflightgray_64.svg';
 
   static const tabHomeOn = 'assets/icon/tab/tabicon_homepurple_32.svg';
   static const tabHomeOff = 'assets/icon/tab/tabicon_homegray_32.svg';

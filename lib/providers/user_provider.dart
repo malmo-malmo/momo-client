@@ -1,4 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:momo_flutter/app_config.dart';
+import 'package:momo_flutter/data/models/common/category_request.dart';
 import 'package:momo_flutter/data/models/common/code_name_pair.dart';
 import 'package:momo_flutter/data/models/user/user_response.dart';
 import 'package:momo_flutter/data/repositories/user_repository.dart';
@@ -43,5 +45,23 @@ class UserDataStateNotifier extends StateNotifier<UserResponse> {
     } catch (e) {
       return true;
     }
+  }
+
+  Future<dynamic> updateUserCategories(List<bool> categoryState) async {
+    final categoryRequest = CategoryRequest(favoriteCategories: [
+      for (int i = 0; i < categoryState.length; i++)
+        if (categoryState[i]) AppConfig.categoryCodeNamePair[i].code
+    ]);
+
+    final response = await userRepository.updateCategory(categoryRequest);
+    state = state.copyWith(
+      categories: [
+        for (int i = 0; i < categoryRequest.favoriteCategories.length; i++)
+          for (int j = 0; j < AppConfig.categoryCodeNamePair.length; j++)
+            if (AppConfig.categoryCodeNamePair[j].code == categoryRequest.favoriteCategories[i])
+              AppConfig.categoryCodeNamePair[j]
+      ],
+    );
+    return response;
   }
 }

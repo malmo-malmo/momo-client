@@ -1,6 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-final termsCheckStateProvider = StateNotifierProvider<TermsCheckState, List<bool>>((ref) => TermsCheckState());
+final termsCheckStateProvider =
+    StateNotifierProvider.autoDispose<TermsCheckState, List<bool>>((ref) => TermsCheckState());
 
 class TermsCheckState extends StateNotifier<List<bool>> {
   TermsCheckState()

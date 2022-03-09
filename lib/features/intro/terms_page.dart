@@ -7,23 +7,22 @@ import 'package:momo_flutter/resources/resources.dart';
 import 'package:momo_flutter/widgets/button/bottom_button.dart';
 import 'package:momo_flutter/widgets/text/main_title.dart';
 
-class TermsPage extends ConsumerWidget {
+class TermsPage extends StatelessWidget {
   const TermsPage({Key? key}) : super(key: key);
 
   static const routeName = 'TermsPage';
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final termsState = ref.watch(termsCheckStateProvider);
+  Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
         backgroundColor: AppColors.gray1,
         body: Padding(
           padding: const EdgeInsets.only(top: 94, bottom: 36, right: 20, left: 20),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Column(
+          child: Consumer(
+            builder: (context, ref, child) {
+              final termsState = ref.watch(termsCheckStateProvider);
+              return Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const MainTitle(AppStrings.termsTitle),
@@ -52,14 +51,15 @@ class TermsPage extends ConsumerWidget {
                     onCheck: () => ref.read(termsCheckStateProvider.notifier).checkTerm(3),
                     title: AppStrings.marketingPolicy,
                   ),
+                  const Spacer(),
+                  BottomButton(
+                    buttonTitle: AppStrings.next,
+                    isEnable: ref.watch(termsCheckStateProvider.notifier).isEnable(),
+                    onPressed: () => Navigator.pushNamed(context, IntroCategoryPage.routeName),
+                  ),
                 ],
-              ),
-              BottomButton(
-                buttonTitle: AppStrings.next,
-                isEnable: ref.watch(termsCheckStateProvider.notifier).isEnable(),
-                onPressed: () => Navigator.pushNamed(context, IntroCategoryPage.routeName),
-              ),
-            ],
+              );
+            },
           ),
         ),
       ),
@@ -114,6 +114,7 @@ class _TermsRow extends StatelessWidget {
             '보기',
             style: AppStyles.regular12.copyWith(
               decoration: TextDecoration.underline,
+              color: AppColors.gray6,
             ),
           )
         ],
