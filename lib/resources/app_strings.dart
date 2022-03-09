@@ -23,6 +23,8 @@ abstract class AppStrings {
   static const add = '추가';
   static const complete = '완료';
   static const edit = '수정';
+  static const seoul = '서울';
+  static const gangnam = '강남구';
 
   static const backButtomInformation = '한번 더 뒤로가기 버튼을 누르면 종료됩니다';
   static const defaultErrorMessage = '데이터를 불러오는데 실패했습니다!';

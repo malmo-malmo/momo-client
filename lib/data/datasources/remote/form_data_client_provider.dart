@@ -1,5 +1,4 @@
 import 'package:dio/dio.dart';
-import 'dart:developer';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:momo_flutter/app_config.dart';
 import 'package:momo_flutter/data/datasources/remote/dio_provider.dart';
@@ -69,10 +68,7 @@ class FormDataClient {
     return PostDetailResponse.fromJson(response.data);
   }
 
-  Future<UserUpdateResponse> updateUserInfo(
-      UserUpdateRequest updateInfo) async {
-    log(updateInfo.toString());
-
+  Future<UserUpdateResponse> updateUserInfo(UserUpdateRequest updateInfo) async {
     final response = await dio.put(
       AppConfig.baseUrl + '/user',
       data: FormData.fromMap(

@@ -36,4 +36,14 @@ class ProfileUpdateState extends StateNotifier<UserUpdateRequest> {
   String get userCity => state.city.isEmpty
       ? ''
       : AppConfig.locationCodeNamePair.where((element) => element.code == state.city).first.name;
+
+  bool isValid() {
+    if (state.nickname.isNotEmpty &&
+        state.university.isNotEmpty &&
+        state.city.isNotEmpty &&
+        state.district.isNotEmpty) {
+      return true;
+    }
+    return false;
+  }
 }

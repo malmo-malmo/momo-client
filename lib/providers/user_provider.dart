@@ -1,8 +1,10 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:momo_flutter/app_config.dart';
+import 'package:momo_flutter/data/datasources/remote/retrofit_client_provider.dart';
 import 'package:momo_flutter/data/models/common/category_request.dart';
 import 'package:momo_flutter/data/models/common/code_name_pair.dart';
 import 'package:momo_flutter/data/models/user/user_response.dart';
+import 'package:momo_flutter/data/models/user/user_update_request.dart';
 import 'package:momo_flutter/data/repositories/user_repository.dart';
 
 final userDataStateProvider = StateNotifierProvider<UserDataStateNotifier, UserResponse>((ref) {
@@ -54,6 +56,17 @@ class UserDataStateNotifier extends StateNotifier<UserResponse> {
     } catch (e) {
       return true;
     }
+  }
+
+  Future<dynamic> updateUserData(UserUpdateRequest updateRequest) async {
+    final response = await userRepository.updateUserData(updateRequest);
+    state = state.copyWith(
+      nickname: response.nickname,
+      city: response.city,
+      district: response.district,
+      image: response.imageUrl,
+      university: response.university,
+    );
   }
 
   Future<dynamic> updateUserCategories(List<bool> categoryState) async {
