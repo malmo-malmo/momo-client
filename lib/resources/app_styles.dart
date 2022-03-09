@@ -80,4 +80,16 @@ abstract class AppStyles {
     letterSpacing: -0.1,
     height: 18 / 10,
   );
+
+  static BoxDecoration containerDecoration({
+    double radius = 16,
+    Color? color,
+    List<BoxShadow>? boxShadow,
+  }) {
+    return BoxDecoration(
+      borderRadius: BorderRadius.circular(radius),
+      color: color ?? AppColors.gray1,
+      boxShadow: boxShadow,
+    );
+  }
 }

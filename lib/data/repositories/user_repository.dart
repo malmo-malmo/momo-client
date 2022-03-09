@@ -33,6 +33,10 @@ class UserRepository {
     return userClient.getUserInfo();
   }
 
+  Future<dynamic> validateNickname(String nickname) {
+    return userClient.validateNickname(nickname);
+  }
+
   Future<List<DistrictResponse>> getDistrcts(String cityCode) {
     return districtClient.getDistricts(cityCode);
   }

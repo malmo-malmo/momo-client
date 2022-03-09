@@ -40,6 +40,11 @@ abstract class AppStrings {
   static const introCategorySubTitle = '참여하고 싶은 활동 모임을 선택해 주세요.';
   static const introProfileTitle = '내 정보 설정 3/3';
 
+  static const nickname = '닉네임';
+  static const availableNickname = '사용 가능한 닉네임이에요';
+  static const notAvailableNickname = '중복된 닉네임이에요';
+  static const university = '학교';
+  static const area = '지역';
   static const nicknameHint = '닉네임을 입력해주세요.';
   static const confirmDuplicate = '중복확인';
   static const universityHint = '재학 중인 학교를 입력해주세요.';

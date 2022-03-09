@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:momo_flutter/features/intro/intro_category_page.dart';
-import 'package:momo_flutter/features/intro/intro_profile_page.dart';
 import 'package:momo_flutter/features/intro/terms_page.dart';
 import 'package:momo_flutter/features/main/main_page.dart';
 import 'package:momo_flutter/features/onboard/onboard_page.dart';
+import 'package:momo_flutter/features/profile/intro_category_page.dart';
+import 'package:momo_flutter/features/profile/intro_profile_page.dart';
 
 abstract class AppRoutes {
   static Route<dynamic>? onGenerateRoute(settings) {

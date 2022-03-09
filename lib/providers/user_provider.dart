@@ -47,6 +47,15 @@ class UserDataStateNotifier extends StateNotifier<UserResponse> {
     }
   }
 
+  Future<bool> validateNickname(String nickname) async {
+    try {
+      await userRepository.validateNickname(nickname);
+      return false;
+    } catch (e) {
+      return true;
+    }
+  }
+
   Future<dynamic> updateUserCategories(List<bool> categoryState) async {
     final categoryRequest = CategoryRequest(favoriteCategories: [
       for (int i = 0; i < categoryState.length; i++)
