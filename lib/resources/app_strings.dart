@@ -28,6 +28,7 @@ abstract class AppStrings {
   static const online = '온라인';
   static const offline = '오프라인';
   static const momoLogout = 'MOMO 로그아웃';
+  static const withdrawal = '회원탈퇴';
 
   static const totalGroup = '총 모임';
   static const favoriteGroup = '찜한 모임';

@@ -8,6 +8,7 @@ abstract class AppTheme {
       elevation: 0,
       centerTitle: false,
       titleSpacing: 0,
+      titleTextStyle: AppStyles.bold16,
     ),
     fontFamily: 'NanumSquareOTF',
     textTheme: const TextTheme(

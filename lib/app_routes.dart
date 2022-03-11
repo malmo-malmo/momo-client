@@ -3,6 +3,7 @@ import 'package:momo_flutter/features/intro/terms_page.dart';
 import 'package:momo_flutter/features/main/main_page.dart';
 import 'package:momo_flutter/features/onboard/onboard_page.dart';
 import 'package:momo_flutter/features/post/manage_post_page.dart';
+import 'package:momo_flutter/features/profile/edit_profile_page.dart';
 import 'package:momo_flutter/features/profile/intro_category_page.dart';
 import 'package:momo_flutter/features/profile/intro_profile_page.dart';
 import 'package:momo_flutter/features/profile/profile_page.dart';
@@ -36,6 +37,9 @@ abstract class AppRoutes {
         break;
       case ManagePostPage.routeName:
         _page = const ManagePostPage();
+        break;
+      case EditProfilePage.routeName:
+        _page = const EditProfilePage();
         break;
       default:
         break;
