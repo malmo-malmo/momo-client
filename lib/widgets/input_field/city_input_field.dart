@@ -13,10 +13,12 @@ class CityInputField extends StatelessWidget {
     this.color,
     required this.city,
     required this.setCity,
+    this.initialValue,
   }) : super(key: key);
 
   final Color? color;
   final String city;
+  final String? initialValue;
   final void Function(String city) setCity;
 
   final _cityInputBoxKey = GlobalKey();
@@ -34,7 +36,7 @@ class CityInputField extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(
-            city.isEmpty ? AppStrings.seoul : city,
+            initialValue != null ? initialValue! : (city.isEmpty ? AppStrings.seoul : city),
             style: AppStyles.regular16.copyWith(
               color: city.isEmpty ? AppColors.gray4 : null,
             ),

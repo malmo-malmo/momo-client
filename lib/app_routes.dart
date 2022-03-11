@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:momo_flutter/data/models/user/user_update_request.dart';
 import 'package:momo_flutter/features/intro/terms_page.dart';
 import 'package:momo_flutter/features/main/main_page.dart';
 import 'package:momo_flutter/features/onboard/onboard_page.dart';
@@ -10,7 +11,7 @@ import 'package:momo_flutter/features/profile/profile_page.dart';
 import 'package:momo_flutter/features/setting/setting_page.dart';
 
 abstract class AppRoutes {
-  static Route<dynamic>? onGenerateRoute(settings) {
+  static Route<dynamic>? onGenerateRoute(RouteSettings settings) {
     late Widget _page;
 
     switch (settings.name) {
@@ -39,7 +40,8 @@ abstract class AppRoutes {
         _page = const ManagePostPage();
         break;
       case EditProfilePage.routeName:
-        _page = const EditProfilePage();
+        final userUpdateRequest = settings.arguments as UserUpdateRequest;
+        _page = EditProfilePage(userUpdateRequest);
         break;
       default:
         break;

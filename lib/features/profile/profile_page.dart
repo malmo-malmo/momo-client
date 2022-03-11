@@ -1,17 +1,22 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:momo_flutter/data/models/user/user_update_request.dart';
 import 'package:momo_flutter/features/profile/edit_profile_page.dart';
+import 'package:momo_flutter/provider/user_provider.dart';
 import 'package:momo_flutter/resources/resources.dart';
 import 'package:momo_flutter/widgets/button/action_button.dart';
 import 'package:momo_flutter/widgets/card/profile_image_card.dart';
 
-class ProfilePage extends StatelessWidget {
+class ProfilePage extends ConsumerWidget {
   const ProfilePage({Key? key}) : super(key: key);
 
   static const routeName = 'ProfilePage';
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final userData = ref.watch(userDataStateProvider);
+
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
@@ -26,6 +31,13 @@ class ProfilePage extends StatelessWidget {
               onPressed: () => Navigator.pushNamed(
                 context,
                 EditProfilePage.routeName,
+                arguments: UserUpdateRequest(
+                  city: userData.city.code,
+                  district: userData.district,
+                  nickname: userData.nickname,
+                  university: userData.university,
+                  imagePath: userData.image!,
+                ),
               ),
               isEnable: true,
             ),
@@ -44,24 +56,24 @@ class ProfilePage extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  const ProfileImageCard(
-                    img: 'https://file.mk.co.kr/meet/neds/2020/08/image_readtop_2020_864116_15980534304326707.png',
+                  ProfileImageCard(
+                    img: userData.image!,
                     rad: 50,
                     backgroundColor: AppColors.purple,
                   ),
                   Column(
                     mainAxisAlignment: MainAxisAlignment.end,
-                    children: const [
+                    children: [
                       _UserProfileRow(
-                        value: '',
+                        value: userData.nickname,
                         label: AppStrings.nickname,
                       ),
                       _UserProfileRow(
-                        value: '',
+                        value: userData.university,
                         label: AppStrings.university,
                       ),
                       _UserProfileRow(
-                        value: '',
+                        value: userData.city.name + ' ' + userData.district,
                         label: AppStrings.area,
                       ),
                     ],
@@ -75,7 +87,9 @@ class ProfilePage extends StatelessWidget {
                 onTap: () {},
                 child: Text(
                   AppStrings.withdrawal,
-                  style: AppStyles.regular15.copyWith(color: AppColors.gray4),
+                  style: AppStyles.regular15.copyWith(
+                    color: AppColors.gray4,
+                  ),
                 ),
               ),
             )

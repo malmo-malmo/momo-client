@@ -7,9 +7,11 @@ class UniversityInputField extends StatefulWidget {
   const UniversityInputField({
     Key? key,
     this.color,
+    this.initialValue,
   }) : super(key: key);
 
   final Color? color;
+  final String? initialValue;
 
   @override
   State<UniversityInputField> createState() => _UniversityInputFieldState();
@@ -33,6 +35,7 @@ class _UniversityInputFieldState extends State<UniversityInputField> {
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 14),
               child: TextFormField(
+                initialValue: widget.initialValue,
                 controller: _controller,
                 decoration: const InputDecoration(
                   hintText: AppStrings.universityHint,

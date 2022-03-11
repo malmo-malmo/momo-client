@@ -41,4 +41,6 @@ abstract class AppIcons {
   static const favoriteCategory = 'assets/icon/mypage/icon_interestcategory_28.svg';
   static const member = 'assets/icon/icon_member_20.svg';
   static const startDay = 'assets/icon/icon_daystart_20.svg';
+
+  static const squareCamera = 'assets/icon/mypage/btn_camera_2_18.svg';
 }
