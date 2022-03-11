@@ -3,6 +3,7 @@ import 'package:momo_flutter/data/models/group/group_response.dart';
 import 'package:momo_flutter/features/main/main_bottom_navigation_bar.dart';
 import 'package:momo_flutter/features/main/mypage/widgets/achievement_card.dart';
 import 'package:momo_flutter/features/main/mypage/widgets/group_and_badge_count_card.dart';
+import 'package:momo_flutter/features/main/mypage/widgets/user_category_list.dart';
 import 'package:momo_flutter/resources/resources.dart';
 import 'package:momo_flutter/utils/load_asset.dart';
 import 'package:momo_flutter/widgets/card/group_card.dart';
@@ -48,35 +49,7 @@ class Mypage extends StatelessWidget {
               title: AppStrings.favoriteCategory,
               icon: AppIcons.favoriteCategory,
             ),
-            SizedBox(
-              height: 88,
-              child: ListView.separated(
-                scrollDirection: Axis.horizontal,
-                itemBuilder: (context, index) {
-                  if (index == 0) {
-                    return Padding(
-                      padding: const EdgeInsets.only(bottom: 24),
-                      child: InkWell(
-                        onTap: () {},
-                        child: const CircleAvatar(
-                          radius: 32,
-                          backgroundColor: AppColors.gray3,
-                          child: Icon(
-                            Icons.add,
-                            color: AppColors.gray4,
-                          ),
-                        ),
-                      ),
-                    );
-                  }
-                  return UserCategoryColumn(
-                    categoryName: userData.categories[index - 1].name,
-                  );
-                },
-                separatorBuilder: (context, index) => const SizedBox(width: 14),
-                itemCount: userData.categories.length + 1,
-              ),
-            ),
+            const UserCategoryList(),
             const SubTitleRow(
               title: AppStrings.recentGroup,
               icon: AppIcons.recentGroup,

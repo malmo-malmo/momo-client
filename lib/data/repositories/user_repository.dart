@@ -19,12 +19,14 @@ final userRepositoryProvider = Provider<UserRepository>(
     final districtClient = ref.watch(districtClientProvider);
     final favoriteClient = ref.watch(favoriteClientProvider);
     final formDataClient = ref.watch(formDataClientProvider);
+    final managementClient = ref.watch(managementClientProvider);
 
     return UserRepository(
       districtClient: districtClient,
       userClient: userClient,
       favoriteClient: favoriteClient,
       formDataClient: formDataClient,
+      managementClient: managementClient,
     );
   },
 );
