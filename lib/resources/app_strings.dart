@@ -27,10 +27,13 @@ abstract class AppStrings {
   static const gangnam = '강남구';
   static const online = '온라인';
   static const offline = '오프라인';
+  static const momoLogout = 'MOMO 로그아웃';
 
   static const totalGroup = '총 모임';
   static const favoriteGroup = '찜한 모임';
   static const takeBadge = '획득뱃지';
+  static const managementProfile = '내 정보 관리';
+  static const managementPost = '게시물 관리';
 
   static const backButtomInformation = '한번 더 뒤로가기 버튼을 누르면 종료됩니다';
   static const defaultErrorMessage = '데이터를 불러오는데 실패했습니다!';
