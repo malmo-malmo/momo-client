@@ -5,6 +5,7 @@ import 'package:momo_flutter/features/intro/terms_page.dart';
 import 'package:momo_flutter/features/main/main_page.dart';
 import 'package:momo_flutter/features/onboard/onboard_page.dart';
 import 'package:momo_flutter/features/post/manage_post_page.dart';
+import 'package:momo_flutter/features/profile/edit_category_page.dart';
 import 'package:momo_flutter/features/profile/edit_profile_page.dart';
 import 'package:momo_flutter/features/profile/intro_category_page.dart';
 import 'package:momo_flutter/features/profile/intro_profile_page.dart';
@@ -47,6 +48,10 @@ abstract class AppRoutes {
       case GalleryPage.routeName:
         final photoRequestType = settings.arguments as PhotoRequestType;
         _page = GalleryPage(photoRequestType);
+        break;
+      case EditCategoryPage.routeName:
+        final initialState = settings.arguments as List<bool>;
+        _page = EditCategoryPage(initialState);
         break;
       default:
         break;

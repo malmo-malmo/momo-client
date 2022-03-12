@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:momo_flutter/app_config.dart';
 import 'package:momo_flutter/app_consts.dart';
+import 'package:momo_flutter/features/profile/edit_category_page.dart';
 import 'package:momo_flutter/provider/user_provider.dart';
 import 'package:momo_flutter/resources/resources.dart';
+import 'package:momo_flutter/utils/extentions/index_map.dart';
 import 'package:momo_flutter/utils/load_asset.dart';
 
 class UserCategoryList extends ConsumerWidget {
@@ -21,7 +23,24 @@ class UserCategoryList extends ConsumerWidget {
             return Padding(
               padding: const EdgeInsets.only(bottom: 24),
               child: InkWell(
-                onTap: () {},
+                onTap: () {
+                  final initialState = List.generate(
+                    AppConfig.categoryCodeNamePair.length,
+                    (index) {
+                      for (var value in userData.categories) {
+                        if (value.name == indexCategoryMap[index]) {
+                          return true;
+                        }
+                      }
+                      return false;
+                    },
+                  );
+                  Navigator.pushNamed(
+                    context,
+                    EditCategoryPage.routeName,
+                    arguments: initialState,
+                  );
+                },
                 child: const CircleAvatar(
                   radius: 32,
                   backgroundColor: AppColors.gray3,
@@ -71,3 +90,14 @@ class _UserCategoryColumn extends StatelessWidget {
     return -1;
   }
 }
+
+Map<int, String> indexCategoryMap = {
+  0: AppStrings.health,
+  1: AppStrings.food,
+  2: AppStrings.self,
+  3: AppStrings.life,
+  4: AppStrings.hobby,
+  5: AppStrings.stock,
+  6: AppStrings.healing,
+  7: AppStrings.job,
+};
