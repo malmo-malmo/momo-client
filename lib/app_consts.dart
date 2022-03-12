@@ -1,23 +1,29 @@
 import 'package:momo_flutter/resources/resources.dart';
 
-const categoryIconOn = [
-  AppIcons.categoryHealthOn,
-  AppIcons.categoryFoodOn,
-  AppIcons.categorySelfOn,
-  AppIcons.categoryLifeOn,
-  AppIcons.categoryHobbyOn,
-  AppIcons.categoryStockOn,
-  AppIcons.categoryHealingOn,
-  AppIcons.categoryJobOn,
-];
+abstract class AppConsts {
+  static const maxPhotoCount = 10000;
+  static const maxSelectCount = 7;
+  static const pageSize = 20;
 
-const categoryIconOff = [
-  AppIcons.categoryHealthOff,
-  AppIcons.categoryFoodOff,
-  AppIcons.categorySelfOff,
-  AppIcons.categoryLifeOff,
-  AppIcons.categoryHobbyOff,
-  AppIcons.categoryStockOff,
-  AppIcons.categoryHealingOff,
-  AppIcons.categoryJobOff,
-];
+  static const categoryIconOn = [
+    AppIcons.categoryHealthOn,
+    AppIcons.categoryFoodOn,
+    AppIcons.categorySelfOn,
+    AppIcons.categoryLifeOn,
+    AppIcons.categoryHobbyOn,
+    AppIcons.categoryStockOn,
+    AppIcons.categoryHealingOn,
+    AppIcons.categoryJobOn,
+  ];
+
+  static const categoryIconOff = [
+    AppIcons.categoryHealthOff,
+    AppIcons.categoryFoodOff,
+    AppIcons.categorySelfOff,
+    AppIcons.categoryLifeOff,
+    AppIcons.categoryHobbyOff,
+    AppIcons.categoryStockOff,
+    AppIcons.categoryHealingOff,
+    AppIcons.categoryJobOff,
+  ];
+}

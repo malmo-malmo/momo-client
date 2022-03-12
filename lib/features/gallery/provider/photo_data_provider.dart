@@ -1,5 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:momo_flutter/app_config.dart';
+import 'package:momo_flutter/app_consts.dart';
 
 final photoDataStateProvider = StateProvider.autoDispose<String>((ref) => '');
 
@@ -16,7 +16,7 @@ final isSelectPhoto = Provider.autoDispose<bool>(
 final checkMaxPhoto = Provider.autoDispose<bool>(
   (ref) {
     final photoDatas = ref.watch(photoDatasStateProvider);
-    return photoDatas.length == AppConfig.maxSelectCount;
+    return photoDatas.length == AppConsts.maxSelectCount;
   },
 );
 

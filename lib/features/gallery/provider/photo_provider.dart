@@ -1,5 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:momo_flutter/app_config.dart';
+import 'package:momo_flutter/app_consts.dart';
 import 'package:photo_manager/photo_manager.dart';
 
 final photoListProvider = FutureProvider.autoDispose<List<AssetEntity>>(
@@ -9,7 +9,7 @@ final photoListProvider = FutureProvider.autoDispose<List<AssetEntity>>(
 
     final recentAssets = await recentAlbum.getAssetListRange(
       start: 0,
-      end: AppConfig.maxPhotoCount,
+      end: AppConsts.maxPhotoCount,
     );
 
     return recentAssets.where((element) => element.type == AssetType.image).toList();

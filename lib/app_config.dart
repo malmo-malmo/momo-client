@@ -10,8 +10,7 @@ import 'package:momo_flutter/data/models/common/code_name_pair.dart';
 abstract class AppConfig {
   static const baseUrl = 'http://gunimon.iptime.org:8100/api';
   static const kakaoNaitiveAppKey = '51af7920a3ab81a3de0020af102e70cd';
-  static const maxPhotoCount = 10000;
-  static const maxSelectCount = 7;
+
   static const unknown = 'unknown';
 
   static late List<CodeNamePair> categoryCodeNamePair;

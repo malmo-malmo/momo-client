@@ -30,7 +30,7 @@ class CategortButton extends StatelessWidget {
           borderRadius: BorderRadius.circular(iconSize),
           onTap: () => onTabIcon(index),
           child: loadAsset(
-            check ? categoryIconOn[index] : categoryIconOff[index],
+            check ? AppConsts.categoryIconOn[index] : AppConsts.categoryIconOff[index],
             width: iconSize,
             height: iconSize,
           ),

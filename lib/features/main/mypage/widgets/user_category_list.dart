@@ -5,7 +5,6 @@ import 'package:momo_flutter/app_consts.dart';
 import 'package:momo_flutter/features/profile/edit_category_page.dart';
 import 'package:momo_flutter/provider/user_provider.dart';
 import 'package:momo_flutter/resources/resources.dart';
-import 'package:momo_flutter/utils/extentions/index_map.dart';
 import 'package:momo_flutter/utils/load_asset.dart';
 
 class UserCategoryList extends ConsumerWidget {
@@ -71,7 +70,7 @@ class _UserCategoryColumn extends StatelessWidget {
     final _index = _getCategoryIcon(categoryName);
     return Column(
       children: [
-        loadAsset(categoryIconOn[_index]),
+        loadAsset(AppConsts.categoryIconOn[_index]),
         const SizedBox(height: 8),
         Text(
           categoryName,
