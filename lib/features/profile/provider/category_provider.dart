@@ -1,6 +1,16 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:momo_flutter/app_config.dart';
 
+final categoryCheckProvider = Provider.family.autoDispose<bool, List<bool>?>(
+  (ref, initialState) {
+    final categoryState = ref.watch(categoryStateProvider(initialState));
+    for (bool check in categoryState) {
+      if (check) return true;
+    }
+    return false;
+  },
+);
+
 final categoryStateProvider = StateNotifierProvider.family.autoDispose<CategoryState, List<bool>, List<bool>?>(
   (ref, initialState) => CategoryState(initialState: initialState),
 );

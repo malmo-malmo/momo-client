@@ -2,6 +2,17 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:momo_flutter/app_config.dart';
 import 'package:momo_flutter/data/models/user/user_update_request.dart';
 
+final profileUpdateCheckProvider = Provider.autoDispose<bool>((ref) {
+  final profileUpdateState = ref.watch(profileUpdateStateProvider);
+  if (profileUpdateState.nickname.isNotEmpty &&
+      profileUpdateState.university.isNotEmpty &&
+      profileUpdateState.city.isNotEmpty &&
+      profileUpdateState.district.isNotEmpty) {
+    return true;
+  }
+  return false;
+});
+
 final vaildatioinNicknameProvider = StateProvider.autoDispose<bool>((ref) => false);
 
 final profileUpdateStateProvider = StateNotifierProvider.autoDispose<ProfileUpdateState, UserUpdateRequest>(
@@ -20,6 +31,15 @@ class ProfileUpdateState extends StateNotifier<UserUpdateRequest> {
           ),
         );
 
+  void initRequest(UserUpdateRequest userUpdateRequest) {
+    state = state.copyWith(
+      nickname: userUpdateRequest.nickname,
+      city: userUpdateRequest.city,
+      district: userUpdateRequest.district,
+      university: userUpdateRequest.university,
+    );
+  }
+
   void setImagePath(String imagePath) => state = state.copyWith(imagePath: imagePath);
 
   void setUserNickname(String nickname) => state = state.copyWith(nickname: nickname);
@@ -36,14 +56,4 @@ class ProfileUpdateState extends StateNotifier<UserUpdateRequest> {
   String get userCity => state.city.isEmpty
       ? ''
       : AppConfig.locationCodeNamePair.where((element) => element.code == state.city).first.name;
-
-  bool isValid() {
-    if (state.nickname.isNotEmpty &&
-        state.university.isNotEmpty &&
-        state.city.isNotEmpty &&
-        state.district.isNotEmpty) {
-      return true;
-    }
-    return false;
-  }
 }

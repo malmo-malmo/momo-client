@@ -26,84 +26,77 @@ class IntroProfilePage extends StatelessWidget {
         child: Scaffold(
           body: Padding(
             padding: const EdgeInsets.only(bottom: 36, right: 20, left: 20),
-            child: LayoutBuilder(
-              builder: (context, constraint) {
-                return SingleChildScrollView(
-                  child: ConstrainedBox(
-                    constraints: BoxConstraints(minHeight: constraint.maxHeight),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
+            child: SingleChildScrollView(
+              child: Container(
+                constraints: const BoxConstraints(minHeight: 800),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const SizedBox(height: 45),
+                    InkWell(
+                      onTap: () => Navigator.pop(context),
+                      child: const Icon(
+                        CupertinoIcons.back,
+                        color: AppColors.gray6,
+                        size: 24,
+                      ),
+                    ),
+                    const SizedBox(height: 25),
+                    const MainTitle(AppStrings.introProfileTitle),
+                    const SizedBox(height: 50),
+                    const SubTitle(AppStrings.nickname),
+                    const SizedBox(height: 16),
+                    const NicknameInputField(
+                      color: AppColors.backgroundWhite,
+                    ),
+                    const SubTitle(AppStrings.university),
+                    const SizedBox(height: 16),
+                    const UniversityInputField(),
+                    const SubTitle(AppStrings.area),
+                    const SizedBox(height: 16),
+                    Consumer(
+                      builder: (context, ref, child) {
+                        final updateProfileData = ref.watch(profileUpdateStateProvider);
+                        return Row(
                           children: [
-                            const SizedBox(height: 45),
-                            InkWell(
-                              onTap: () => Navigator.pop(context),
-                              child: const Icon(
-                                CupertinoIcons.back,
-                                color: AppColors.gray6,
-                                size: 24,
-                              ),
+                            CityInputField(
+                              city: ref.watch(profileUpdateStateProvider.notifier).userCity,
+                              setCity: ref.read(profileUpdateStateProvider.notifier).setUserCity,
                             ),
-                            const SizedBox(height: 25),
-                            const MainTitle(AppStrings.introProfileTitle),
-                            const SizedBox(height: 50),
-                            const SubTitle(AppStrings.nickname),
-                            const SizedBox(height: 16),
-                            const NicknameInputField(
-                              color: AppColors.backgroundWhite,
+                            const SizedBox(width: 24),
+                            DistrictInputField(
+                              district: updateProfileData.district,
+                              cityCode: updateProfileData.city,
+                              setDistrict: ref.read(profileUpdateStateProvider.notifier).setUserDistrict,
                             ),
-                            const SubTitle(AppStrings.university),
-                            const SizedBox(height: 16),
-                            const UniversityInputField(),
-                            const SubTitle(AppStrings.area),
-                            const SizedBox(height: 16),
-                            Consumer(
-                              builder: (context, ref, child) {
-                                final updateProfileData = ref.watch(profileUpdateStateProvider);
-                                return Row(
-                                  children: [
-                                    CityInputField(
-                                      city: ref.watch(profileUpdateStateProvider.notifier).userCity,
-                                      setCity: ref.read(profileUpdateStateProvider.notifier).setUserCity,
-                                    ),
-                                    const SizedBox(width: 24),
-                                    DistrictInputField(
-                                      district: updateProfileData.district,
-                                      cityCode: updateProfileData.city,
-                                      setDistrict: ref.read(profileUpdateStateProvider.notifier).setUserDistrict,
-                                    ),
-                                  ],
-                                );
-                              },
-                            ),
-                            const SizedBox(height: 200),
                           ],
-                        ),
-                        Consumer(
-                          builder: (context, ref, child) {
-                            final validateNickname = ref.watch(vaildatioinNicknameProvider);
-                            final updateRequest = ref.watch(profileUpdateStateProvider);
-                            return BottomButton(
-                              isEnable: validateNickname && ref.watch(profileUpdateStateProvider.notifier).isValid(),
-                              buttonTitle: AppStrings.next,
-                              onPressed: () async {
-                                await ref.read(userDataStateProvider.notifier).updateUserData(updateRequest);
-                                Navigator.pushNamedAndRemoveUntil(
-                                  context,
-                                  OnboardPage.routeName,
-                                  (route) => false,
-                                );
-                              },
+                        );
+                      },
+                    ),
+                    const SizedBox(height: 200),
+                    const Spacer(),
+                    Consumer(
+                      builder: (context, ref, child) {
+                        final validateNickname = ref.watch(vaildatioinNicknameProvider);
+                        final updateRequest = ref.watch(profileUpdateStateProvider);
+                        final isValid = ref.watch(profileUpdateCheckProvider);
+                        return BottomButton(
+                          isEnable: validateNickname && isValid,
+                          buttonTitle: AppStrings.next,
+                          onPressed: () async {
+                            await ref.read(userDataStateProvider.notifier).updateUserData(updateRequest);
+                            Navigator.pushNamedAndRemoveUntil(
+                              context,
+                              OnboardPage.routeName,
+                              (route) => false,
                             );
                           },
-                        ),
-                      ],
+                        );
+                      },
                     ),
-                  ),
-                );
-              },
+                  ],
+                ),
+              ),
             ),
           ),
         ),

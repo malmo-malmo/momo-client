@@ -23,42 +23,47 @@ class IntroCategoryPage extends StatelessWidget {
         body: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
           child: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const SizedBox(height: 45),
-                InkWell(
-                  onTap: () => Navigator.pop(context),
-                  child: const Icon(
-                    CupertinoIcons.back,
-                    size: 24,
-                    color: AppColors.gray6,
+            child: Container(
+              constraints: const BoxConstraints(minHeight: 800),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const SizedBox(height: 45),
+                  InkWell(
+                    onTap: () => Navigator.pop(context),
+                    child: const Icon(
+                      CupertinoIcons.back,
+                      size: 24,
+                      color: AppColors.gray6,
+                    ),
                   ),
-                ),
-                const SizedBox(height: 25),
-                const MainTitle(AppStrings.introCategoryTitle),
-                const SizedBox(height: 20),
-                const IntroSubTitle(AppStrings.introCategorySubTitle),
-                const SizedBox(height: 40),
-                const CategoryListCard(),
-                const SizedBox(height: 64),
-                Padding(
-                  padding: const EdgeInsets.only(bottom: 36),
-                  child: Consumer(
-                    builder: (context, ref, child) {
-                      final categoryState = ref.watch(categoryStateProvider(null));
-                      return BottomButton(
-                        isEnable: ref.watch(categoryStateProvider(null).notifier).isValid(),
-                        buttonTitle: AppStrings.next,
-                        onPressed: () async {
-                          await ref.read(userDataStateProvider.notifier).updateUserCategories(categoryState);
-                          Navigator.pushNamed(context, IntroProfilePage.routeName);
-                        },
-                      );
-                    },
+                  const SizedBox(height: 25),
+                  const MainTitle(AppStrings.introCategoryTitle),
+                  const SizedBox(height: 20),
+                  const IntroSubTitle(AppStrings.introCategorySubTitle),
+                  const SizedBox(height: 40),
+                  const CategoryListCard(),
+                  const SizedBox(height: 64),
+                  const Spacer(),
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 36),
+                    child: Consumer(
+                      builder: (context, ref, child) {
+                        final categoryState = ref.watch(categoryStateProvider(null));
+                        final isValid = ref.watch(categoryCheckProvider(null));
+                        return BottomButton(
+                          isEnable: isValid,
+                          buttonTitle: AppStrings.next,
+                          onPressed: () async {
+                            await ref.read(userDataStateProvider.notifier).updateUserCategories(categoryState);
+                            Navigator.pushNamed(context, IntroProfilePage.routeName);
+                          },
+                        );
+                      },
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),

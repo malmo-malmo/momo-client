@@ -1,12 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:momo_flutter/app_config.dart';
 import 'package:momo_flutter/data/models/user/user_update_request.dart';
 import 'package:momo_flutter/features/gallery/gallery_page.dart';
 import 'package:momo_flutter/features/profile/provider/profile_update_provider.dart';
 import 'package:momo_flutter/features/profile/widgets/nickname_input_field.dart';
 import 'package:momo_flutter/features/profile/widgets/university_input_field.dart';
+import 'package:momo_flutter/provider/user_provider.dart';
 import 'package:momo_flutter/resources/resources.dart';
 import 'package:momo_flutter/utils/load_asset.dart';
 import 'package:momo_flutter/widgets/button/action_button.dart';
@@ -16,7 +16,7 @@ import 'package:momo_flutter/widgets/input_field/city_input_field.dart';
 import 'package:momo_flutter/widgets/input_field/district_input_field.dart';
 import 'package:momo_flutter/widgets/title/sub_title.dart';
 
-class EditProfilePage extends StatelessWidget {
+class EditProfilePage extends ConsumerStatefulWidget {
   const EditProfilePage(
     this.userUpdateRequest, {
     Key? key,
@@ -25,6 +25,19 @@ class EditProfilePage extends StatelessWidget {
   final UserUpdateRequest userUpdateRequest;
 
   static const routeName = 'EditProfilePage';
+
+  @override
+  ConsumerState<EditProfilePage> createState() => _EditProfilePageState();
+}
+
+class _EditProfilePageState extends ConsumerState<EditProfilePage> {
+  @override
+  void initState() {
+    super.initState();
+    Future.microtask(
+      () => ref.read(profileUpdateStateProvider.notifier).initRequest(widget.userUpdateRequest),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -38,13 +51,28 @@ class EditProfilePage extends StatelessWidget {
           ),
           title: const Text(AppStrings.managementProfile),
           actions: [
-            ActionButton(
-              buttonTitle: AppStrings.complete,
-              onPressed: () => Navigator.pushNamed(
-                context,
-                EditProfilePage.routeName,
-              ),
-              isEnable: true,
+            Consumer(
+              builder: (context, ref, child) {
+                final isValid = ref.watch(profileUpdateCheckProvider);
+                final validateNickname = ref.watch(vaildatioinNicknameProvider);
+                final updateRequest = ref.watch(profileUpdateStateProvider);
+                return ActionButton(
+                  buttonTitle: AppStrings.complete,
+                  onPressed: () async {
+                    await ref.read(userDataStateProvider.notifier).updateUserData(
+                          UserUpdateRequest(
+                            city: updateRequest.city,
+                            district: updateRequest.district,
+                            nickname: validateNickname ? updateRequest.nickname : widget.userUpdateRequest.nickname,
+                            university: updateRequest.university,
+                            imagePath: updateRequest.imagePath,
+                          ),
+                        );
+                    Navigator.pop(context);
+                  },
+                  isEnable: isValid,
+                );
+              },
             ),
           ],
         ),
@@ -69,7 +97,7 @@ class EditProfilePage extends StatelessWidget {
                             children: [
                               fileImage.isEmpty
                                   ? ProfileImageCard(
-                                      img: userUpdateRequest.imagePath,
+                                      img: widget.userUpdateRequest.imagePath,
                                       rad: 50,
                                       backgroundColor: AppColors.purple,
                                     )
@@ -105,13 +133,9 @@ class EditProfilePage extends StatelessWidget {
                   ),
                   const SizedBox(height: 40),
                   const SubTitle(AppStrings.nickname),
-                  NicknameInputField(
-                    initialValue: userUpdateRequest.nickname,
-                  ),
+                  const NicknameInputField(),
                   const SubTitle(AppStrings.university),
-                  UniversityInputField(
-                    initialValue: userUpdateRequest.university,
-                  ),
+                  const UniversityInputField(),
                   const SubTitle(AppStrings.area),
                   Consumer(
                     builder: (context, ref, child) {
@@ -119,17 +143,11 @@ class EditProfilePage extends StatelessWidget {
                       return Row(
                         children: [
                           CityInputField(
-                            initialValue: AppConfig.locationCodeNamePair
-                                .where((e) => e.code == updateProfileData.city)
-                                .first
-                                .name,
                             city: ref.watch(profileUpdateStateProvider.notifier).userCity,
                             setCity: ref.read(profileUpdateStateProvider.notifier).setUserCity,
                           ),
                           const SizedBox(width: 24),
                           DistrictInputField(
-                            initialCityCode: updateProfileData.city,
-                            initialDistrict: updateProfileData.district,
                             district: updateProfileData.district,
                             cityCode: updateProfileData.city,
                             setDistrict: ref.read(profileUpdateStateProvider.notifier).setUserDistrict,
