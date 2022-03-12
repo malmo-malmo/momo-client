@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:momo_flutter/app_config.dart';
 import 'package:momo_flutter/data/models/user/user_update_request.dart';
+import 'package:momo_flutter/features/gallery/gallery_page.dart';
 import 'package:momo_flutter/features/profile/provider/profile_update_provider.dart';
 import 'package:momo_flutter/features/profile/widgets/nickname_input_field.dart';
 import 'package:momo_flutter/features/profile/widgets/university_input_field.dart';
@@ -77,7 +78,16 @@ class EditProfilePage extends StatelessWidget {
                                 right: 0,
                                 bottom: 0,
                                 child: InkWell(
-                                  onTap: () async {},
+                                  onTap: () async {
+                                    final result = await Navigator.pushNamed(
+                                      context,
+                                      GalleryPage.routeName,
+                                      arguments: PhotoRequestType.one,
+                                    );
+                                    if (result != null) {
+                                      ref.read(profileUpdateStateProvider.notifier).setImagePath(result as String);
+                                    }
+                                  },
                                   child: CircleAvatar(
                                     radius: 17,
                                     backgroundColor: AppColors.purple,

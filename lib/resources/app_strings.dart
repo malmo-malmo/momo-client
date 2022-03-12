@@ -15,6 +15,7 @@ abstract class AppStrings {
   static const calendar = '캘린더';
   static const myGroup = '내 모임';
   static const myPage = '마이페이지';
+  static const gallery = '사진첩';
 
   static const startMomo = 'MOMO 시작하기';
   static const next = '다음';

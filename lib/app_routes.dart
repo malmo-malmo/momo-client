@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:momo_flutter/data/models/user/user_update_request.dart';
+import 'package:momo_flutter/features/gallery/gallery_page.dart';
 import 'package:momo_flutter/features/intro/terms_page.dart';
 import 'package:momo_flutter/features/main/main_page.dart';
 import 'package:momo_flutter/features/onboard/onboard_page.dart';
@@ -42,6 +43,10 @@ abstract class AppRoutes {
       case EditProfilePage.routeName:
         final userUpdateRequest = settings.arguments as UserUpdateRequest;
         _page = EditProfilePage(userUpdateRequest);
+        break;
+      case GalleryPage.routeName:
+        final photoRequestType = settings.arguments as PhotoRequestType;
+        _page = GalleryPage(photoRequestType);
         break;
       default:
         break;
