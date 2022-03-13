@@ -5,6 +5,7 @@ import 'package:momo_flutter/features/intro/terms_page.dart';
 import 'package:momo_flutter/features/main/main_page.dart';
 import 'package:momo_flutter/features/onboard/onboard_page.dart';
 import 'package:momo_flutter/features/post/manage_post_page.dart';
+import 'package:momo_flutter/features/post/post_detail_page.dart';
 import 'package:momo_flutter/features/profile/edit_category_page.dart';
 import 'package:momo_flutter/features/profile/edit_profile_page.dart';
 import 'package:momo_flutter/features/profile/intro_category_page.dart';
@@ -52,6 +53,10 @@ abstract class AppRoutes {
       case EditCategoryPage.routeName:
         final initialState = settings.arguments as List<bool>;
         _page = EditCategoryPage(initialState);
+        break;
+      case PostDetailPage.routeName:
+        final postId = settings.arguments as int;
+        _page = PostDetailPage(postId);
         break;
       default:
         break;

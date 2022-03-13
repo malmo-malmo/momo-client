@@ -32,7 +32,6 @@ dependencies:
   kakao_flutter_sdk_user: ^1.0.0
   cached_network_image: ^3.2.0
   device_info_plus: ^3.2.2
-
   cupertino_icons: ^1.0.2
 
 dev_dependencies:

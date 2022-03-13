@@ -33,6 +33,14 @@ abstract class AppStyles {
     height: 24 / 16,
   );
 
+  static const bold14 = TextStyle(
+    fontSize: 14,
+    fontWeight: AppDimens.bold,
+    color: AppColors.gray6,
+    letterSpacing: -0.14,
+    height: 28 / 14,
+  );
+
   static const regular16 = TextStyle(
     fontSize: 16,
     fontWeight: AppDimens.regular,
