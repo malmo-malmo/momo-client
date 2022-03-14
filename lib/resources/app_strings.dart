@@ -30,6 +30,8 @@ abstract class AppStrings {
   static const offline = '오프라인';
   static const momoLogout = 'MOMO 로그아웃';
   static const withdrawal = '회원탈퇴';
+  static const include = '포함';
+  static const notInclude = '미포함';
 
   static const totalGroup = '총 모임';
   static const favoriteGroup = '찜한 모임';
@@ -69,4 +71,15 @@ abstract class AppStrings {
   static const recentGroup = '최근 본 모임';
   static const directManageGroup = '직접 관리 모임';
   static const etcGroup = '그 외 참여모임';
+
+  static const makeGroup = '모임 만들기';
+  static const groupName = '모임명';
+  static const acticeCatetory = '활동 카테고리';
+  static const groupType = '모임 유형';
+  static const groupStartDay = '모임 시작일';
+  static const recruitNumber = '모집 인원';
+  static const myUniversity = '내 학교';
+  static const groupLocation = '모임 지역';
+  static const memo = '메모';
+  static const groupHintText = '모임에 대한 간단한 설명을 남겨주세요.';
 }

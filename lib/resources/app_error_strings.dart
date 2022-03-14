@@ -5,4 +5,5 @@ abstract class AppErrorString {
   static const managePostEmpty = '작성한 게시물이 없습니다!';
   static const myGroupEmpty = '내가 만든 모임이 없습니다!';
   static const etcGroupEmpty = '그 외 참여한 모임이 없습니다!';
+  static const requestImageEmpty = '사진을 등록해주세요!';
 }

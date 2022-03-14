@@ -49,4 +49,5 @@ abstract class AppIcons {
   static const myGroup = 'assets/icon/meet/icon_manage_28.svg';
   static const etcGroup = 'assets/icon/meet/icon_othermoim.svg';
   static const addGroup = 'assets/icon/meet/floatingbtn_addmoim_64.svg';
+  static const camera = 'assets/icon/btn_camera_32.svg';
 }

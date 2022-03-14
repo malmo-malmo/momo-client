@@ -4,8 +4,8 @@ import 'package:momo_flutter/app_consts.dart';
 import 'package:momo_flutter/resources/resources.dart';
 import 'package:momo_flutter/utils/load_asset.dart';
 
-class CategortButton extends StatelessWidget {
-  const CategortButton({
+class CategoryButton extends StatelessWidget {
+  const CategoryButton({
     Key? key,
     required this.check,
     required this.index,

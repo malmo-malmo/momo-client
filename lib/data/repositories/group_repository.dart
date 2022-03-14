@@ -4,6 +4,8 @@ import 'package:momo_flutter/data/datasources/remote/retrofit/favorite_client.da
 import 'package:momo_flutter/data/datasources/remote/retrofit/group_client.dart';
 import 'package:momo_flutter/data/datasources/remote/retrofit/management_client.dart';
 import 'package:momo_flutter/data/datasources/remote/retrofit_client_provider.dart';
+import 'package:momo_flutter/data/models/group/group_detail_response.dart';
+import 'package:momo_flutter/data/models/group/group_request.dart';
 import 'package:momo_flutter/data/models/management/group_summary_response.dart';
 import 'package:momo_flutter/data/models/management/my_group_response.dart';
 
@@ -40,5 +42,9 @@ class GroupRepository {
 
   Future<List<GroupSummaryReseponse>> getParticipationGroups() {
     return managementClient.getParticipationGroupSummary();
+  }
+
+  Future<GroupDetailResponse> createGroup(GroupRequest groupRequest) {
+    return formDataClient.createGroup(groupRequest);
   }
 }

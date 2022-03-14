@@ -33,7 +33,7 @@ class CategoryListCard extends StatelessWidget {
               runSpacing: 36,
               children: [
                 for (int i = 0; i < categoryState.length; i++)
-                  CategortButton(
+                  CategoryButton(
                     check: categoryState[i],
                     index: i,
                     onTabIcon: ref.read(categoryStateProvider(initialState).notifier).toggleCategory,
