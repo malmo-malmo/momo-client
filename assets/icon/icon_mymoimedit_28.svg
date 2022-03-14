@@ -1,0 +1,13 @@
+<svg id="icon_mymoimedit28" xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 28 28">
+    <defs>
+        <clipPath id="clip-path">
+            <path id="Rectangle_2976" data-name="Rectangle 2976" style="fill:none" d="M0 0h28v28H0z"/>
+        </clipPath>
+        <style>
+            
+        </style>
+    </defs>
+    <g id="Group_2475" data-name="Group 2475" style="clip-path:url(#clip-path)">
+        <path id="Path_3276" data-name="Path 3276" d="m23.451 7.275-2.684-2.684a1.879 1.879 0 0 0-2.637-.012L4.81 17.655a1 1 0 0 0-.294.6l-.51 4.59A1 1 0 0 0 5 23.958c.036 0 .071 0 .107-.005l4.717-.511a1 1 0 0 0 .605-.293L23.461 9.915a1.879 1.879 0 0 0-.01-2.64M9.255 21.492l-3.123.339.333-3 9.842-9.661 2.561 2.56zm11.016-11.187-2.536-2.536 1.706-1.676L21.949 8.6z" style="fill:#fdfdfd"/>
+    </g>
+</svg>

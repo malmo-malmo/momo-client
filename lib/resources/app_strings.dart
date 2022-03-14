@@ -67,4 +67,6 @@ abstract class AppStrings {
 
   static const favoriteCategory = '관심 카테고리';
   static const recentGroup = '최근 본 모임';
+  static const directManageGroup = '직접 관리 모임';
+  static const etcGroup = '그 외 참여모임';
 }

@@ -43,4 +43,10 @@ abstract class AppIcons {
   static const startDay = 'assets/icon/icon_daystart_20.svg';
 
   static const squareCamera = 'assets/icon/mypage/btn_camera_2_18.svg';
+  static const notification = 'assets/icon/icon_alarm_28.svg';
+  static const chat = 'assets/icon/icon_msg_28.svg';
+  static const groupEdit = 'assets/icon/icon_mymoimedit_28.svg';
+  static const myGroup = 'assets/icon/meet/icon_manage_28.svg';
+  static const etcGroup = 'assets/icon/meet/icon_othermoim.svg';
+  static const addGroup = 'assets/icon/meet/floatingbtn_addmoim_64.svg';
 }
