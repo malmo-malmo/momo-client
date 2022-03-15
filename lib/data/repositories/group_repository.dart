@@ -59,6 +59,14 @@ class GroupRepository {
     return favoriteClient.deleteGroupLike(groupId);
   }
 
+  Future<List<GroupResponse>> getGroupsBySearch(
+    int page, {
+    List<String>? categories,
+    List<String>? cities,
+  }) {
+    return groupClient.getGroupsBySearch(page, AppConsts.pageSize, categories ?? [], cities ?? []);
+  }
+
   Future<List<GroupResponse>> getGroupsByCategories(int page, {int size = AppConsts.pageSize}) {
     return groupClient.getGroupsByCategories(page, size);
   }

@@ -34,6 +34,7 @@ abstract class AppStrings {
   static const withdrawal = '회원탈퇴';
   static const include = '포함';
   static const notInclude = '미포함';
+  static const more = '더보기';
 
   static const totalGroup = '총 모임';
   static const favoriteGroup = '찜한 모임';

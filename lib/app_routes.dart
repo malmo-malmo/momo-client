@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:momo_flutter/data/models/user/user_update_request.dart';
 import 'package:momo_flutter/features/gallery/gallery_page.dart';
+import 'package:momo_flutter/features/group/group_list_page.dart';
+import 'package:momo_flutter/features/group/recommend_group_list_page.dart';
 import 'package:momo_flutter/features/intro/terms_page.dart';
 import 'package:momo_flutter/features/main/main_page.dart';
 import 'package:momo_flutter/features/onboard/onboard_page.dart';
@@ -57,6 +59,20 @@ abstract class AppRoutes {
       case PostDetailPage.routeName:
         final postId = settings.arguments as int;
         _page = PostDetailPage(postId);
+        break;
+      case GroupListPage.routeName:
+        final groupListArg = settings.arguments as GroupListArg;
+        _page = GroupListPage(
+          name: groupListArg.name,
+          likeCallback: groupListArg.likeCallback,
+        );
+        break;
+      case RecommendGroupListPage.routeName:
+        final likeCallback = settings.arguments as void Function({
+          required int groupId,
+          required bool like,
+        });
+        _page = RecommendGroupListPage(likeCallback);
         break;
       default:
         break;

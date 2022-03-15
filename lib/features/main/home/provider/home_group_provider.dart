@@ -78,17 +78,17 @@ class HomeGroupStateNotifier extends StateNotifier<HomeGroupState> {
 
   void groupLikeCallBack({
     required int groupId,
-    required bool favorite,
+    required bool like,
   }) {
     state = state.copyWith(
       categoryGroups: [
-        ...state.categoryGroups.map((e) => e.id == groupId ? e.copyWith(favoriteGroup: favorite) : e).toList()
+        ...state.categoryGroups.map((e) => e.id == groupId ? e.copyWith(favoriteGroup: like) : e).toList()
       ],
       districtGroups: [
-        ...state.districtGroups.map((e) => e.id == groupId ? e.copyWith(favoriteGroup: favorite) : e).toList()
+        ...state.districtGroups.map((e) => e.id == groupId ? e.copyWith(favoriteGroup: like) : e).toList()
       ],
       universityGroups: [
-        ...state.universityGroups.map((e) => e.id == groupId ? e.copyWith(favoriteGroup: favorite) : e).toList()
+        ...state.universityGroups.map((e) => e.id == groupId ? e.copyWith(favoriteGroup: like) : e).toList()
       ],
     );
   }

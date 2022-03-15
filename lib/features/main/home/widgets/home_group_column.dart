@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:momo_flutter/features/group/group_list_page.dart';
+import 'package:momo_flutter/features/group/recommend_group_list_page.dart';
 import 'package:momo_flutter/features/main/home/provider/home_group_provider.dart';
 import 'package:momo_flutter/features/main/home/widgets/home_group_list_view.dart';
 import 'package:momo_flutter/resources/resources.dart';
@@ -27,7 +29,11 @@ class HomeGroupColumn extends ConsumerWidget {
             title: AppStrings.recommendation,
             icon: AppIcons.recommendation,
             actionIcon: InkWell(
-              onTap: () {},
+              onTap: () => Navigator.pushNamed(
+                context,
+                RecommendGroupListPage.routeName,
+                arguments: ref.read(homeGroupStateProvider.notifier).groupLikeCallBack,
+              ),
               child: const Icon(Icons.add),
             ),
           ),
@@ -39,7 +45,14 @@ class HomeGroupColumn extends ConsumerWidget {
             title: AppStrings.myUniversity,
             icon: AppIcons.myUniversity,
             actionIcon: InkWell(
-              onTap: () {},
+              onTap: () => Navigator.pushNamed(
+                context,
+                GroupListPage.routeName,
+                arguments: GroupListArg(
+                  name: AppStrings.myUniversity,
+                  likeCallback: ref.read(homeGroupStateProvider.notifier).groupLikeCallBack,
+                ),
+              ),
               child: const Icon(Icons.add),
             ),
           ),
@@ -51,7 +64,14 @@ class HomeGroupColumn extends ConsumerWidget {
             title: AppStrings.around,
             icon: AppIcons.around,
             actionIcon: InkWell(
-              onTap: () {},
+              onTap: () => Navigator.pushNamed(
+                context,
+                GroupListPage.routeName,
+                arguments: GroupListArg(
+                  name: AppStrings.around,
+                  likeCallback: ref.read(homeGroupStateProvider.notifier).groupLikeCallBack,
+                ),
+              ),
               child: const Icon(Icons.add),
             ),
           ),
