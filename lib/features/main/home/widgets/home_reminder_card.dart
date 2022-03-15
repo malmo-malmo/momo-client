@@ -14,11 +14,14 @@ import 'package:momo_flutter/widgets/indicator/loading_indicator.dart';
 class HomeReminderCard extends StatelessWidget {
   HomeReminderCard({Key? key}) : super(key: key);
 
-  final _controller = ScrollController();
+  final _controller = ScrollController(
+    initialScrollOffset: 53 * (DateTime.now().day - 3),
+  );
 
   @override
   Widget build(BuildContext context) {
     return Container(
+      margin: const EdgeInsets.only(top: 8),
       padding: const EdgeInsets.symmetric(vertical: 20),
       height: 390,
       decoration: BoxDecoration(

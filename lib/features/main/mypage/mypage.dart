@@ -69,6 +69,7 @@ class Mypage extends StatelessWidget {
                       startDate: '2021-12-31',
                       favoriteGroup: index % 2 == 1,
                     ),
+                    setLike: () {},
                   );
                 },
                 separatorBuilder: (context, index) => const SizedBox(width: 14),

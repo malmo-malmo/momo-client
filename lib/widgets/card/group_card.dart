@@ -10,6 +10,7 @@ class GroupCard extends StatelessWidget {
   const GroupCard(
     this.group, {
     Key? key,
+    required this.setLike,
     this.height = 200,
     this.width = 148,
   }) : super(key: key);
@@ -17,6 +18,7 @@ class GroupCard extends StatelessWidget {
   final GroupResponse group;
   final double height;
   final double width;
+  final Function setLike;
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +50,7 @@ class GroupCard extends StatelessWidget {
                   children: [
                     OnOffCard(group.offline),
                     InkWell(
-                      onTap: () {},
+                      onTap: () => setLike(),
                       child: Icon(
                         group.favoriteGroup ? CupertinoIcons.heart_fill : CupertinoIcons.heart,
                         size: 24,

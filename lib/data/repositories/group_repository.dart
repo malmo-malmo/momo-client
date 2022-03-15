@@ -1,11 +1,14 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:momo_flutter/app_consts.dart';
 import 'package:momo_flutter/data/datasources/remote/form_data_client_provider.dart';
 import 'package:momo_flutter/data/datasources/remote/retrofit/favorite_client.dart';
 import 'package:momo_flutter/data/datasources/remote/retrofit/group_client.dart';
 import 'package:momo_flutter/data/datasources/remote/retrofit/management_client.dart';
 import 'package:momo_flutter/data/datasources/remote/retrofit_client_provider.dart';
 import 'package:momo_flutter/data/models/group/group_detail_response.dart';
+import 'package:momo_flutter/data/models/group/group_like_request.dart';
 import 'package:momo_flutter/data/models/group/group_request.dart';
+import 'package:momo_flutter/data/models/group/group_response.dart';
 import 'package:momo_flutter/data/models/management/group_summary_response.dart';
 import 'package:momo_flutter/data/models/management/my_group_response.dart';
 
@@ -46,5 +49,25 @@ class GroupRepository {
 
   Future<GroupDetailResponse> createGroup(GroupRequest groupRequest) {
     return formDataClient.createGroup(groupRequest);
+  }
+
+  Future<dynamic> createGroupLike(int groupId) {
+    return favoriteClient.createGroupLike(GroupLikeRequest(groupId: groupId));
+  }
+
+  Future<dynamic> deleteGroupLike(int groupId) {
+    return favoriteClient.deleteGroupLike(groupId);
+  }
+
+  Future<List<GroupResponse>> getGroupsByCategories(int page, {int size = AppConsts.pageSize}) {
+    return groupClient.getGroupsByCategories(page, size);
+  }
+
+  Future<List<GroupResponse>> getGroupsByLocation(int page, {int size = AppConsts.pageSize}) {
+    return groupClient.getGroupsByDistrict(page, size);
+  }
+
+  Future<List<GroupResponse>> getGroupsByUniversity(int page, {int size = AppConsts.pageSize}) {
+    return groupClient.getGroupsByUniversity(page, size);
   }
 }

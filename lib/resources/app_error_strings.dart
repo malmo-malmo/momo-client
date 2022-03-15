@@ -7,4 +7,5 @@ abstract class AppErrorString {
   static const etcGroupEmpty = '그 외 참여한 모임이 없습니다!';
   static const requestImageEmpty = '사진을 등록해주세요!';
   static const scheduleEmpty = '등록된 일정이 없어요!';
+  static const homeGroupEmpty = '해당 모임이 존재하지 않습니다!';
 }
