@@ -50,4 +50,10 @@ abstract class AppIcons {
   static const etcGroup = 'assets/icon/meet/icon_othermoim.svg';
   static const addGroup = 'assets/icon/meet/floatingbtn_addmoim_64.svg';
   static const camera = 'assets/icon/btn_camera_32.svg';
+
+  static const reminder = 'assets/icon/home/icon_reminder_28.svg';
+  static const recommendation = 'assets/icon/home/icon_recommend_28.svg';
+  static const myUniversity = 'assets/icon/home/icon_myschool_28.svg';
+  static const around = 'assets/icon/home/icon_location_28.svg';
+  static const top4 = 'assets/icon/home/icon_topfour_28.svg';
 }

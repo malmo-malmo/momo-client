@@ -16,6 +16,8 @@ abstract class AppStrings {
   static const myGroup = '내 모임';
   static const myPage = '마이페이지';
   static const gallery = '사진첩';
+  static const around = '주변';
+  static const momth = '월';
 
   static const startMomo = 'MOMO 시작하기';
   static const next = '다음';
@@ -82,4 +84,9 @@ abstract class AppStrings {
   static const groupLocation = '모임 지역';
   static const memo = '메모';
   static const groupHintText = '모임에 대한 간단한 설명을 남겨주세요.';
+
+  static const homeTitle = '어서와,\n이런 모임은 처음이지?';
+  static const reminder = '리마인더';
+  static const recommendation = '추천';
+  static const weeklyTop4 = '주간 달성률 Top4';
 }
