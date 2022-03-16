@@ -39,6 +39,10 @@ class GroupRepository {
     required this.favoriteClient,
   });
 
+  Future<GroupDetailResponse> getGroupDetail(int groupId) {
+    return groupClient.getGroupDetail(groupId);
+  }
+
   Future<List<MyGroupResponse>> getMyGroups() {
     return managementClient.getMyGroupDetail();
   }
@@ -77,5 +81,20 @@ class GroupRepository {
 
   Future<List<GroupResponse>> getGroupsByUniversity(int page, {int size = AppConsts.pageSize}) {
     return groupClient.getGroupsByUniversity(page, size);
+  }
+
+  Future<dynamic> participantGroup(int groupId) {
+    return groupClient.participantGroup(groupId);
+  }
+
+  Future<dynamic> endGropu(int id) {
+    return groupClient.endGroup(id);
+  }
+
+  Future<dynamic> managerGroup({
+    required int id,
+    required int userId,
+  }) {
+    return groupClient.managerGroup(id, userId);
   }
 }

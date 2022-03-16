@@ -90,4 +90,7 @@ abstract class AppStrings {
   static const reminder = '리마인더';
   static const recommendation = '추천';
   static const weeklyTop4 = '주간 달성률 Top4';
+
+  static const noUniversity = '대학교 없음';
+  static const groupInformation = '모임 안내';
 }

@@ -1,6 +1,7 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:momo_flutter/data/models/user/user_update_request.dart';
 import 'package:momo_flutter/features/gallery/gallery_page.dart';
+import 'package:momo_flutter/features/group/group_detail_page.dart';
 import 'package:momo_flutter/features/group/group_list_page.dart';
 import 'package:momo_flutter/features/group/recommend_group_list_page.dart';
 import 'package:momo_flutter/features/intro/terms_page.dart';
@@ -74,10 +75,15 @@ abstract class AppRoutes {
         });
         _page = RecommendGroupListPage(likeCallback);
         break;
+      case GroupDetailPage.routeName:
+        final groupId = settings.arguments as int;
+        _page = GroupDetailPage(groupId);
+        break;
+
       default:
         break;
     }
-    return MaterialPageRoute(
+    return CupertinoPageRoute(
       builder: (context) => _page,
     );
   }
