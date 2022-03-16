@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:momo_flutter/features/main/home/widgets/event_card.dart';
 import 'package:momo_flutter/features/main/home/widgets/home_group_column.dart';
 import 'package:momo_flutter/features/main/home/widgets/home_reminder_card.dart';
+import 'package:momo_flutter/features/main/home/widgets/weekly_top_rate_card.dart';
 import 'package:momo_flutter/features/main/main_bottom_navigation_bar.dart';
 import 'package:momo_flutter/resources/resources.dart';
 import 'package:momo_flutter/utils/load_asset.dart';
@@ -48,6 +49,7 @@ class HomePage extends StatelessWidget {
                   ),
                 ),
               ),
+              const WeeklyTopRateCard(),
               const EventCard(),
             ],
           ),
