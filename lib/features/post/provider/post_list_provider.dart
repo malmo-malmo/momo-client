@@ -1,0 +1,72 @@
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:momo_flutter/app_consts.dart';
+import 'package:momo_flutter/data/models/enum/post_type.dart';
+import 'package:momo_flutter/data/models/post/post_response.dart';
+import 'package:momo_flutter/data/repositories/post_repository.dart';
+
+part 'post_list_provider.freezed.dart';
+
+final postListStateProvider = StateNotifierProvider.autoDispose.family<PostListStateNotifier, PostListState, int>(
+  (ref, groupId) {
+    final postRepository = ref.watch(postRepositoryProvider);
+    return PostListStateNotifier(
+      groupId: groupId,
+      postRepository: postRepository,
+    );
+  },
+);
+
+final noticeListStateProvider = StateNotifierProvider.autoDispose.family<PostListStateNotifier, PostListState, int>(
+  (ref, groupId) {
+    final postRepository = ref.watch(postRepositoryProvider);
+    return PostListStateNotifier(
+      groupId: groupId,
+      postRepository: postRepository,
+    );
+  },
+);
+
+class PostListStateNotifier extends StateNotifier<PostListState> {
+  PostListStateNotifier({
+    required this.groupId,
+    required this.postRepository,
+  }) : super(
+          PostListState(
+            posts: [],
+            nextPage: 0,
+          ),
+        );
+
+  final int groupId;
+  final PostRepository postRepository;
+
+  Future<void> getPosts({
+    required int page,
+    required PostType postType,
+  }) async {
+    try {
+      final response = await postRepository.getPosts(
+        groupId: groupId,
+        page: page,
+        type: postType,
+      );
+
+      state = state.copyWith(
+        posts: [...state.posts, ...response],
+        nextPage: response.length == AppConsts.pageSize ? page : null,
+      );
+    } catch (e) {
+      state = state.copyWith(error: e);
+    }
+  }
+}
+
+@freezed
+class PostListState with _$PostListState {
+  factory PostListState({
+    required List<PostResponse> posts,
+    int? nextPage,
+    dynamic error,
+  }) = _PostListState;
+}

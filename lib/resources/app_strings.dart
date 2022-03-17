@@ -35,6 +35,12 @@ abstract class AppStrings {
   static const include = '포함';
   static const notInclude = '미포함';
   static const more = '더보기';
+  static const end = '종료';
+  static const deadLine = '마감';
+  static const canApply = '신청 가능';
+
+  static const upcomingSchedule = '다가오는 일정';
+  static const commentCount = '댓글 수';
 
   static const totalGroup = '총 모임';
   static const favoriteGroup = '찜한 모임';
