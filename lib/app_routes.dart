@@ -8,7 +8,9 @@ import 'package:momo_flutter/features/intro/terms_page.dart';
 import 'package:momo_flutter/features/main/main_page.dart';
 import 'package:momo_flutter/features/onboard/onboard_page.dart';
 import 'package:momo_flutter/features/post/manage_post_page.dart';
+import 'package:momo_flutter/features/post/notice_list_page.dart';
 import 'package:momo_flutter/features/post/post_detail_page.dart';
+import 'package:momo_flutter/features/post/post_request_page.dart';
 import 'package:momo_flutter/features/profile/edit_category_page.dart';
 import 'package:momo_flutter/features/profile/edit_profile_page.dart';
 import 'package:momo_flutter/features/profile/intro_category_page.dart';
@@ -78,6 +80,16 @@ abstract class AppRoutes {
       case GroupDetailPage.routeName:
         final groupId = settings.arguments as int;
         _page = GroupDetailPage(groupId);
+        break;
+
+      case NoticeListPage.routeName:
+        final groupId = settings.arguments as int;
+        _page = NoticeListPage(groupId);
+        break;
+
+      case PostRequestPage.routeName:
+        final postRequestArg = settings.arguments as PostRequestArg;
+        _page = PostRequestPage(postRequestArg);
         break;
 
       default:

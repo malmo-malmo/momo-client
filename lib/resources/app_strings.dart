@@ -22,6 +22,7 @@ abstract class AppStrings {
   static const startMomo = 'MOMO 시작하기';
   static const next = '다음';
   static const confirm = '확인';
+  static const yes = '네';
   static const no = '아니요';
   static const add = '추가';
   static const complete = '완료';
@@ -99,4 +100,15 @@ abstract class AppStrings {
 
   static const noUniversity = '대학교 없음';
   static const groupInformation = '모임 안내';
+
+  static const createPost = '게시물 작성';
+  static const createNotice = '공지사항 작성';
+  static const addSchedule = '일정 추가';
+  static const withdrawalGroup = '모임 탈퇴';
+  static const closeGroup = '모임 종료';
+  static const manageAuthority = '관리자 권한 넘기기';
+  static const groupManagerChat = '모임 관리자 1:1 채팅';
+
+  static const withdrawalGroupConfrim = AppStrings.yes + ', ' + '나갈래요';
+  static const withdrawalGroupAsk = '정말 모임에서 탈퇴하시겠어요?';
 }

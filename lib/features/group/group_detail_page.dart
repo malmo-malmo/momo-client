@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:momo_flutter/data/models/group/group_detail_response.dart';
 import 'package:momo_flutter/features/group/providers/group_detail_provider.dart';
 import 'package:momo_flutter/features/group/widgets/group_contents_card.dart';
@@ -11,7 +12,7 @@ import 'package:momo_flutter/utils/load_asset.dart';
 import 'package:momo_flutter/widgets/button/bottom_button.dart';
 import 'package:momo_flutter/widgets/indicator/loading_indicator.dart';
 
-class GroupDetailPage extends ConsumerWidget {
+class GroupDetailPage extends ConsumerStatefulWidget {
   const GroupDetailPage(this.groupId, {Key? key}) : super(key: key);
 
   final int groupId;
@@ -19,8 +20,26 @@ class GroupDetailPage extends ConsumerWidget {
   static const routeName = 'GroupDetailPage';
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final groupDetail = ref.watch(groupDetailStateProvider(groupId));
+  ConsumerState<GroupDetailPage> createState() => _GroupDetailPageState();
+}
+
+class _GroupDetailPageState extends ConsumerState<GroupDetailPage> {
+  final _fToast = FToast();
+
+  @override
+  void initState() {
+    super.initState();
+    _fToast.init(context);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    ref.listen<GroupDetailResponse>(
+      groupDetailStateProvider(widget.groupId),
+      (pre, next) {},
+    );
+
+    final groupDetail = ref.watch(groupDetailStateProvider(widget.groupId));
 
     if (groupDetail.managerId == -1) {
       return const Scaffold(

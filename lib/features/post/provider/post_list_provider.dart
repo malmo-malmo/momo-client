@@ -2,6 +2,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:momo_flutter/app_consts.dart';
 import 'package:momo_flutter/data/models/enum/post_type.dart';
+import 'package:momo_flutter/data/models/post/post_detail_response.dart';
 import 'package:momo_flutter/data/models/post/post_response.dart';
 import 'package:momo_flutter/data/repositories/post_repository.dart';
 
@@ -59,6 +60,23 @@ class PostListStateNotifier extends StateNotifier<PostListState> {
     } catch (e) {
       state = state.copyWith(error: e);
     }
+  }
+
+  void createCallback(PostDetailResponse post) {
+    final _post = PostResponse(
+      id: post.id,
+      authorNickname: post.authorNickname,
+      title: post.title,
+      contents: post.contents,
+      createdDate: post.createdDate,
+      commentCnt: 0,
+      authorImage: post.authorImage,
+    );
+
+    state = state.copyWith(posts: [
+      _post,
+      ...state.posts,
+    ]);
   }
 }
 

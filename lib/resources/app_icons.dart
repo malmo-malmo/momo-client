@@ -60,4 +60,11 @@ abstract class AppIcons {
   static const oooWhite = 'assets/icon/icon_ooowhite_28.svg';
   static const locationWhite = 'assets/icon/icon_locationwhite_20.svg';
   static const universityWhite = 'assets/icon/icon_schoolwhite_20.svg';
+
+  static const write = 'assets/icon/icon_write_28.svg';
+  static const exitGroup = 'assets/icon/icon_memberexit_28.svg';
+  static const writeNotice = 'assets/icon/icon_notice_28.svg';
+  static const addSchedule = 'assets/icon/icon_todoadd_28.svg';
+  static const managerAuthority = 'assets/icon/icon_manager_28.svg';
+  static const closeGroup = 'assets/icon/icon_moimclose.svg';
 }
