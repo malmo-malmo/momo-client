@@ -39,6 +39,8 @@ abstract class AppStrings {
   static const end = '종료';
   static const deadLine = '마감';
   static const canApply = '신청 가능';
+  static const choice = '선택';
+  static const achievementRate = '달성률';
 
   static const upcomingSchedule = '다가오는 일정';
   static const commentCount = '댓글 수';
@@ -109,6 +111,12 @@ abstract class AppStrings {
   static const manageAuthority = '관리자 권한 넘기기';
   static const groupManagerChat = '모임 관리자 1:1 채팅';
 
-  static const withdrawalGroupConfrim = AppStrings.yes + ', ' + '나갈래요';
+  static const withdrawalGroupConfrim = AppStrings.yes + ', 나갈래요';
   static const withdrawalGroupAsk = '정말 모임에서 탈퇴하시겠어요?';
+
+  static const closeGroupTitle = '정말 모임을 종료하시겠어요?';
+  static const closeGroupSubTitle = '모임을 종료하면 더 이상 기능을\n이용할 수 없어요';
+  static const closeGroupConfirm = AppStrings.yes + ', 종료!';
+
+  static const authorityConfirm = '해당 멤버에게 관리자 권한을\n넘기시겠어요?';
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:momo_flutter/data/models/user/user_update_request.dart';
 import 'package:momo_flutter/features/gallery/gallery_page.dart';
+import 'package:momo_flutter/features/group/group_authority_page.dart';
 import 'package:momo_flutter/features/group/group_detail_page.dart';
 import 'package:momo_flutter/features/group/group_list_page.dart';
 import 'package:momo_flutter/features/group/recommend_group_list_page.dart';
@@ -16,6 +17,7 @@ import 'package:momo_flutter/features/profile/edit_profile_page.dart';
 import 'package:momo_flutter/features/profile/intro_category_page.dart';
 import 'package:momo_flutter/features/profile/intro_profile_page.dart';
 import 'package:momo_flutter/features/profile/profile_page.dart';
+import 'package:momo_flutter/features/schedule/schedule_request_page.dart';
 import 'package:momo_flutter/features/setting/setting_page.dart';
 
 abstract class AppRoutes {
@@ -81,22 +83,27 @@ abstract class AppRoutes {
         final groupId = settings.arguments as int;
         _page = GroupDetailPage(groupId);
         break;
-
       case NoticeListPage.routeName:
         final groupId = settings.arguments as int;
         _page = NoticeListPage(groupId);
         break;
-
       case PostRequestPage.routeName:
         final postRequestArg = settings.arguments as PostRequestArg;
         _page = PostRequestPage(postRequestArg);
+        break;
+      case ScheduleRequestPage.routeName:
+        final groupId = settings.arguments as int;
+        _page = ScheduleRequestPage(groupId);
+        break;
+      case GroupAuthorityPage.routeName:
+        final groupId = settings.arguments as int;
+        _page = GroupAuthorityPage(groupId);
         break;
 
       default:
         break;
     }
-    return CupertinoPageRoute(
-      builder: (context) => _page,
-    );
+
+    return CupertinoPageRoute(builder: (context) => _page);
   }
 }

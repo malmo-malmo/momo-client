@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:momo_flutter/resources/resources.dart';
 import 'package:momo_flutter/widgets/button/bottom_button.dart';
+import 'package:momo_flutter/widgets/button/reverse_bottom_button.dart';
 
 class QuestionDialog extends StatelessWidget {
   const QuestionDialog({
@@ -37,8 +38,7 @@ class QuestionDialog extends StatelessWidget {
               child: Row(
                 children: [
                   Expanded(
-                    child: BottomButton(
-                      isEnable: true,
+                    child: ReverseBottomButton(
                       buttonTitle: noText,
                       onPressed: () => Navigator.pop(context, true),
                     ),

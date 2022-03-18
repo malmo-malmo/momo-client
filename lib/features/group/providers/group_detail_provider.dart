@@ -60,4 +60,12 @@ class GroupDetailReponseState extends StateNotifier<GroupDetailResponse> {
     await groupRepository.managerGroup(id: state.id, userId: userId);
     state = state.copyWith(managerId: userId);
   }
+
+  Future<dynamic> withdrawalGroup() async {
+    await groupRepository.withdrawalGroup(state.id);
+    state = state.copyWith(
+      participant: false,
+      participantCnt: state.participantCnt - 1,
+    );
+  }
 }

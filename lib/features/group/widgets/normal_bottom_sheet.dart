@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:momo_flutter/data/models/enum/post_type.dart';
 import 'package:momo_flutter/data/models/post/post_detail_response.dart';
+import 'package:momo_flutter/features/group/providers/group_detail_provider.dart';
 import 'package:momo_flutter/features/post/post_request_page.dart';
 import 'package:momo_flutter/features/post/provider/post_list_provider.dart';
 import 'package:momo_flutter/resources/resources.dart';
@@ -9,8 +10,8 @@ import 'package:momo_flutter/widgets/button/bottom_sheet_tab_button.dart';
 import 'package:momo_flutter/widgets/dialog/question_dialog.dart';
 import 'package:momo_flutter/widgets/indicator/bottom_sheet_indicator.dart';
 
-class NormarBottomSheet extends StatelessWidget {
-  const NormarBottomSheet(this.groupId, {Key? key}) : super(key: key);
+class NormalBottomSheet extends StatelessWidget {
+  const NormalBottomSheet(this.groupId, {Key? key}) : super(key: key);
 
   final int groupId;
 
@@ -53,7 +54,6 @@ class NormarBottomSheet extends StatelessWidget {
                 title: AppStrings.withdrawalGroup,
                 icon: AppIcons.exitGroup,
                 onTap: () async {
-                  Navigator.pop(context);
                   final isWithdrawal = await showDialog<bool?>(
                     context: context,
                     builder: (_) => const QuestionDialog(
@@ -63,6 +63,7 @@ class NormarBottomSheet extends StatelessWidget {
                     ),
                   );
                   if (isWithdrawal != null && isWithdrawal) {
+                    ref.read(groupDetailStateProvider(groupId).notifier).withdrawalGroup();
                     Navigator.pop(context);
                   }
                 },
