@@ -41,6 +41,9 @@ abstract class AppStrings {
   static const canApply = '신청 가능';
   static const choice = '선택';
   static const achievementRate = '달성률';
+  static const title = '제목';
+  static const am = '오전';
+  static const pm = '오후';
 
   static const upcomingSchedule = '다가오는 일정';
   static const commentCount = '댓글 수';
@@ -119,4 +122,10 @@ abstract class AppStrings {
   static const closeGroupConfirm = AppStrings.yes + ', 종료!';
 
   static const authorityConfirm = '해당 멤버에게 관리자 권한을\n넘기시겠어요?';
+
+  static const scheduleName = '일정명';
+  static const dateAndTime = '날짜 및 시간';
+  static const scheduleHintText = '일정에 대한 간단한 메모를 남겨주세요.';
+  static const choiceGroup = '모임선택';
+  static const choiceGroupHint = '모임을 선택해주세요';
 }
