@@ -7,6 +7,7 @@ import 'package:momo_flutter/data/datasources/remote/retrofit_client_provider.da
 import 'package:momo_flutter/data/models/enum/post_type.dart';
 import 'package:momo_flutter/data/models/management/management_post_response.dart';
 import 'package:momo_flutter/data/models/post/post_detail_response.dart';
+import 'package:momo_flutter/data/models/post/post_request.dart';
 import 'package:momo_flutter/data/models/post/post_response.dart';
 
 final postRepositoryProvider = Provider<PostRepository>((ref) {
@@ -46,5 +47,9 @@ class PostRepository {
 
   Future<PostDetailResponse> getPostDetail(int postId) {
     return postClient.getPostDetail(postId);
+  }
+
+  Future<PostDetailResponse> createPost(PostRequest postRequest) {
+    return formDataClient.createPost(postRequest);
   }
 }

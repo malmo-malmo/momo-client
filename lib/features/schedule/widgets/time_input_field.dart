@@ -57,6 +57,7 @@ class _TimeInputFieldState extends State<TimeInputField> {
   }
 }
 
+// ignore: must_be_immutable
 class _TimePickerDialog extends StatelessWidget {
   _TimePickerDialog({Key? key}) : super(key: key);
 

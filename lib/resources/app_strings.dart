@@ -113,6 +113,7 @@ abstract class AppStrings {
   static const closeGroup = '모임 종료';
   static const manageAuthority = '관리자 권한 넘기기';
   static const groupManagerChat = '모임 관리자 1:1 채팅';
+  static const contentHint = '내용을 작성해주세요';
 
   static const withdrawalGroupConfrim = AppStrings.yes + ', 나갈래요';
   static const withdrawalGroupAsk = '정말 모임에서 탈퇴하시겠어요?';
