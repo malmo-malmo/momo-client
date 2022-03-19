@@ -67,4 +67,6 @@ abstract class AppIcons {
   static const addSchedule = 'assets/icon/icon_todoadd_28.svg';
   static const managerAuthority = 'assets/icon/icon_manager_28.svg';
   static const closeGroup = 'assets/icon/icon_moimclose.svg';
+
+  static const sendButton = 'assets/icon/icon_sendgray_44.svg';
 }

@@ -13,4 +13,5 @@ abstract class AppErrorString {
 
   static const noticeEmpty = '공지사항이 없습니다!';
   static const postEmpty = '게시물이 없습니다!';
+  static const commentEmpty = '작성된 댓글이 없어요!';
 }

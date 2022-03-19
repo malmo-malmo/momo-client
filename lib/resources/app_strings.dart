@@ -44,6 +44,8 @@ abstract class AppStrings {
   static const title = '제목';
   static const am = '오전';
   static const pm = '오후';
+  static const delete = '삭제';
+  static const report = '신고';
 
   static const upcomingSchedule = '다가오는 일정';
   static const commentCount = '댓글 수';
@@ -129,4 +131,6 @@ abstract class AppStrings {
   static const scheduleHintText = '일정에 대한 간단한 메모를 남겨주세요.';
   static const choiceGroup = '모임선택';
   static const choiceGroupHint = '모임을 선택해주세요';
+
+  static const commentHint = '댓글을 입력하세요.';
 }
