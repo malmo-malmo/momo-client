@@ -42,7 +42,7 @@ class _AuthClient implements AuthClient {
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<TokenData>(
             Options(method: 'POST', headers: _headers, extra: _extra)
-                .compose(_dio.options, '/oauth/login/request',
+                .compose(_dio.options, '/oauth/login/refresh',
                     queryParameters: queryParameters, data: _data)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = TokenData.fromJson(_result.data!);

@@ -2,6 +2,7 @@ part of 'resources.dart';
 
 abstract class AppIcons {
   static const momo = 'assets/icon/ic_momo.svg';
+  static const branding = 'assets/icon/imgbrand200x80.svg';
 
   static const categoryFoodOn = 'assets/icon/category/icon_food_64.svg';
   static const categoryFoodOff = 'assets/icon/category/icon_foodlightgray_64.svg';
@@ -16,7 +17,7 @@ abstract class AppIcons {
   static const categoryLifeOn = 'assets/icon/category/icon_life_64.svg';
   static const categoryLifeOff = 'assets/icon/category/icon_lifelightgray_64.svg';
   static const categoryStockOn = 'assets/icon/category/icon_stock_64.svg';
-  static const categoryStockOff = 'assets/icon/category/icon_stocklightgray_64.svg';
+  static const categoryStockOff = 'assets/icon/category/icon_stockightgray_64.svg';
   static const categorySelfOn = 'assets/icon/category/icon_self_64.svg';
   static const categorySelfOff = 'assets/icon/category/icon_selflightgray_64.svg';
 

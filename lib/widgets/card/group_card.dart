@@ -29,7 +29,8 @@ class GroupCard extends StatelessWidget {
           ClipRRect(
             borderRadius: BorderRadius.circular(20),
             child: CachedImageCard(
-              imageUrl: group.imageUrl ?? 'http://m.pokjukworld.co.kr/web/product/big/pokjukworld_222.jpg',
+              imageUrl:
+                  'https://s3.ap-northeast-2.amazonaws.com/img.kormedi.com/news/article/__icsFiles/artimage/2017/04/18/c_km601/shutterstock_369150029_540.jpg',
               height: height,
               width: width,
             ),

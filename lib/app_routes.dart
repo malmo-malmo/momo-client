@@ -23,12 +23,16 @@ import 'package:momo_flutter/features/profile/intro_profile_page.dart';
 import 'package:momo_flutter/features/profile/profile_page.dart';
 import 'package:momo_flutter/features/schedule/schedule_request_page.dart';
 import 'package:momo_flutter/features/setting/setting_page.dart';
+import 'package:momo_flutter/splash_page.dart';
 
 abstract class AppRoutes {
   static Route<dynamic>? onGenerateRoute(RouteSettings settings) {
     late Widget _page;
 
     switch (settings.name) {
+      case SplashPage.routeName:
+        _page = const SplashPage();
+        break;
       case LoginPage.routeName:
         _page = const LoginPage();
         break;

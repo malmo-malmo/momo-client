@@ -27,13 +27,7 @@ class HomeReminderCard extends StatelessWidget {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(26),
         color: AppColors.gray0,
-        boxShadow: const [
-          BoxShadow(
-            offset: Offset(0, 3),
-            blurRadius: 6,
-            spreadRadius: 0,
-          ),
-        ],
+        boxShadow: const [BoxShadow()],
       ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -112,7 +106,7 @@ class _DayCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () => selectDay(index),
+      onTap: () => selectDay(index + 1),
       child: Container(
         padding: const EdgeInsets.only(top: 24, bottom: 16),
         height: 89,

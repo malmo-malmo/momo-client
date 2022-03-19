@@ -14,13 +14,7 @@ class MainBottomNavigationBar extends StatelessWidget {
       height: 64,
       decoration: const BoxDecoration(
         color: AppColors.gray0,
-        boxShadow: [
-          BoxShadow(
-            offset: Offset.zero,
-            blurRadius: 1,
-            spreadRadius: 0,
-          ),
-        ],
+        boxShadow: [BoxShadow()],
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,

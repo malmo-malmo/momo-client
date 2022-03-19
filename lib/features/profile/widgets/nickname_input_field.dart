@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:momo_flutter/features/profile/provider/profile_update_provider.dart';
+import 'package:momo_flutter/provider/loading_provider.dart';
 import 'package:momo_flutter/provider/user_provider.dart';
 import 'package:momo_flutter/resources/resources.dart';
 import 'package:momo_flutter/widgets/dialog/confirm_dialog.dart';
@@ -24,7 +25,7 @@ class NicknameInputField extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           SizedBox(
-            width: 180,
+            width: 240,
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 14),
               child: Consumer(
@@ -36,6 +37,7 @@ class NicknameInputField extends StatelessWidget {
                     },
                     decoration: const InputDecoration(
                       hintText: AppStrings.nicknameHint,
+                      counterText: '',
                     ),
                     maxLength: 10,
                   );
@@ -52,20 +54,23 @@ class NicknameInputField extends StatelessWidget {
                 return ElevatedButton(
                   onPressed: nickname.isNotEmpty
                       ? () async {
+                          FocusScope.of(context).unfocus();
+                          ref.read(loadingProvider.state).state = true;
                           final response = await ref.read(userDataStateProvider.notifier).validateNickname(nickname);
-                          ref.read(vaildatioinNicknameProvider.state).state = true;
+                          ref.read(loadingProvider.state).state = false;
+                          ref.read(vaildatioinNicknameProvider.state).state = !response;
                           showDialog(
                             context: context,
                             builder: (context) => ConfirmDialog(
-                              response ? AppStrings.availableNickname : AppStrings.notAvailableNickname,
+                              !response ? AppStrings.availableNickname : AppStrings.notAvailableNickname,
                             ),
                           );
                         }
                       : null,
                   style: ButtonStyle(
-                    shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(12))),
-                    textStyle: MaterialStateProperty.all(AppStyles.regular10),
-                  ),
+                      shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(12))),
+                      textStyle: MaterialStateProperty.all(AppStyles.regular10),
+                      padding: MaterialStateProperty.all(EdgeInsets.zero)),
                   child: const Text(AppStrings.confirmDuplicate),
                 );
               },

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:momo_flutter/features/main/main_page.dart';
 import 'package:momo_flutter/resources/resources.dart';
 import 'package:momo_flutter/utils/load_asset.dart';
 import 'package:momo_flutter/widgets/button/bottom_button.dart';
@@ -51,7 +52,11 @@ class OnboardStartCard extends StatelessWidget {
               child: BottomButton(
                 isEnable: true,
                 buttonTitle: AppStrings.startMomo,
-                onPressed: () {},
+                onPressed: () => Navigator.pushNamedAndRemoveUntil(
+                  context,
+                  MainPage.routeName,
+                  (route) => false,
+                ),
               ),
             ),
           ],

@@ -29,7 +29,7 @@ class _UniversityInputFieldState extends State<UniversityInputField> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           SizedBox(
-            width: 180,
+            width: 240,
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 14),
               child: TextFormField(

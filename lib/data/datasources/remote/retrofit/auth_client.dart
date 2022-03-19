@@ -19,7 +19,7 @@ abstract class AuthClient {
     @Body() LoginRequest loginRequest,
   );
 
-  @POST('/oauth/login/request')
+  @POST('/oauth/login/refresh')
   Future<TokenData> refreshLogin(
     @Body() RefreshRequest refreshRequest,
   );

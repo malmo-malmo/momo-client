@@ -13,7 +13,7 @@ final profileUpdateCheckProvider = Provider.autoDispose<bool>((ref) {
   return false;
 });
 
-final vaildatioinNicknameProvider = StateProvider.autoDispose<bool>((ref) => false);
+final vaildatioinNicknameProvider = StateProvider.autoDispose<bool>((ref) => true);
 
 final profileUpdateStateProvider = StateNotifierProvider.autoDispose<ProfileUpdateState, UserUpdateRequest>(
   (ref) => ProfileUpdateState(),

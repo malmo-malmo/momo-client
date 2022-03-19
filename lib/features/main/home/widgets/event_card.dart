@@ -12,19 +12,13 @@ class EventCard extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return InkWell(
       child: Container(
-        margin: const EdgeInsets.only(top: 44),
+        margin: const EdgeInsets.only(top: 44, bottom: 24),
         padding: const EdgeInsets.symmetric(horizontal: 24),
         height: 97,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(16),
           color: AppColors.gray0,
-          boxShadow: const [
-            BoxShadow(
-              offset: Offset(0, 3),
-              blurRadius: 6,
-              spreadRadius: 0,
-            )
-          ],
+          boxShadow: const [BoxShadow()],
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,

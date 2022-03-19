@@ -16,6 +16,7 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: const MainBottomNavigationBar(),
+      backgroundColor: AppColors.backgroundPurple,
       appBar: AppBar(
         actions: [
           loadAsset(AppIcons.notification),

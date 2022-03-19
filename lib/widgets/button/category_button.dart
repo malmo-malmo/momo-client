@@ -10,7 +10,7 @@ class CategoryButton extends StatelessWidget {
     required this.check,
     required this.index,
     required this.onTabIcon,
-    this.iconSize = 32,
+    this.iconSize = 64,
     this.textStyle = AppStyles.regular14,
     this.spaceHeight = 10,
   }) : super(key: key);

@@ -6,7 +6,6 @@ abstract class AppStyles {
     fontWeight: AppDimens.bold,
     color: AppColors.gray6,
     letterSpacing: -0.28,
-    height: 84 / 28,
   );
 
   static const bold24 = TextStyle(
@@ -14,7 +13,6 @@ abstract class AppStyles {
     fontWeight: AppDimens.bold,
     color: AppColors.gray0,
     letterSpacing: -0.24,
-    height: 32 / 24,
   );
 
   static const bold20 = TextStyle(
@@ -22,7 +20,6 @@ abstract class AppStyles {
     fontWeight: AppDimens.bold,
     color: AppColors.gray6,
     letterSpacing: -0.2,
-    height: 28 / 20,
   );
 
   static const bold16 = TextStyle(
@@ -30,7 +27,6 @@ abstract class AppStyles {
     fontWeight: AppDimens.bold,
     color: AppColors.gray6,
     letterSpacing: -0.16,
-    height: 24 / 16,
   );
 
   static const bold14 = TextStyle(
@@ -38,7 +34,6 @@ abstract class AppStyles {
     fontWeight: AppDimens.bold,
     color: AppColors.gray6,
     letterSpacing: -0.14,
-    height: 28 / 14,
   );
 
   static const regular16 = TextStyle(
@@ -46,7 +41,6 @@ abstract class AppStyles {
     fontWeight: AppDimens.regular,
     color: AppColors.gray6,
     letterSpacing: -0.16,
-    height: 24 / 16,
   );
 
   static const regular15 = TextStyle(
@@ -54,7 +48,6 @@ abstract class AppStyles {
     fontWeight: AppDimens.regular,
     color: AppColors.gray6,
     letterSpacing: -0.15,
-    height: 23 / 15,
   );
 
   static const regular14 = TextStyle(
@@ -62,7 +55,6 @@ abstract class AppStyles {
     fontWeight: AppDimens.regular,
     color: AppColors.gray6,
     letterSpacing: -0.14,
-    height: 22 / 14,
   );
 
   static const regular12 = TextStyle(
@@ -70,7 +62,6 @@ abstract class AppStyles {
     fontWeight: AppDimens.regular,
     color: AppColors.gray0,
     letterSpacing: -0.12,
-    height: 20 / 12,
   );
 
   static const regular11 = TextStyle(
@@ -78,7 +69,6 @@ abstract class AppStyles {
     fontWeight: AppDimens.regular,
     color: AppColors.gray5,
     letterSpacing: -0.11,
-    height: 19 / 11,
   );
 
   static const regular10 = TextStyle(
@@ -86,7 +76,6 @@ abstract class AppStyles {
     fontWeight: AppDimens.regular,
     color: AppColors.gray0,
     letterSpacing: -0.1,
-    height: 18 / 10,
   );
 
   static BoxDecoration containerDecoration({

@@ -11,8 +11,7 @@ class WeeklyTopRateCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 24),
-      height: 304,
-      width: 328,
+      height: 325,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20),
         color: AppColors.backgroundWhite,

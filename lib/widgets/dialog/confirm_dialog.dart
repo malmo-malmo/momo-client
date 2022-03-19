@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:momo_flutter/resources/resources.dart';
-import 'package:momo_flutter/widgets/button/bottom_button.dart';
 
 class ConfirmDialog extends StatelessWidget {
   const ConfirmDialog(this.dialogText, {Key? key}) : super(key: key);
@@ -25,11 +24,24 @@ class ConfirmDialog extends StatelessWidget {
                 textAlign: TextAlign.center,
               ),
             ),
-            BottomButton(
-              isEnable: true,
-              buttonTitle: AppStrings.confirm,
-              onPressed: () => Navigator.pop(context),
-            ),
+            SizedBox(
+              height: 56,
+              width: double.infinity,
+              child: ElevatedButton(
+                onPressed: () => Navigator.pop(context),
+                child: const Text(AppStrings.confirm),
+                style: ButtonStyle(
+                  shape: MaterialStateProperty.all(
+                    const RoundedRectangleBorder(
+                      borderRadius: BorderRadius.only(
+                        bottomLeft: Radius.circular(20),
+                        bottomRight: Radius.circular(20),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            )
           ],
         ),
       ),

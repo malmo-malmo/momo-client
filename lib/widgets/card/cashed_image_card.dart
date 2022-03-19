@@ -18,7 +18,6 @@ class CachedImageCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return CachedNetworkImage(
       imageUrl: imageUrl,
-      progressIndicatorBuilder: (context, url, _) => const LoadingIndicator(),
       placeholder: (context, url) => const LoadingIndicator(),
       errorWidget: (context, url, error) => const Icon(Icons.error),
       fit: BoxFit.cover,

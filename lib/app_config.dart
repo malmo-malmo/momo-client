@@ -17,7 +17,7 @@ abstract class AppConfig {
   static late List<CodeNamePair> locationCodeNamePair;
   static late String deviceCode;
 
-  static void initConfig() async {
+  static Future<void> initConfig() async {
     await Hive.initFlutter();
     Hive.registerAdapter(TokenDataAdapter());
     await Hive.openBox<TokenData>(AppDatabase.authKey);
@@ -26,7 +26,7 @@ abstract class AppConfig {
   }
 
   static void initCategoryAndLocation() async {
-    final dio = Dio();
+    // final dio = Dio();
     // categoryCodeNamePair = await GroupClient(dio).getGroupCategories();
     // locationCodeNamePair = await DistrictClient(dio).getCities();
   }
