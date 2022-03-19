@@ -46,6 +46,8 @@ abstract class AppStrings {
   static const pm = '오후';
   static const delete = '삭제';
   static const report = '신고';
+  static const toReport = '신고하기';
+  static const toDelte = '삭제하기';
 
   static const upcomingSchedule = '다가오는 일정';
   static const commentCount = '댓글 수';

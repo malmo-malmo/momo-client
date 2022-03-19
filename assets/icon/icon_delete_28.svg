@@ -1,0 +1,19 @@
+<svg id="icon_delete28" xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 28 28">
+    <defs>
+        <clipPath id="clip-path">
+            <path id="Rectangle_2885" data-name="Rectangle 2885" style="fill:none" d="M0 0h28v28H0z"/>
+        </clipPath>
+        <style>
+            
+        </style>
+    </defs>
+    <g id="Group_2340" data-name="Group 2340" style="clip-path:url(#clip-path)">
+        <g id="Group_2339" data-name="Group 2339">
+            <g id="Group_2338" data-name="Group 2338" style="clip-path:url(#clip-path)">
+                <path id="Path_3234" data-name="Path 3234" d="M22.729 7.341H18.4v-.029a4.407 4.407 0 0 0-8.814 0v.029H5.272a1 1 0 1 0 0 2H6v12.443a3.31 3.31 0 0 0 3.305 3.306h9.39A3.31 3.31 0 0 0 22 21.784V9.341h.728a1 1 0 1 0 0-2m-11.135-.029a2.407 2.407 0 1 1 4.814.012.1.1 0 0 0 0 .017h-4.82c0-.01.006-.019.006-.029M20 21.784a1.308 1.308 0 0 1-1.306 1.306H9.305A1.308 1.308 0 0 1 8 21.784V9.341h12z" style="fill:#8a69f2"/>
+                <path id="Path_3235" data-name="Path 3235" d="M11.577 19.393a1 1 0 0 0 1-1V14.3a1 1 0 0 0-2 0v4.095a1 1 0 0 0 1 1" style="fill:#8a69f2"/>
+                <path id="Path_3236" data-name="Path 3236" d="M16.423 19.393a1 1 0 0 0 1-1V14.3a1 1 0 0 0-2 0v4.095a1 1 0 0 0 1 1" style="fill:#8a69f2"/>
+            </g>
+        </g>
+    </g>
+</svg>

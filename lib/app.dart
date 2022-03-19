@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:momo_flutter/app_routes.dart';
-import 'package:momo_flutter/features/main/main_page.dart';
+import 'package:momo_flutter/features/intro/login_page.dart';
 import 'package:momo_flutter/resources/resources.dart';
 
 class App extends StatelessWidget {
@@ -25,7 +25,7 @@ class App extends StatelessWidget {
       },
       debugShowCheckedModeBanner: false,
       scrollBehavior: AppScrollBehavior(),
-      initialRoute: MainPage.routeName,
+      initialRoute: LoginPage.routeName,
       onGenerateRoute: AppRoutes.onGenerateRoute,
       theme: AppTheme.light,
       localizationsDelegates: const [

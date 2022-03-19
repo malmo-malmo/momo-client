@@ -1,10 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:momo_flutter/data/models/user/user_update_request.dart';
+import 'package:momo_flutter/features/%08report/report_page.dart';
 import 'package:momo_flutter/features/gallery/gallery_page.dart';
 import 'package:momo_flutter/features/group/group_authority_page.dart';
 import 'package:momo_flutter/features/group/group_detail_page.dart';
 import 'package:momo_flutter/features/group/group_list_page.dart';
 import 'package:momo_flutter/features/group/recommend_group_list_page.dart';
+import 'package:momo_flutter/features/images/full_image_page.dart';
+import 'package:momo_flutter/features/images/full_image_page_view.dart';
+import 'package:momo_flutter/features/intro/login_page.dart';
 import 'package:momo_flutter/features/intro/terms_page.dart';
 import 'package:momo_flutter/features/main/main_page.dart';
 import 'package:momo_flutter/features/onboard/onboard_page.dart';
@@ -25,6 +29,9 @@ abstract class AppRoutes {
     late Widget _page;
 
     switch (settings.name) {
+      case LoginPage.routeName:
+        _page = const LoginPage();
+        break;
       case OnboardPage.routeName:
         _page = const OnboardPage();
         break;
@@ -99,7 +106,17 @@ abstract class AppRoutes {
         final groupId = settings.arguments as int;
         _page = GroupAuthorityPage(groupId);
         break;
-
+      case FullImagePage.routeName:
+        final image = settings.arguments as String;
+        _page = FullImagePage(image);
+        break;
+      case FullImagePageView.routeName:
+        final images = settings.arguments as List<String>;
+        _page = FullImagePageView(images);
+        break;
+      case ReportPage.routeName:
+        _page = const ReportPage();
+        break;
       default:
         break;
     }

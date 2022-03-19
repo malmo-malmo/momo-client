@@ -57,6 +57,9 @@ abstract class AppIcons {
   static const around = 'assets/icon/home/icon_location_28.svg';
   static const top4 = 'assets/icon/home/icon_topfour_28.svg';
 
+  static const report = 'assets/icon/icon_report_28.svg';
+  static const delete = 'assets/icon/icon_delete_28.svg';
+  static const ooo = 'assets/icon/icon_ooo_28.svg';
   static const oooWhite = 'assets/icon/icon_ooowhite_28.svg';
   static const locationWhite = 'assets/icon/icon_locationwhite_20.svg';
   static const universityWhite = 'assets/icon/icon_schoolwhite_20.svg';
