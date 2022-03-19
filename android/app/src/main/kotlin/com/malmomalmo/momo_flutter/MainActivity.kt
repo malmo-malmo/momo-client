@@ -1,4 +1,4 @@
-package com.malmomalmo.momo_flutter
+package com.malmomalmo.momo
 
 import io.flutter.embedding.android.FlutterActivity
 

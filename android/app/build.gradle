@@ -42,7 +42,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.malmomalmo.momo_flutter"
+        applicationId "com.malmomalmo.momo"
         minSdkVersion 21
         targetSdkVersion flutter.targetSdkVersion
         versionCode flutterVersionCode.toInteger()
