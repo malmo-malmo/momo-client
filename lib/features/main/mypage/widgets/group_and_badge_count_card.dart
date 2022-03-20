@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:momo_flutter/features/group/favorite_group_list_page.dart';
+import 'package:momo_flutter/features/group/total_group_list_page.dart';
 import 'package:momo_flutter/features/main/mypage/provider/mypage_count_provider.dart';
 import 'package:momo_flutter/resources/resources.dart';
 import 'package:momo_flutter/widgets/indicator/loading_indicator.dart';
@@ -28,7 +29,12 @@ class GroupAndBadgeCountCard extends StatelessWidget {
                     _CountColumn(
                       count: mypageCounts.totalGroupCount,
                       title: AppStrings.totalGroup,
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.pushNamed(
+                          context,
+                          TotalGroupListPage.routeName,
+                        );
+                      },
                     ),
                     _CountColumn(
                       count: mypageCounts.favoriteGroupCount,

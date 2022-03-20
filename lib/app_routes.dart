@@ -7,6 +7,7 @@ import 'package:momo_flutter/features/group/group_authority_page.dart';
 import 'package:momo_flutter/features/group/group_detail_page.dart';
 import 'package:momo_flutter/features/group/group_list_page.dart';
 import 'package:momo_flutter/features/group/recommend_group_list_page.dart';
+import 'package:momo_flutter/features/group/total_group_list_page.dart';
 import 'package:momo_flutter/features/images/full_image_page.dart';
 import 'package:momo_flutter/features/images/full_image_page_view.dart';
 import 'package:momo_flutter/features/intro/login_page.dart';
@@ -138,6 +139,9 @@ abstract class AppRoutes {
         break;
       case FavoriteGroupListPage.routeName:
         _page = const FavoriteGroupListPage();
+        break;
+      case TotalGroupListPage.routeName:
+        _page = const TotalGroupListPage();
         break;
       default:
         break;

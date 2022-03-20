@@ -12,6 +12,7 @@ import 'package:momo_flutter/data/models/group/group_response.dart';
 import 'package:momo_flutter/data/models/group/wish_group_response.dart';
 import 'package:momo_flutter/data/models/management/group_summary_response.dart';
 import 'package:momo_flutter/data/models/management/my_group_response.dart';
+import 'package:momo_flutter/data/models/management/participation_group_response.dart';
 import 'package:momo_flutter/data/models/user/participant_user_response.dart';
 
 final groupRepositoryProvider = Provider<GroupRepository>((ref) {
@@ -110,5 +111,9 @@ class GroupRepository {
 
   Future<List<WishGroupResponse>> getFavoriteGroups() {
     return favoriteClient.getFavoriteGroups();
+  }
+
+  Future<List<ParticipationGroupResponse>> getParticipantGroups() {
+    return managementClient.getParticipationGroupDetail();
   }
 }
