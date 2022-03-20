@@ -46,7 +46,7 @@ class FormDataClient {
       'groupId': postRequest.groupId,
       'title': postRequest.title,
       'contents': postRequest.contents,
-      'typeName': postRequest.postType,
+      'postType': postRequest.postType,
     });
 
     formData.files.addAll(

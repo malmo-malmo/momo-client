@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:momo_flutter/data/models/group/group_detail_response.dart';
 import 'package:momo_flutter/features/group/providers/upcoming_schedule_provider.dart';
+import 'package:momo_flutter/features/group/widgets/group_detail_image_card.dart';
 import 'package:momo_flutter/features/post/widgets/notice_horizontal_list_view.dart';
 import 'package:momo_flutter/features/post/widgets/post_list_view.dart';
 import 'package:momo_flutter/resources/app_error_strings.dart';
@@ -25,6 +26,7 @@ class ParticipantGroupBody extends StatelessWidget {
         SliverToBoxAdapter(
           child: Column(
             children: [
+              GroupDetailImageCard(group),
               _ScheduleCard(group.id),
               Container(
                 height: 10,

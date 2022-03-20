@@ -1,46 +1,37 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:momo_flutter/app_consts.dart';
-import 'package:momo_flutter/provider/state_notifier/radio_check_state_notifier.dart';
 
-final photoDatasStateProvider =
-    StateNotifierProvider.autoDispose<PhotoListState, List<String>>((ref) => PhotoListState());
-
-final photoDataStateProvider = StateNotifierProvider.autoDispose<RadioCheckStateNotifier, List<bool>>((ref) {
-  return RadioCheckStateNotifier(AppConsts.maxPhotoCount);
-});
-
-final radioPhotoDataStateProvider = StateProvider.autoDispose<String>((ref) => '');
-
-final isSelectPhotoOne = Provider.autoDispose<bool>((ref) {
-  final photoData = ref.watch(radioPhotoDataStateProvider);
-  return photoData.isNotEmpty;
-});
-
-final isSelectPhoto = Provider.autoDispose<bool>(
-  (ref) {
-    final photoDatas = ref.watch(photoDatasStateProvider);
-    return photoDatas.isNotEmpty;
-  },
-);
-
-final checkMaxPhoto = Provider.autoDispose<bool>(
-  (ref) {
-    final photoDatas = ref.watch(photoDatasStateProvider);
-    return photoDatas.length == AppConsts.maxSelectCount;
-  },
-);
-
-class PhotoListState extends StateNotifier<List<String>> {
-  PhotoListState() : super([]);
-
-  void setData({
-    required bool check,
-    required String image,
-  }) {
-    if (check) {
-      state.remove(image);
-    } else {
-      state = [...state, image];
+final isSelectPhoto = Provider.autoDispose<bool>((ref) {
+  final galleryState = ref.watch(galleryStateProvider);
+  for (int i = 0; i < galleryState.length; i++) {
+    if (galleryState[i]) {
+      return true;
     }
+  }
+  return false;
+});
+
+final checkMaxPhoto = Provider.autoDispose<bool>((ref) {
+  final galleryState = ref.watch(galleryStateProvider);
+  return galleryState.where((e) => e).toList().length == AppConsts.maxSelectCount;
+});
+
+final galleryStateProvider = StateNotifierProvider.autoDispose<GalleryState, List<bool>>((ref) => GalleryState());
+
+class GalleryState extends StateNotifier<List<bool>> {
+  GalleryState() : super(List.generate(AppConsts.maxPhotoCount, (index) => false));
+
+  void toggle(int index) {
+    state = [
+      for (int i = 0; i < state.length; i++)
+        if (i == index) state[index] = !state[index] else state[i]
+    ];
+  }
+
+  void checkOne(int index) {
+    state = [
+      for (int i = 0; i < state.length; i++)
+        if (i == index) true else false
+    ];
   }
 }

@@ -4,9 +4,12 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:momo_flutter/data/models/group/group_detail_response.dart';
 import 'package:momo_flutter/features/group/providers/group_detail_provider.dart';
+import 'package:momo_flutter/features/group/widgets/admin_bottom_sheet.dart';
 import 'package:momo_flutter/features/group/widgets/group_contents_card.dart';
 import 'package:momo_flutter/features/group/widgets/group_detail_image_card.dart';
+import 'package:momo_flutter/features/group/widgets/normal_bottom_sheet.dart';
 import 'package:momo_flutter/features/group/widgets/participant_group_body.dart';
+import 'package:momo_flutter/provider/user_provider.dart';
 import 'package:momo_flutter/resources/resources.dart';
 import 'package:momo_flutter/utils/load_asset.dart';
 import 'package:momo_flutter/widgets/button/bottom_button.dart';
@@ -40,6 +43,7 @@ class _GroupDetailPageState extends ConsumerState<GroupDetailPage> {
     );
 
     final groupDetail = ref.watch(groupDetailStateProvider(widget.groupId));
+    final userId = ref.watch(userDataStateProvider).id;
 
     if (groupDetail.managerId == -1) {
       return const Scaffold(
@@ -58,9 +62,24 @@ class _GroupDetailPageState extends ConsumerState<GroupDetailPage> {
             ),
           ),
           actions: [
-            InkWell(
-              onTap: () {},
-              child: loadAsset(AppIcons.oooWhite),
+            Padding(
+              padding: const EdgeInsets.only(right: 16),
+              child: InkWell(
+                onTap: () {
+                  if (userId == groupDetail.managerId) {
+                    showModalBottomSheet(
+                      context: context,
+                      builder: (_) => AdminBottomSheet(groupDetail.id),
+                    );
+                  } else {
+                    showModalBottomSheet(
+                      context: context,
+                      builder: (_) => NormalBottomSheet(groupDetail.id),
+                    );
+                  }
+                },
+                child: loadAsset(AppIcons.oooWhite),
+              ),
             ),
           ],
         ),

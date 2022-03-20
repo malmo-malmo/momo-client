@@ -1,8 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:momo_flutter/resources/resources.dart';
 import 'package:momo_flutter/utils/format/time_format.dart';
-import 'package:momo_flutter/widgets/button/bottom_button.dart';
+import 'package:momo_flutter/widgets/button/dialog_bottom_button.dart';
 import 'package:momo_flutter/widgets/title/sub_title.dart';
 
 class TimeInputField extends StatefulWidget {
@@ -26,7 +27,7 @@ class _TimeInputFieldState extends State<TimeInputField> {
       onTap: () async {
         final result = await showDialog(
           context: context,
-          builder: (context) => _TimePickerDialog(),
+          builder: (_) => _TimePickerDialog(),
         );
 
         if (result != null) {
@@ -57,13 +58,13 @@ class _TimeInputFieldState extends State<TimeInputField> {
   }
 }
 
+final _isAmProvider = StateProvider.autoDispose<bool>((ref) => true);
+final _hourProvider = StateProvider.autoDispose<int>((ref) => 0);
+final _minuteProvider = StateProvider.autoDispose<int>((ref) => 0);
+
 // ignore: must_be_immutable
 class _TimePickerDialog extends StatelessWidget {
   _TimePickerDialog({Key? key}) : super(key: key);
-
-  bool isAm = true;
-  int hour = 0;
-  int minute = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -72,55 +73,58 @@ class _TimePickerDialog extends StatelessWidget {
         height: 221,
         width: 280,
         padding: const EdgeInsets.only(top: 48),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Container(
-              height: 100,
-              padding: const EdgeInsets.symmetric(horizontal: 56),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  _CustomPicker(
-                    children: const [
-                      Center(child: SubTitle(AppStrings.am)),
-                      Center(child: SubTitle(AppStrings.pm)),
-                    ],
-                    onSelected: (index) => isAm = index == 0 ? true : false,
-                  ),
-                  Row(
+        child: Consumer(
+          builder: (context, ref, child) {
+            final isAm = ref.watch(_isAmProvider);
+            final hour = ref.watch(_hourProvider);
+            final minute = ref.watch(_minuteProvider);
+            return Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Container(
+                  height: 100,
+                  padding: const EdgeInsets.symmetric(horizontal: 56),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       _CustomPicker(
-                        children: List.generate(12, (index) => Center(child: SubTitle('$index'))),
-                        onSelected: (index) => hour = index,
+                        children: const [
+                          Center(child: SubTitle(AppStrings.am)),
+                          Center(child: SubTitle(AppStrings.pm)),
+                        ],
+                        onSelected: (index) => ref.read(_isAmProvider.state).state = (index == 0 ? true : false),
                       ),
-                      const SubTitle(':'),
-                      _CustomPicker(
-                        children: List.generate(
-                          12,
-                          (index) => Center(
-                            child: SubTitle(
-                              index <= 1 ? '0${index * 5}' : '${index * 5}',
-                            ),
+                      Row(
+                        children: [
+                          _CustomPicker(
+                            children: List.generate(12, (index) => Center(child: SubTitle('$index'))),
+                            onSelected: (index) => ref.read(_hourProvider.state).state = index,
                           ),
-                        ),
-                        onSelected: (index) => minute = index * 5,
+                          const SubTitle(':'),
+                          _CustomPicker(
+                            children: List.generate(
+                              12,
+                              (index) => Center(
+                                child: SubTitle(
+                                  index <= 1 ? '0${index * 5}' : '${index * 5}',
+                                ),
+                              ),
+                            ),
+                            onSelected: (index) => ref.read(_minuteProvider.state).state = index * 5,
+                          ),
+                        ],
                       ),
                     ],
                   ),
-                ],
-              ),
-            ),
-            const SizedBox(height: 16),
-            BottomButton(
-              isEnable: true,
-              buttonTitle: AppStrings.confirm,
-              onPressed: () => Navigator.pop(
-                context,
-                [hour, minute, isAm],
-              ),
-            ),
-          ],
+                ),
+                const SizedBox(height: 16),
+                DialogBottomButton(
+                  isEnable: true,
+                  result: [hour, minute, isAm],
+                ),
+              ],
+            );
+          },
         ),
       ),
     );

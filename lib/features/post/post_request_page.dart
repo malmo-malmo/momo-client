@@ -7,9 +7,11 @@ import 'package:momo_flutter/data/models/enum/post_type.dart';
 import 'package:momo_flutter/features/gallery/gallery_page.dart';
 import 'package:momo_flutter/features/gallery/provider/gallery_permission_provider.dart';
 import 'package:momo_flutter/features/post/provider/post_request_provider.dart';
+import 'package:momo_flutter/provider/loading_provider.dart';
 import 'package:momo_flutter/resources/resources.dart';
 import 'package:momo_flutter/utils/load_asset.dart';
 import 'package:momo_flutter/widgets/button/action_button.dart';
+import 'package:momo_flutter/widgets/indicator/custom_loader.dart';
 import 'package:momo_flutter/widgets/input_field/content_input_field.dart';
 import 'package:momo_flutter/widgets/input_field/title_input_field.dart';
 
@@ -32,102 +34,109 @@ class PostRequestPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: GestureDetector(
-        onTap: () => FocusScope.of(context).unfocus(),
-        child: Scaffold(
-          appBar: AppBar(
-            leading: InkWell(
-              onTap: () => Navigator.pop(context),
-              child: const Icon(CupertinoIcons.xmark),
-            ),
-            title: Text(
-              arg.postType == PostType.NORMAR ? AppStrings.createPost : AppStrings.createNotice,
-            ),
-            actions: [
-              Consumer(
-                builder: (context, ref, child) {
-                  final isValid = ref.watch(postRequestCheckProvider(arg));
-                  return ActionButton(
-                    isEnable: isValid,
-                    buttonTitle: AppStrings.confirm,
-                    onPressed: () async {
-                      final result = await ref.read(postRequestStateProvider(arg).notifier).createPost();
-                      Navigator.pop(context, result);
-                    },
-                  );
-                },
-              ),
-            ],
-          ),
-          body: Padding(
-            padding: const EdgeInsets.only(right: 16, left: 16),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Expanded(
-                  child: CustomScrollView(
-                    slivers: [
-                      const SliverToBoxAdapter(child: SizedBox(height: 24)),
-                      SliverToBoxAdapter(
-                        child: Consumer(
-                          builder: (context, ref, child) {
-                            return TitleInputField(
-                              onTextChanged: ref.read(postRequestStateProvider(arg).notifier).setTitle,
-                              hintText: AppStrings.title,
-                            );
-                          },
-                        ),
-                      ),
-                      const SliverToBoxAdapter(child: SizedBox(height: 14)),
-                      SliverToBoxAdapter(
-                        child: Consumer(
-                          builder: (context, ref, child) {
-                            return ContentInputField(
-                              onTextChanged: ref.read(postRequestStateProvider(arg).notifier).setContents,
-                              maxLines: 24,
-                              height: 400,
-                              hintText: AppStrings.contentHint,
-                            );
-                          },
-                        ),
-                      ),
-                      const SliverToBoxAdapter(child: SizedBox(height: 24)),
-                      Consumer(
-                        builder: (context, ref, child) {
-                          final images = ref.watch(postRequestStateProvider(arg)).images;
-                          return SliverToBoxAdapter(
-                            child: images.isEmpty
-                                ? const SizedBox()
-                                : Wrap(
-                                    spacing: 8,
-                                    runSpacing: 8,
-                                    children: List.generate(
-                                      images.length,
-                                      (index) => _ImageCard(
-                                        image: images[index],
-                                        deleteImg: ref.read(postRequestStateProvider(arg).notifier).deleteImg,
-                                      ),
-                                    ),
-                                  ),
-                          );
+    return Stack(
+      children: [
+        SafeArea(
+          child: GestureDetector(
+            onTap: () => FocusScope.of(context).unfocus(),
+            child: Scaffold(
+              appBar: AppBar(
+                leading: InkWell(
+                  onTap: () => Navigator.pop(context),
+                  child: const Icon(CupertinoIcons.xmark),
+                ),
+                title: Text(
+                  arg.postType == PostType.NORMAR ? AppStrings.createPost : AppStrings.createNotice,
+                ),
+                actions: [
+                  Consumer(
+                    builder: (context, ref, child) {
+                      final isValid = ref.watch(postRequestCheckProvider(arg));
+                      return ActionButton(
+                        isEnable: isValid,
+                        buttonTitle: AppStrings.confirm,
+                        onPressed: () async {
+                          ref.read(loadingProvider.state).state = true;
+                          final result = await ref.read(postRequestStateProvider(arg).notifier).createPost();
+                          ref.read(loadingProvider.state).state = false;
+                          Navigator.pop(context, result);
                         },
-                      ),
-                    ],
+                      );
+                    },
                   ),
+                ],
+              ),
+              body: Padding(
+                padding: const EdgeInsets.only(right: 16, left: 16),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Expanded(
+                      child: CustomScrollView(
+                        slivers: [
+                          const SliverToBoxAdapter(child: SizedBox(height: 24)),
+                          SliverToBoxAdapter(
+                            child: Consumer(
+                              builder: (context, ref, child) {
+                                return TitleInputField(
+                                  onTextChanged: ref.read(postRequestStateProvider(arg).notifier).setTitle,
+                                  hintText: AppStrings.title,
+                                );
+                              },
+                            ),
+                          ),
+                          const SliverToBoxAdapter(child: SizedBox(height: 14)),
+                          SliverToBoxAdapter(
+                            child: Consumer(
+                              builder: (context, ref, child) {
+                                return ContentInputField(
+                                  onTextChanged: ref.read(postRequestStateProvider(arg).notifier).setContents,
+                                  maxLines: 24,
+                                  height: 400,
+                                  hintText: AppStrings.contentHint,
+                                );
+                              },
+                            ),
+                          ),
+                          const SliverToBoxAdapter(child: SizedBox(height: 24)),
+                          Consumer(
+                            builder: (context, ref, child) {
+                              final images = ref.watch(postRequestStateProvider(arg)).images;
+                              return SliverToBoxAdapter(
+                                child: images.isEmpty
+                                    ? const SizedBox()
+                                    : Wrap(
+                                        spacing: 8,
+                                        runSpacing: 8,
+                                        children: List.generate(
+                                          images.length,
+                                          (index) => _ImageCard(
+                                            image: images[index],
+                                            deleteImg: ref.read(postRequestStateProvider(arg).notifier).deleteImg,
+                                          ),
+                                        ),
+                                      ),
+                              );
+                            },
+                          ),
+                        ],
+                      ),
+                    ),
+                    Consumer(
+                      builder: (context, ref, child) {
+                        return _FloatingCameraBotton(
+                          addImages: ref.read(postRequestStateProvider(arg).notifier).setImages,
+                        );
+                      },
+                    ),
+                  ],
                 ),
-                Consumer(
-                  builder: (context, ref, child) {
-                    return _FloatingCameraBotton(
-                      addImages: ref.read(postRequestStateProvider(arg).notifier).setImages,
-                    );
-                  },
-                ),
-              ],
+              ),
             ),
           ),
         ),
-      ),
+        ...customLoader,
+      ],
     );
   }
 }
@@ -155,13 +164,13 @@ class _FloatingCameraBotton extends StatelessWidget {
                 FocusScope.of(context).unfocus();
                 final check = await ref.read(galleryPermissionProvider.future);
                 if (check) {
-                  List<String>? images = await Navigator.pushNamed(
+                  final images = await Navigator.pushNamed(
                     context,
                     GalleryPage.routeName,
                     arguments: PhotoRequestType.many,
                   );
                   if (images != null) {
-                    addImages(images);
+                    addImages(images as List<String>);
                   }
                 }
               },

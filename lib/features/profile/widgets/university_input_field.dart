@@ -18,6 +18,7 @@ class UniversityInputField extends StatefulWidget {
 }
 
 class _UniversityInputFieldState extends State<UniversityInputField> {
+  // ignore: prefer_final_fields
   late TextEditingController _controller = TextEditingController(
     text: widget.initialValue,
   );
