@@ -5,6 +5,7 @@ import 'package:momo_flutter/data/models/post/post_detail_response.dart';
 import 'package:momo_flutter/features/group/providers/group_detail_provider.dart';
 import 'package:momo_flutter/features/post/post_request_page.dart';
 import 'package:momo_flutter/features/post/provider/post_list_provider.dart';
+import 'package:momo_flutter/provider/loading_provider.dart';
 import 'package:momo_flutter/resources/resources.dart';
 import 'package:momo_flutter/widgets/button/bottom_sheet_tab_button.dart';
 import 'package:momo_flutter/widgets/dialog/question_dialog.dart';
@@ -63,7 +64,9 @@ class NormalBottomSheet extends StatelessWidget {
                     ),
                   );
                   if (isWithdrawal != null && isWithdrawal) {
-                    ref.read(groupDetailStateProvider(groupId).notifier).withdrawalGroup();
+                    ref.read(loadingProvider.state).state = true;
+                    await ref.read(groupDetailStateProvider(groupId).notifier).withdrawalGroup();
+                    ref.read(loadingProvider.state).state = false;
                     Navigator.pop(context);
                   }
                 },

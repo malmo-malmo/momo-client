@@ -139,4 +139,8 @@ abstract class AppStrings {
   static const choiceGroupHint = '모임을 선택해주세요';
 
   static const commentHint = '댓글을 입력하세요.';
+
+  static const toastEndGroup = '모임이 종료되었어요';
+  static const toastAuthority = '권한을 넘겼어요';
+  static const toastWithdrawalGroup = '탈퇴 되었어요';
 }

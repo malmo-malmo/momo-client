@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:momo_flutter/data/models/group/group_response.dart';
+import 'package:momo_flutter/features/group/group_detail_page.dart';
 import 'package:momo_flutter/resources/resources.dart';
 import 'package:momo_flutter/widgets/card/cashed_image_card.dart';
 import 'package:momo_flutter/widgets/card/on_off_card.dart';
@@ -23,7 +24,13 @@ class GroupCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {},
+      onTap: () {
+        Navigator.pushNamed(
+          context,
+          GroupDetailPage.routeName,
+          arguments: group.id,
+        );
+      },
       child: Stack(
         children: [
           ClipRRect(

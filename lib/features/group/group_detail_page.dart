@@ -9,11 +9,14 @@ import 'package:momo_flutter/features/group/widgets/group_contents_card.dart';
 import 'package:momo_flutter/features/group/widgets/group_detail_image_card.dart';
 import 'package:momo_flutter/features/group/widgets/normal_bottom_sheet.dart';
 import 'package:momo_flutter/features/group/widgets/participant_group_body.dart';
+import 'package:momo_flutter/provider/loading_provider.dart';
 import 'package:momo_flutter/provider/user_provider.dart';
 import 'package:momo_flutter/resources/resources.dart';
 import 'package:momo_flutter/utils/load_asset.dart';
 import 'package:momo_flutter/widgets/button/bottom_button.dart';
+import 'package:momo_flutter/widgets/indicator/custom_loader.dart';
 import 'package:momo_flutter/widgets/indicator/loading_indicator.dart';
+import 'package:momo_flutter/widgets/toast/cutom_toast.dart';
 
 class GroupDetailPage extends ConsumerStatefulWidget {
   const GroupDetailPage(this.groupId, {Key? key}) : super(key: key);
@@ -39,7 +42,17 @@ class _GroupDetailPageState extends ConsumerState<GroupDetailPage> {
   Widget build(BuildContext context) {
     ref.listen<GroupDetailResponse>(
       groupDetailStateProvider(widget.groupId),
-      (pre, next) {},
+      (pre, next) {
+        if (pre != null && (pre.participant && !next.participant)) {
+          _fToast.showToast(
+            child: const CustomToast(
+              AppStrings.toastWithdrawalGroup,
+            ),
+            gravity: ToastGravity.BOTTOM,
+          );
+          Navigator.pop(context);
+        }
+      },
     );
 
     final groupDetail = ref.watch(groupDetailStateProvider(widget.groupId));
@@ -51,39 +64,44 @@ class _GroupDetailPageState extends ConsumerState<GroupDetailPage> {
       );
     }
     return SafeArea(
-      child: Scaffold(
-        extendBodyBehindAppBar: true,
-        appBar: AppBar(
-          leading: InkWell(
-            onTap: () => Navigator.pop(context),
-            child: const Icon(
-              CupertinoIcons.back,
-              color: AppColors.backgroundWhite,
-            ),
-          ),
-          actions: [
-            Padding(
-              padding: const EdgeInsets.only(right: 16),
-              child: InkWell(
-                onTap: () {
-                  if (userId == groupDetail.managerId) {
-                    showModalBottomSheet(
-                      context: context,
-                      builder: (_) => AdminBottomSheet(groupDetail.id),
-                    );
-                  } else {
-                    showModalBottomSheet(
-                      context: context,
-                      builder: (_) => NormalBottomSheet(groupDetail.id),
-                    );
-                  }
-                },
-                child: loadAsset(AppIcons.oooWhite),
+      child: Stack(
+        children: [
+          Scaffold(
+            extendBodyBehindAppBar: true,
+            appBar: AppBar(
+              leading: InkWell(
+                onTap: () => Navigator.pop(context),
+                child: const Icon(
+                  CupertinoIcons.back,
+                  color: AppColors.backgroundWhite,
+                ),
               ),
+              actions: [
+                Padding(
+                  padding: const EdgeInsets.only(right: 16),
+                  child: InkWell(
+                    onTap: () {
+                      if (userId == groupDetail.managerId) {
+                        showModalBottomSheet(
+                          context: context,
+                          builder: (_) => AdminBottomSheet(groupDetail.id),
+                        );
+                      } else {
+                        showModalBottomSheet(
+                          context: context,
+                          builder: (_) => NormalBottomSheet(groupDetail.id),
+                        );
+                      }
+                    },
+                    child: loadAsset(AppIcons.oooWhite),
+                  ),
+                ),
+              ],
             ),
-          ],
-        ),
-        body: _BuildBody(groupDetail),
+            body: _BuildBody(groupDetail),
+          ),
+          ...customLoader,
+        ],
       ),
     );
   }
@@ -104,7 +122,6 @@ class _BuildBody extends StatelessWidget {
               children: [
                 GroupDetailImageCard(group),
                 GroupContentsCard(group.introduction),
-                const Spacer(),
                 BottomButton(
                   isEnable: false,
                   buttonTitle: AppStrings.end,
@@ -116,10 +133,10 @@ class _BuildBody extends StatelessWidget {
         ],
       );
     } else if (!group.participant) {
-      final _check = group.participantCnt >= group.recruitmentCnt;
+      final _check = group.participantCnt <= group.recruitmentCnt;
       return CustomScrollView(
         slivers: [
-          SliverToBoxAdapter(
+          SliverFillRemaining(
             child: Column(
               children: [
                 GroupDetailImageCard(group),
@@ -127,12 +144,17 @@ class _BuildBody extends StatelessWidget {
                 const Spacer(),
                 Consumer(
                   builder: (context, ref, child) {
-                    return BottomButton(
-                      isEnable: _check,
-                      buttonTitle: _check ? AppStrings.deadLine : AppStrings.canApply,
-                      onPressed: () async {
-                        await ref.read(groupDetailStateProvider(group.id).notifier).participantGroup();
-                      },
+                    return Padding(
+                      padding: const EdgeInsets.all(16),
+                      child: BottomButton(
+                        isEnable: _check,
+                        buttonTitle: _check ? AppStrings.canApply : AppStrings.deadLine,
+                        onPressed: () async {
+                          ref.read(loadingProvider.state).state = true;
+                          await ref.read(groupDetailStateProvider(group.id).notifier).participantGroup();
+                          ref.read(loadingProvider.state).state = false;
+                        },
+                      ),
                     );
                   },
                 ),
