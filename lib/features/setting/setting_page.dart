@@ -6,6 +6,7 @@ import 'package:momo_flutter/features/post/manage_post_page.dart';
 import 'package:momo_flutter/features/profile/profile_page.dart';
 import 'package:momo_flutter/resources/resources.dart';
 import 'package:momo_flutter/widgets/button/bottom_button.dart';
+import 'package:momo_flutter/widgets/dialog/question_dialog.dart';
 
 class SettingPage extends StatelessWidget {
   const SettingPage({Key? key}) : super(key: key);
@@ -16,7 +17,15 @@ class SettingPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: AppBar(),
+        appBar: AppBar(
+          leading: InkWell(
+            onTap: () => Navigator.pop(context),
+            child: const Icon(CupertinoIcons.back),
+          ),
+          title: const Text(AppStrings.setting),
+          backgroundColor: AppColors.backgroundWhite,
+        ),
+        backgroundColor: AppColors.gray1,
         body: Column(
           children: [
             _SettingMenuCard(
@@ -34,10 +43,23 @@ class SettingPage extends StatelessWidget {
               ),
             ),
             const Spacer(),
-            BottomButton(
-              isEnable: true,
-              buttonTitle: AppStrings.momoLogout,
-              onPressed: () {},
+            Padding(
+              padding: const EdgeInsets.all(16),
+              child: BottomButton(
+                isEnable: true,
+                buttonTitle: AppStrings.momoLogout,
+                onPressed: () async {
+                  final result = await showDialog<bool?>(
+                    context: context,
+                    builder: (_) => const QuestionDialog(
+                      dialogText: AppStrings.logoutQustion,
+                      yesText: AppStrings.logout,
+                      noText: AppStrings.no,
+                    ),
+                  );
+                  if (result != null) {}
+                },
+              ),
             ),
           ],
         ),

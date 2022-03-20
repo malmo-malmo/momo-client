@@ -48,6 +48,10 @@ abstract class AppStrings {
   static const report = '신고';
   static const toReport = '신고하기';
   static const toDelte = '삭제하기';
+  static const setting = '설정';
+
+  static const logout = '로그아웃';
+  static const logoutQustion = '로그아웃 하시겠어요?';
 
   static const upcomingSchedule = '다가오는 일정';
   static const commentCount = '댓글 수';

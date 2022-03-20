@@ -9,9 +9,8 @@ import 'package:momo_flutter/features/post/post_request_page.dart';
 import 'package:momo_flutter/features/post/provider/post_list_provider.dart';
 import 'package:momo_flutter/features/schedule/schedule_request_page.dart';
 import 'package:momo_flutter/resources/resources.dart';
-import 'package:momo_flutter/widgets/button/bottom_button.dart';
 import 'package:momo_flutter/widgets/button/bottom_sheet_tab_button.dart';
-import 'package:momo_flutter/widgets/button/reverse_bottom_button.dart';
+import 'package:momo_flutter/widgets/button/dialog_choice_button.dart';
 import 'package:momo_flutter/widgets/indicator/bottom_sheet_indicator.dart';
 
 class AdminBottomSheet extends StatelessWidget {
@@ -148,8 +147,8 @@ class _CloseGroupDialog extends StatelessWidget {
         width: 280,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            const Padding(
+          children: const [
+            Padding(
               padding: EdgeInsets.only(top: 40),
               child: Text(
                 AppStrings.closeGroupTitle,
@@ -157,31 +156,14 @@ class _CloseGroupDialog extends StatelessWidget {
                 textAlign: TextAlign.center,
               ),
             ),
-            const Text(
+            Text(
               AppStrings.closeGroupSubTitle,
               style: AppStyles.regular16,
               textAlign: TextAlign.center,
             ),
-            SizedBox(
-              height: 56,
-              child: Row(
-                children: [
-                  Expanded(
-                    child: ReverseBottomButton(
-                      buttonTitle: AppStrings.closeGroupConfirm,
-                      onPressed: () => Navigator.pop(context, true),
-                    ),
-                  ),
-                  Expanded(
-                    child: BottomButton(
-                      isEnable: true,
-                      buttonTitle: AppStrings.no,
-                      onPressed: () => Navigator.pop(context),
-                    ),
-                  ),
-                ],
-              ),
-            ),
+            DialogChoiceButton(
+              yesText: AppStrings.closeGroupConfirm,
+            )
           ],
         ),
       ),

@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:momo_flutter/resources/resources.dart';
-import 'package:momo_flutter/widgets/button/bottom_button.dart';
-import 'package:momo_flutter/widgets/button/reverse_bottom_button.dart';
+import 'package:momo_flutter/widgets/button/dialog_choice_button.dart';
 
 class QuestionDialog extends StatelessWidget {
   const QuestionDialog({
     Key? key,
     required this.dialogText,
     required this.yesText,
-    required this.noText,
+    this.noText = AppStrings.no,
   }) : super(key: key);
 
   final String dialogText;
@@ -29,29 +28,13 @@ class QuestionDialog extends StatelessWidget {
               padding: const EdgeInsets.only(top: 40),
               child: Text(
                 dialogText,
-                style: AppStyles.regular16,
+                style: AppStyles.bold16,
                 textAlign: TextAlign.center,
               ),
             ),
-            SizedBox(
-              height: 56,
-              child: Row(
-                children: [
-                  Expanded(
-                    child: ReverseBottomButton(
-                      buttonTitle: noText,
-                      onPressed: () => Navigator.pop(context, true),
-                    ),
-                  ),
-                  Expanded(
-                    child: BottomButton(
-                      isEnable: true,
-                      buttonTitle: yesText,
-                      onPressed: () => Navigator.pop(context),
-                    ),
-                  ),
-                ],
-              ),
+            DialogChoiceButton(
+              yesText: yesText,
+              noText: noText,
             ),
           ],
         ),

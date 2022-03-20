@@ -57,7 +57,7 @@ class ProfilePage extends ConsumerWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   ProfileImageCard(
-                    img: userData.image!,
+                    img: userData.image ?? 'https://github.com/malmo-malmo/momo-client/blob/develop/assets/splash.png',
                     rad: 50,
                     backgroundColor: AppColors.purple,
                   ),

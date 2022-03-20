@@ -12,7 +12,7 @@ import 'package:momo_flutter/widgets/button/action_button.dart';
 import 'package:momo_flutter/widgets/button/category_button.dart';
 import 'package:momo_flutter/widgets/button/on_off_toggle_button.dart';
 import 'package:momo_flutter/widgets/dialog/confirm_dialog.dart';
-import 'package:momo_flutter/widgets/indicator/loading_indicator.dart';
+import 'package:momo_flutter/widgets/indicator/custom_loader.dart';
 import 'package:momo_flutter/widgets/input_field/city_input_field.dart';
 import 'package:momo_flutter/widgets/input_field/content_input_field.dart';
 import 'package:momo_flutter/widgets/input_field/date_input_field.dart';
@@ -171,24 +171,7 @@ class GroupRequestPage extends StatelessWidget {
                 ),
               ),
             ),
-            Consumer(
-              builder: (context, ref, child) {
-                final isLoading = ref.watch(loadingProvider);
-                if (isLoading) {
-                  return const Opacity(opacity: 0.3);
-                }
-                return const SizedBox();
-              },
-            ),
-            Consumer(
-              builder: (context, ref, child) {
-                final isLoading = ref.watch(loadingProvider);
-                if (isLoading) {
-                  return const LoadingIndicator();
-                }
-                return const SizedBox();
-              },
-            ),
+            ...customLoader,
           ],
         ),
       ),
