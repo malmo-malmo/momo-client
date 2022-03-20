@@ -4,7 +4,7 @@ import 'package:momo_flutter/data/repositories/user_repository.dart';
 
 part 'mypage_count_provider.freezed.dart';
 
-final mypageCountStateProvider = StateNotifierProvider<MypageCountStateNotifier, GroupAndBadgeState>(
+final mypageCountStateProvider = StateNotifierProvider.autoDispose<MypageCountStateNotifier, GroupAndBadgeState>(
   (ref) {
     final userRepository = ref.watch(userRepositoryProvider);
     final stateNotifier = MypageCountStateNotifier(userRepository: userRepository);

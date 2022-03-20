@@ -11,6 +11,7 @@ import 'package:momo_flutter/features/images/full_image_page_view.dart';
 import 'package:momo_flutter/features/intro/login_page.dart';
 import 'package:momo_flutter/features/intro/terms_page.dart';
 import 'package:momo_flutter/features/main/main_page.dart';
+import 'package:momo_flutter/features/main/my_group/group_request_page.dart';
 import 'package:momo_flutter/features/onboard/onboard_page.dart';
 import 'package:momo_flutter/features/post/manage_post_page.dart';
 import 'package:momo_flutter/features/post/notice_list_page.dart';
@@ -120,6 +121,9 @@ abstract class AppRoutes {
         break;
       case ReportPage.routeName:
         _page = const ReportPage();
+        break;
+      case GroupRequestPage.routeName:
+        _page = const GroupRequestPage();
         break;
       default:
         break;

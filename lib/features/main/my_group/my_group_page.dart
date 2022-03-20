@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:momo_flutter/data/models/group/group_detail_response.dart';
 import 'package:momo_flutter/features/main/main_bottom_navigation_bar.dart';
+import 'package:momo_flutter/features/main/my_group/group_request_page.dart';
 import 'package:momo_flutter/features/main/my_group/widgets/manage_group_list.dart';
 import 'package:momo_flutter/features/main/my_group/widgets/participant_group_list.dart';
 import 'package:momo_flutter/resources/resources.dart';
@@ -18,14 +20,33 @@ class MyGroupPage extends StatelessWidget {
     return Scaffold(
       bottomNavigationBar: const MainBottomNavigationBar(),
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         actions: [
-          loadAsset(AppIcons.notification),
-          loadAsset(AppIcons.chat),
+          Padding(
+            padding: const EdgeInsets.only(right: 16),
+            child: loadAsset(AppIcons.notification),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(right: 16),
+            child: loadAsset(AppIcons.chat),
+          ),
         ],
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {},
-        child: loadAsset(AppIcons.addGroup),
+      floatingActionButton: Consumer(
+        builder: (context, ref, child) {
+          return FloatingActionButton(
+            onPressed: () async {
+              final result = await Navigator.pushNamed<GroupDetailResponse>(
+                context,
+                GroupRequestPage.routeName,
+              );
+              if (result != null) {
+                ref.read(myGroupStateProvider.notifier).createGroupCallback(result);
+              }
+            },
+            child: loadAsset(AppIcons.addGroup),
+          );
+        },
       ),
       body: SingleChildScrollView(
         child: Padding(

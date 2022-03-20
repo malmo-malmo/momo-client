@@ -16,7 +16,11 @@ class ActionButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(right: 12),
+      padding: const EdgeInsets.only(
+        right: 12,
+        top: 10,
+        bottom: 10,
+      ),
       child: SizedBox(
         height: 36,
         width: 64,
@@ -29,11 +33,7 @@ class ActionButton extends StatelessWidget {
             ),
             textStyle: MaterialStateProperty.all(AppStyles.regular14),
           ),
-          onPressed: isEnable
-              ? () {
-                  onPressed();
-                }
-              : null,
+          onPressed: isEnable ? () => onPressed() : null,
           child: Text(buttonTitle),
         ),
       ),

@@ -7,8 +7,7 @@ import 'package:momo_flutter/utils/logger/dio_logger.dart';
 
 final dioProvider = Provider<Dio>(
   (ref) {
-    final db = ref.watch(appDatabaseProvider);
-    final tokenData = db.getTokenData() ??
+    final tokenData = AppDatabase().getTokenData() ??
         TokenData(
           accessToken: AppConfig.unknown,
           refreshToken: AppConfig.unknown,
@@ -24,32 +23,52 @@ final dioProvider = Provider<Dio>(
       ),
     );
 
-    dio.interceptors.add(DioLogger('dio'));
-
     final authDio = Dio()..interceptors.add(DioLogger('authdio'));
-
+    dio.interceptors.add(DioLogger('dio'));
     dio.interceptors.add(
       QueuedInterceptorsWrapper(
-        onError: (error, handler) async {
+        onRequest: (options, handler) {
+          final _tokenData = AppDatabase().getTokenData();
+          if (options.headers['Authorization'] != '${_tokenData!.accessTokenType} ${_tokenData.accessToken}') {
+            options.headers['Authorization'] = '${_tokenData.accessTokenType} ${_tokenData.accessToken}';
+            handler.next(options);
+          } else {
+            return handler.next(options);
+          }
+        },
+        onError: (error, handler) {
+          final _tokenData = AppDatabase().getTokenData();
           if (error.response?.statusCode == 401) {
             RequestOptions options = error.response!.requestOptions;
-            await authDio.post(
+            if (options.headers['Authorization'] != '${_tokenData!.accessTokenType} ${_tokenData.accessToken}') {
+              options.headers['Authorization'] = '${_tokenData.accessTokenType} ${_tokenData.accessToken}';
+              dio.fetch(options).then(
+                (r) => handler.resolve(r),
+                onError: (e) {
+                  handler.reject(e);
+                },
+              );
+              return;
+            }
+            authDio.post(
               AppConfig.baseUrl + '/oauth/login/refresh',
               data: {
                 'refreshToken': tokenData.refreshToken,
                 'deviceCode': AppConfig.deviceCode,
               },
             ).then(
-              (response) {
+              (response) async {
                 final _tokenData = TokenData.fromJson(response.data);
-                db.setTokenData(_tokenData);
+                await AppDatabase().setTokenData(_tokenData);
                 options.headers['Authorization'] = '${_tokenData.accessTokenType} ${_tokenData.accessToken}';
               },
             ).then(
-              (value) => dio.fetch(options).then(
+              (_) => dio.fetch(options).then(
                     (value) => handler.resolve(value),
                   ),
-              onError: (e) => handler.reject(e),
+              onError: (e) {
+                handler.reject(e);
+              },
             );
             return;
           }

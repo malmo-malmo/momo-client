@@ -75,6 +75,7 @@ class _CountColumn extends StatelessWidget {
                 '$count',
                 style: AppStyles.bold24.copyWith(
                   decoration: TextDecoration.underline,
+                  color: AppColors.gray6,
                 ),
               ),
             ),

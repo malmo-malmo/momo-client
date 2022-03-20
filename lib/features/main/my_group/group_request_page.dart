@@ -23,6 +23,8 @@ import 'package:momo_flutter/widgets/title/sub_title.dart';
 class GroupRequestPage extends StatelessWidget {
   const GroupRequestPage({Key? key}) : super(key: key);
 
+  static const routeName = 'GroupRequestPage';
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(

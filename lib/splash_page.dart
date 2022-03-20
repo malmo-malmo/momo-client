@@ -68,7 +68,7 @@ class _SplashPageState extends ConsumerState<SplashPage> {
   }
 
   bool _hasNoToken() {
-    final token = ref.watch(appDatabaseProvider).getTokenData() ?? 'no token';
+    final token = AppDatabase().getTokenData() ?? 'no token';
     return token == 'no token';
   }
 }

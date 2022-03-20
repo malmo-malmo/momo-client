@@ -8,7 +8,7 @@ class CategoryListCard extends StatelessWidget {
   const CategoryListCard({
     Key? key,
     this.initialState,
-    this.color = AppColors.backgroundWhite,
+    this.color = AppColors.backgroundPurple,
   }) : super(key: key);
 
   final List<bool>? initialState;

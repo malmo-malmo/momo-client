@@ -18,6 +18,7 @@ class HomePage extends StatelessWidget {
       bottomNavigationBar: const MainBottomNavigationBar(),
       backgroundColor: AppColors.backgroundPurple,
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         actions: [
           loadAsset(AppIcons.notification),
           loadAsset(AppIcons.chat),

@@ -6,23 +6,19 @@ import 'package:momo_flutter/data/models/auth/login_request.dart';
 
 final authRepositoryProvider = Provider<AuthRepository>((ref) {
   final authClient = ref.watch(authClientProvider);
-  final appDatabase = ref.watch(appDatabaseProvider);
   return AuthRepository(
     authClient: authClient,
-    appDatabase: appDatabase,
   );
 });
 
 class AuthRepository {
   final AuthClient authClient;
-  final AppDatabase appDatabase;
 
   const AuthRepository({
     required this.authClient,
-    required this.appDatabase,
   });
 
   Future<void> login(LoginRequest loginRequest) {
-    return authClient.login(loginRequest).then((value) => appDatabase.setTokenData(value));
+    return authClient.login(loginRequest).then((value) => AppDatabase().setTokenData(value));
   }
 }

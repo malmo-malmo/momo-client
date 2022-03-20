@@ -46,7 +46,9 @@ class IntroCategoryPage extends StatelessWidget {
                       const SizedBox(height: 20),
                       const IntroSubTitle(AppStrings.introCategorySubTitle),
                       const SizedBox(height: 40),
-                      const CategoryListCard(),
+                      const CategoryListCard(
+                        color: AppColors.backgroundWhite,
+                      ),
                       const SizedBox(height: 64),
                       const Spacer(),
                       Padding(

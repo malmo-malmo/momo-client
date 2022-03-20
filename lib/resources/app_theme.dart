@@ -4,11 +4,15 @@ abstract class AppTheme {
   static final light = ThemeData(
     appBarTheme: const AppBarTheme(
       backgroundColor: Colors.transparent,
+      foregroundColor: AppColors.gray6,
       toolbarHeight: 56,
       elevation: 0,
       centerTitle: false,
       titleSpacing: 0,
       titleTextStyle: AppStyles.bold16,
+      iconTheme: IconThemeData(
+        color: AppColors.gray6,
+      ),
     ),
     fontFamily: 'NanumSquareOTF',
     textTheme: const TextTheme(

@@ -28,22 +28,26 @@ class HomeGroupStateNotifier extends StateNotifier<HomeGroupState> {
 
   Future<void> getGroups() async {
     state = state.copyWith(isLoading: true);
-    final categoryGroupResponse = groupRepository.getGroupsByCategories(0, size: 10);
-    final districtGroupResponse = groupRepository.getGroupsByLocation(0, size: 10);
-    final universityGroupResponse = groupRepository.getGroupsByUniversity(0, size: 10);
+    try {
+      final categoryGroupResponse = groupRepository.getGroupsByCategories(0, size: 10);
+      final districtGroupResponse = groupRepository.getGroupsByLocation(0, size: 10);
+      final universityGroupResponse = groupRepository.getGroupsByUniversity(0, size: 10);
 
-    final groupResponse = await Future.wait([
-      categoryGroupResponse,
-      districtGroupResponse,
-      universityGroupResponse,
-    ]);
+      final groupResponse = await Future.wait([
+        categoryGroupResponse,
+        districtGroupResponse,
+        universityGroupResponse,
+      ]);
 
-    state = state.copyWith(
-      categoryGroups: [...groupResponse[0]],
-      districtGroups: [...groupResponse[1]],
-      universityGroups: [...groupResponse[2]],
-      isLoading: false,
-    );
+      state = state.copyWith(
+        categoryGroups: [...groupResponse[0]],
+        districtGroups: [...groupResponse[1]],
+        universityGroups: [...groupResponse[2]],
+        isLoading: false,
+      );
+    } catch (e) {
+      state = state.copyWith(isLoading: false);
+    }
   }
 
   Future<void> createGroupLike(int groupId) async {
