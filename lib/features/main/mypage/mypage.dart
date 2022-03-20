@@ -56,7 +56,7 @@ class Mypage extends StatelessWidget {
               }),
               const SizedBox(height: 30),
               const GroupAndBadgeCountCard(),
-              const SizedBox(height: 14),
+              const SizedBox(height: 18),
               const AchievementCard(),
               const Padding(
                 padding: EdgeInsets.only(top: 40, bottom: 14),
