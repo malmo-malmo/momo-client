@@ -25,7 +25,7 @@ class MemberDateRow extends StatelessWidget {
               AppIcons.member,
               color: color,
             ),
-            const SizedBox(width: 2),
+            const SizedBox(width: 4),
             Text(
               '$headNum',
               style: AppStyles.regular12.copyWith(
@@ -41,7 +41,7 @@ class MemberDateRow extends StatelessWidget {
               AppIcons.startDay,
               color: color,
             ),
-            const SizedBox(width: 2),
+            const SizedBox(width: 4),
             Text(
               groupCardDateFormat(startDay),
               style: AppStyles.regular12.copyWith(

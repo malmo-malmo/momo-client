@@ -4,9 +4,12 @@ import 'package:intl/intl.dart';
 import 'package:momo_flutter/resources/resources.dart';
 import 'package:momo_flutter/utils/format/calendar_format.dart';
 import 'package:momo_flutter/widgets/button/bottom_button.dart';
+import 'package:momo_flutter/widgets/button/dialog_bottom_button.dart';
 import 'package:momo_flutter/widgets/calendar_style/calendar_default_builder.dart';
+import 'package:momo_flutter/widgets/calendar_style/calendar_disabled_builder.dart';
 import 'package:momo_flutter/widgets/calendar_style/calendar_dow_builder.dart';
 import 'package:momo_flutter/widgets/calendar_style/calendar_header_style.dart';
+import 'package:momo_flutter/widgets/calendar_style/calendar_outside_builder.dart';
 import 'package:momo_flutter/widgets/calendar_style/calendar_selected_builder.dart';
 import 'package:momo_flutter/widgets/calendar_style/calendar_today_builder.dart';
 import 'package:table_calendar/table_calendar.dart';
@@ -47,7 +50,7 @@ class _DateInputFieldState extends State<DateInputField> {
         width: 190,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20),
-          color: dateTimeText.isEmpty ? AppColors.gray4 : AppColors.gray1,
+          color: dateTimeText.isNotEmpty ? AppColors.gray4 : AppColors.gray1,
         ),
         child: Center(
           child: Text(
@@ -105,13 +108,15 @@ class _CalendarDialog extends StatelessWidget {
                       todayBuilder: calendarTodayBuilder,
                       dowBuilder: calendarDowBuilder,
                       defaultBuilder: calendarDefaultBuilder,
+                      outsideBuilder: calendarOutsideBuilder,
+                      disabledBuilder: calendarDisabledBuilder,
+                      rangeStartBuilder: calendarTodayBuilder,
                     ),
                   ),
                 ),
-                BottomButton(
+                DialogBottomButton(
                   isEnable: true,
-                  buttonTitle: AppStrings.confirm,
-                  onPressed: () {},
+                  result: _selectDay,
                 ),
               ],
             ),

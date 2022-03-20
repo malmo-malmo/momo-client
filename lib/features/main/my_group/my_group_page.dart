@@ -24,11 +24,19 @@ class MyGroupPage extends StatelessWidget {
         actions: [
           Padding(
             padding: const EdgeInsets.only(right: 16),
-            child: loadAsset(AppIcons.notification),
+            child: InkWell(
+              onTap: () {},
+              child: loadAsset(
+                AppIcons.notification,
+              ),
+            ),
           ),
           Padding(
             padding: const EdgeInsets.only(right: 16),
-            child: loadAsset(AppIcons.chat),
+            child: InkWell(
+              onTap: () {},
+              child: loadAsset(AppIcons.chat),
+            ),
           ),
         ],
       ),
@@ -36,12 +44,12 @@ class MyGroupPage extends StatelessWidget {
         builder: (context, ref, child) {
           return FloatingActionButton(
             onPressed: () async {
-              final result = await Navigator.pushNamed<GroupDetailResponse>(
+              final result = await Navigator.pushNamed(
                 context,
                 GroupRequestPage.routeName,
               );
               if (result != null) {
-                ref.read(myGroupStateProvider.notifier).createGroupCallback(result);
+                ref.read(myGroupStateProvider.notifier).createGroupCallback(result as GroupDetailResponse);
               }
             },
             child: loadAsset(AppIcons.addGroup),

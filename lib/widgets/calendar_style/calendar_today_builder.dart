@@ -10,7 +10,7 @@ Widget? calendarTodayBuilder(
     return Center(
       child: CircleAvatar(
         foregroundColor: Colors.transparent,
-        backgroundColor: AppColors.purple,
+        backgroundColor: AppColors.backgroundPurple,
         radius: 14,
         child: Text(
           '${day.day}',
@@ -19,5 +19,14 @@ Widget? calendarTodayBuilder(
       ),
     );
   }
-  return null;
+  return Center(
+    child: CircleAvatar(
+      backgroundColor: AppColors.backgroundPurple,
+      radius: 14,
+      child: Text(
+        '${day.day}',
+        style: AppStyles.regular12.copyWith(color: AppColors.gray6),
+      ),
+    ),
+  );
 }

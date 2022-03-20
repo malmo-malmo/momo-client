@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:momo_flutter/data/models/management/my_group_response.dart';
+import 'package:momo_flutter/features/group/group_detail_page.dart';
 import 'package:momo_flutter/resources/app_error_strings.dart';
 import 'package:momo_flutter/resources/resources.dart';
 import 'package:momo_flutter/widgets/card/empty_item_card.dart';
@@ -31,7 +32,13 @@ class _ManageGroupCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {},
+      onTap: () {
+        Navigator.pushNamed(
+          context,
+          GroupDetailPage.routeName,
+          arguments: group.id,
+        );
+      },
       child: Stack(
         children: [
           ClipRRect(
@@ -83,7 +90,7 @@ class _ManageGroupCard extends StatelessWidget {
                 const SizedBox(height: 12),
                 const MemberDateRow(
                   headNum: 3,
-                  startDay: '11/2',
+                  startDay: '2022-06-01',
                 ),
               ],
             ),

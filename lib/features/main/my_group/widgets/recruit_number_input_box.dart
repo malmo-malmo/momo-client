@@ -15,7 +15,7 @@ class RecruitNumberInputBox extends StatelessWidget {
           Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(20),
-              color: AppColors.gray4,
+              color: AppColors.gray1,
             ),
             padding: const EdgeInsets.only(left: 24),
             height: 44,

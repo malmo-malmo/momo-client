@@ -45,13 +45,13 @@ class RequestImageBox extends StatelessWidget {
                     onTap: () async {
                       final check = await ref.read(galleryPermissionProvider.future);
                       if (check) {
-                        String? imagePath = await Navigator.pushNamed(
+                        final imagePath = await Navigator.pushNamed(
                           context,
                           GalleryPage.routeName,
                           arguments: PhotoRequestType.one,
                         );
                         if (imagePath != null) {
-                          ref.read(groupRequestStateProvider.notifier).setImageUrl(imagePath);
+                          ref.read(groupRequestStateProvider.notifier).setImageUrl(imagePath as String);
                         }
                       }
                     },

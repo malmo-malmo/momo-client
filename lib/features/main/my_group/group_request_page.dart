@@ -51,9 +51,7 @@ class GroupRequestPage extends StatelessWidget {
                           ref.read(loadingProvider.state).state = false;
                           await showDialog(
                             context: context,
-                            builder: (context) => ConfirmDialog('''
-        '${result.name}'\n모임을 추가했어요!
-        '''),
+                            builder: (context) => ConfirmDialog("${result.name}'\n모임을 추가했어요!"),
                           );
                           Navigator.pop(context, result);
                         },
@@ -65,6 +63,7 @@ class GroupRequestPage extends StatelessWidget {
               ),
               body: SingleChildScrollView(
                 child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const SizedBox(height: 8),
                     const RequestImageBox(),

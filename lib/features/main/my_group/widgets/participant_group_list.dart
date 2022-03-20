@@ -18,7 +18,10 @@ class ParticipantGroupList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (participantGroups.isEmpty) {
-      return const EmptyItemCard(AppErrorString.etcGroupEmpty);
+      return const SizedBox(
+        height: 300,
+        child: EmptyItemCard(AppErrorString.etcGroupEmpty),
+      );
     }
     return Column(
       children: [

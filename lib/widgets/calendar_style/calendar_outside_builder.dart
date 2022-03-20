@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:momo_flutter/resources/resources.dart';
 
-Widget calendarDefaultBuilder(
+Widget calendarOutsideBuilder(
   BuildContext context,
   DateTime day,
   DateTime focusedDay, {
