@@ -104,11 +104,13 @@ class _GroupListPageState extends ConsumerState<GroupListPage> {
                           widget.likeCallback(groupId: item.id, like: true);
                         }
                       },
+                      width: MediaQuery.of(context).size.width / 360 * 157,
+                      height: MediaQuery.of(context).size.width / 360 * 200,
                     ),
                   ),
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2,
-                    mainAxisExtent: 200,
+                    mainAxisExtent: MediaQuery.of(context).size.width / 360 * 200,
                     mainAxisSpacing: 14,
                     crossAxisSpacing: 14,
                     childAspectRatio: 100 / 150,

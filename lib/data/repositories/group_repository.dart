@@ -9,6 +9,7 @@ import 'package:momo_flutter/data/models/group/group_detail_response.dart';
 import 'package:momo_flutter/data/models/group/group_like_request.dart';
 import 'package:momo_flutter/data/models/group/group_request.dart';
 import 'package:momo_flutter/data/models/group/group_response.dart';
+import 'package:momo_flutter/data/models/group/wish_group_response.dart';
 import 'package:momo_flutter/data/models/management/group_summary_response.dart';
 import 'package:momo_flutter/data/models/management/my_group_response.dart';
 import 'package:momo_flutter/data/models/user/participant_user_response.dart';
@@ -105,5 +106,9 @@ class GroupRepository {
 
   Future<List<ParticipantUserResponse>> getParticipantUsers(int groupId) {
     return groupClient.getParticipantUsers(groupId);
+  }
+
+  Future<List<WishGroupResponse>> getFavoriteGroups() {
+    return favoriteClient.getFavoriteGroups();
   }
 }

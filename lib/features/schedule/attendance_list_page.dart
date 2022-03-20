@@ -2,10 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:momo_flutter/features/schedule/provider/attendance_list_provider.dart';
 import 'package:momo_flutter/features/schedule/widgets/attendance_card.dart';
-import 'package:momo_flutter/provider/loading_provider.dart';
 import 'package:momo_flutter/resources/resources.dart';
-import 'package:momo_flutter/widgets/card/empty_item_card.dart';
-import 'package:momo_flutter/widgets/indicator/loading_indicator.dart';
 
 class AttendanceListPageArg {
   final int groupId;

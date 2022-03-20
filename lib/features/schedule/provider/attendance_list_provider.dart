@@ -3,7 +3,6 @@ import 'package:momo_flutter/data/models/attendance/attendance_check_update_requ
 import 'package:momo_flutter/data/models/attendance/attendance_response.dart';
 import 'package:momo_flutter/data/models/attendance/attendance_update_request.dart';
 import 'package:momo_flutter/data/repositories/schedule_repository.dart';
-import 'package:momo_flutter/provider/loading_provider.dart';
 
 final attendanceResponseStateProvider =
     StateNotifierProvider.family.autoDispose<AttendanceResponseState, List<AttendanceResponse>, int>(

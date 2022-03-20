@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:momo_flutter/data/models/user/user_update_request.dart';
 import 'package:momo_flutter/features/%08report/report_page.dart';
 import 'package:momo_flutter/features/gallery/gallery_page.dart';
+import 'package:momo_flutter/features/group/favorite_group_list_page.dart';
 import 'package:momo_flutter/features/group/group_authority_page.dart';
 import 'package:momo_flutter/features/group/group_detail_page.dart';
 import 'package:momo_flutter/features/group/group_list_page.dart';
@@ -131,10 +132,12 @@ abstract class AppRoutes {
         final groupId = settings.arguments as int;
         _page = ScheduleListPage(groupId);
         break;
-
       case AttendanceListPage.routeName:
         final arg = settings.arguments as AttendanceListPageArg;
         _page = AttendanceListPage(arg);
+        break;
+      case FavoriteGroupListPage.routeName:
+        _page = const FavoriteGroupListPage();
         break;
       default:
         break;
