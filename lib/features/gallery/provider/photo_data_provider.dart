@@ -1,10 +1,20 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:momo_flutter/app_consts.dart';
-
-final photoDataStateProvider = StateProvider.autoDispose<String>((ref) => '');
+import 'package:momo_flutter/provider/state_notifier/radio_check_state_notifier.dart';
 
 final photoDatasStateProvider =
     StateNotifierProvider.autoDispose<PhotoListState, List<String>>((ref) => PhotoListState());
+
+final photoDataStateProvider = StateNotifierProvider.autoDispose<RadioCheckStateNotifier, List<bool>>((ref) {
+  return RadioCheckStateNotifier(AppConsts.maxPhotoCount);
+});
+
+final radioPhotoDataStateProvider = StateProvider.autoDispose<String>((ref) => '');
+
+final isSelectPhotoOne = Provider.autoDispose<bool>((ref) {
+  final photoData = ref.watch(radioPhotoDataStateProvider);
+  return photoData.isNotEmpty;
+});
 
 final isSelectPhoto = Provider.autoDispose<bool>(
   (ref) {

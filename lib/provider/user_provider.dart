@@ -1,5 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:momo_flutter/app_config.dart';
+import 'package:momo_flutter/app_consts.dart';
 import 'package:momo_flutter/data/models/common/category_request.dart';
 import 'package:momo_flutter/data/models/common/code_name_pair.dart';
 import 'package:momo_flutter/data/models/user/user_response.dart';
@@ -25,6 +26,7 @@ class UserDataStateNotifier extends StateNotifier<UserResponse> {
             district: '',
             university: '',
             categories: [],
+            image: AppConsts.defalutProfile,
           ),
         );
 
@@ -33,6 +35,9 @@ class UserDataStateNotifier extends StateNotifier<UserResponse> {
   Future<dynamic> getUserData() async {
     final userResponse = await userRepository.getUserData();
     state = userResponse;
+    if (state.image == null) {
+      state = state.copyWith(image: AppConsts.defalutProfile);
+    }
   }
 
   Future<bool> isFirstLogin() async {
@@ -40,6 +45,9 @@ class UserDataStateNotifier extends StateNotifier<UserResponse> {
       final userResponse = await userRepository.getUserData();
       if (userResponse.nickname.isNotEmpty) {
         state = userResponse;
+        if (state.image == null) {
+          state = state.copyWith(image: AppConsts.defalutProfile);
+        }
         return false;
       }
       return true;

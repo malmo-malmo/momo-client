@@ -7,16 +7,25 @@ class UniversityInputField extends StatefulWidget {
   const UniversityInputField({
     Key? key,
     this.color,
+    this.initialValue,
   }) : super(key: key);
 
   final Color? color;
+  final String? initialValue;
 
   @override
   State<UniversityInputField> createState() => _UniversityInputFieldState();
 }
 
 class _UniversityInputFieldState extends State<UniversityInputField> {
-  final _controller = TextEditingController();
+  late TextEditingController _controller = TextEditingController(
+    text: widget.initialValue,
+  );
+
+  @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {

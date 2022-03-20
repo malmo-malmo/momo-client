@@ -24,6 +24,7 @@ class ProfilePage extends ConsumerWidget {
             onTap: () => Navigator.pop(context),
             child: const Icon(CupertinoIcons.back),
           ),
+          backgroundColor: AppColors.backgroundWhite,
           title: const Text(AppStrings.managementProfile),
           actions: [
             ActionButton(
@@ -43,6 +44,7 @@ class ProfilePage extends ConsumerWidget {
             ),
           ],
         ),
+        backgroundColor: AppColors.gray1,
         body: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -57,7 +59,7 @@ class ProfilePage extends ConsumerWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   ProfileImageCard(
-                    img: userData.image ?? 'https://github.com/malmo-malmo/momo-client/blob/develop/assets/splash.png',
+                    img: userData.image!,
                     rad: 50,
                     backgroundColor: AppColors.purple,
                   ),

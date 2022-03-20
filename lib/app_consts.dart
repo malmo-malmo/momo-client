@@ -5,6 +5,8 @@ abstract class AppConsts {
   static const maxSelectCount = 7;
   static const pageSize = 20;
 
+  static const defalutProfile = 'https://github.com/malmo-malmo/momo-client/blob/develop/default_profile.png?raw=true';
+
   static const categoryIconOn = [
     AppIcons.categoryHealthOn,
     AppIcons.categoryFoodOn,

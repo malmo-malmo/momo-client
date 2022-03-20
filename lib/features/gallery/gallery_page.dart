@@ -1,4 +1,5 @@
 import 'dart:typed_data';
+import 'dart:developer';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -7,6 +8,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:momo_flutter/features/gallery/provider/photo_data_provider.dart';
 import 'package:momo_flutter/features/gallery/provider/photo_provider.dart';
 import 'package:momo_flutter/features/gallery/widgets/image_thumbnail.dart';
+import 'package:momo_flutter/features/gallery/widgets/radio_image_thumbnail.dart';
 import 'package:momo_flutter/resources/app_error_strings.dart';
 import 'package:momo_flutter/resources/resources.dart';
 import 'package:momo_flutter/widgets/button/action_button.dart';
@@ -53,11 +55,11 @@ class GalleryPage extends StatelessWidget {
                       onPressed: () => Navigator.pop(
                         context,
                         photoRequestType == PhotoRequestType.one
-                            ? ref.watch(photoDataStateProvider)
-                            : ref.watch(photoDatasStateProvider),
+                            ? ref.read(radioPhotoDataStateProvider)
+                            : ref.read(photoDatasStateProvider),
                       ),
                       isEnable: photoRequestType == PhotoRequestType.one
-                          ? ref.watch(photoDataStateProvider).isNotEmpty
+                          ? ref.watch(isSelectPhotoOne)
                           : ref.watch(isSelectPhoto),
                     ),
                   ],
@@ -76,10 +78,23 @@ class GalleryPage extends StatelessWidget {
                               if (bytes == null) {
                                 return const LoadingIndicator();
                               }
-                              return ImageThumbnail(
-                                imageData: bytes,
-                                photoRequestType: photoRequestType,
-                              );
+                              final checks = ref.watch(photoDataStateProvider);
+                              return photoRequestType == PhotoRequestType.one
+                                  ? InkWell(
+                                      onTap: () async {
+                                        final imagePath = await photoList[index].file;
+                                        ref.read(radioPhotoDataStateProvider.state).state = imagePath!.path;
+                                        ref.read(photoDataStateProvider.notifier).checkOne(index);
+                                      },
+                                      child: RadioImageThumbnail(
+                                        index: index,
+                                        imageData: bytes,
+                                        check: checks[index],
+                                      ),
+                                    )
+                                  : ImageThumbnail(
+                                      imageData: bytes,
+                                    );
                             },
                           );
                         },

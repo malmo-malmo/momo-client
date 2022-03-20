@@ -10,9 +10,11 @@ class NicknameInputField extends StatelessWidget {
   const NicknameInputField({
     Key? key,
     this.color,
+    this.initialValue,
   }) : super(key: key);
 
   final Color? color;
+  final String? initialValue;
 
   @override
   Widget build(BuildContext context) {
@@ -31,6 +33,7 @@ class NicknameInputField extends StatelessWidget {
               child: Consumer(
                 builder: (context, ref, child) {
                   return TextFormField(
+                    initialValue: initialValue,
                     onChanged: (value) {
                       ref.read(profileUpdateStateProvider.notifier).setUserNickname(value);
                       ref.read(vaildatioinNicknameProvider.state).state = false;

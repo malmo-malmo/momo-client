@@ -39,22 +39,21 @@ class Mypage extends StatelessWidget {
           child: Column(
             children: [
               const SizedBox(height: 16),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Consumer(
-                    builder: (context, ref, child) {
-                      final userName = ref.watch(userDataStateProvider).nickname;
-                      return MainTitle('$userName님의\n마이페이지');
-                    },
-                  ),
-                  const ProfileImageCard(
-                    img: 'https://file.mk.co.kr/meet/neds/2020/08/image_readtop_2020_864116_15980534304326707.png',
-                    rad: 34,
-                    backgroundColor: AppColors.purple,
-                  ),
-                ],
-              ),
+              Consumer(builder: (context, ref, child) {
+                final userData = ref.watch(userDataStateProvider);
+
+                return Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    MainTitle('${userData.nickname}님의\n마이페이지'),
+                    ProfileImageCard(
+                      img: userData.image!,
+                      rad: 34,
+                      backgroundColor: AppColors.purple,
+                    ),
+                  ],
+                );
+              }),
               const SizedBox(height: 30),
               const GroupAndBadgeCountCard(),
               const SizedBox(height: 14),
