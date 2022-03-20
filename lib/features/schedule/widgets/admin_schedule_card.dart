@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:momo_flutter/app_consts.dart';
 import 'package:momo_flutter/data/models/schedule/schedule_detail_response.dart';
+import 'package:momo_flutter/features/schedule/attendance_list_page.dart';
 import 'package:momo_flutter/resources/resources.dart';
 import 'package:momo_flutter/utils/format/post_card_date_format.dart';
 import 'package:momo_flutter/widgets/card/profile_image_card.dart';
@@ -19,12 +20,23 @@ class AdminScheduleCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () async {},
+      onTap: () async {
+        Navigator.pushNamed(
+          context,
+          AttendanceListPage.routeName,
+          arguments: AttendanceListPageArg(
+            groupId: groupId,
+            scheduleId: schedule.scheduleId,
+            isCheck: schedule.attendanceCheck,
+          ),
+        );
+      },
       child: Container(
         height: 204,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20),
           boxShadow: const [BoxShadow()],
+          color: AppColors.backgroundWhite,
         ),
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 20),

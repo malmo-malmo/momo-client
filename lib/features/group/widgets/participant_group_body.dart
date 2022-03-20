@@ -8,6 +8,7 @@ import 'package:momo_flutter/features/group/providers/upcoming_schedule_provider
 import 'package:momo_flutter/features/group/widgets/group_detail_image_card.dart';
 import 'package:momo_flutter/features/post/widgets/notice_horizontal_list_view.dart';
 import 'package:momo_flutter/features/post/widgets/post_list_view.dart';
+import 'package:momo_flutter/features/schedule/schedule_list_page.dart';
 import 'package:momo_flutter/resources/app_error_strings.dart';
 import 'package:momo_flutter/resources/resources.dart';
 import 'package:momo_flutter/widgets/card/error_card.dart';
@@ -71,7 +72,11 @@ class _ScheduleCard extends ConsumerWidget {
                   children: [
                     const SubTitle(AppStrings.upcomingSchedule),
                     InkWell(
-                      onTap: () {},
+                      onTap: () => Navigator.pushNamed(
+                        context,
+                        ScheduleListPage.routeName,
+                        arguments: groupId,
+                      ),
                       child: Transform.rotate(
                         angle: pi,
                         child: const Icon(

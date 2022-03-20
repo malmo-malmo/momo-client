@@ -27,7 +27,7 @@ class _TimeInputFieldState extends State<TimeInputField> {
       onTap: () async {
         final result = await showDialog(
           context: context,
-          builder: (_) => _TimePickerDialog(),
+          builder: (_) => const _TimePickerDialog(),
         );
 
         if (result != null) {
@@ -62,9 +62,8 @@ final _isAmProvider = StateProvider.autoDispose<bool>((ref) => true);
 final _hourProvider = StateProvider.autoDispose<int>((ref) => 0);
 final _minuteProvider = StateProvider.autoDispose<int>((ref) => 0);
 
-// ignore: must_be_immutable
 class _TimePickerDialog extends StatelessWidget {
-  _TimePickerDialog({Key? key}) : super(key: key);
+  const _TimePickerDialog({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
