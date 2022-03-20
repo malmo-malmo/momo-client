@@ -22,6 +22,7 @@ import 'package:momo_flutter/features/profile/edit_profile_page.dart';
 import 'package:momo_flutter/features/profile/intro_category_page.dart';
 import 'package:momo_flutter/features/profile/intro_profile_page.dart';
 import 'package:momo_flutter/features/profile/profile_page.dart';
+import 'package:momo_flutter/features/schedule/schedule_list_page.dart';
 import 'package:momo_flutter/features/schedule/schedule_request_page.dart';
 import 'package:momo_flutter/features/setting/setting_page.dart';
 import 'package:momo_flutter/splash_page.dart';
@@ -124,6 +125,10 @@ abstract class AppRoutes {
         break;
       case GroupRequestPage.routeName:
         _page = const GroupRequestPage();
+        break;
+      case ScheduleListPage.routeName:
+        final groupId = settings.arguments as int;
+        _page = ScheduleListPage(groupId);
         break;
       default:
         break;

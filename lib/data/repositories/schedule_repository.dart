@@ -1,30 +1,37 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:momo_flutter/app_consts.dart';
+import 'package:momo_flutter/data/datasources/remote/retrofit/attendance_client.dart';
 import 'package:momo_flutter/data/datasources/remote/retrofit/management_client.dart';
 import 'package:momo_flutter/data/datasources/remote/retrofit/schedule_client.dart';
 import 'package:momo_flutter/data/datasources/remote/retrofit_client_provider.dart';
 import 'package:momo_flutter/data/models/management/my_group_response.dart';
 import 'package:momo_flutter/data/models/schedule/schedule_detail_response.dart';
 import 'package:momo_flutter/data/models/schedule/schedule_request.dart';
+import 'package:momo_flutter/data/models/schedule/schedule_response.dart';
 import 'package:momo_flutter/data/models/schedule/schedule_summary_response.dart';
 import 'package:momo_flutter/data/models/schedule/upcoming_schedule_response.dart';
 
 final scheduleRepositoryProvider = Provider<ScheduleRepository>((ref) {
   final scheduleClient = ref.watch(scheduleClientProvider);
   final managementClient = ref.watch(managementClientProvider);
+  final attendanceClient = ref.watch(attendanceClientProvider);
 
   return ScheduleRepository(
     scheduleClient: scheduleClient,
     managementClient: managementClient,
+    attendanceClient: attendanceClient,
   );
 });
 
 class ScheduleRepository {
   final ScheduleClient scheduleClient;
   final ManagementClient managementClient;
+  final AttendanceClient attendanceClient;
 
   const ScheduleRepository({
     required this.scheduleClient,
     required this.managementClient,
+    required this.attendanceClient,
   });
 
   Future<List<ScheduleSummaryResponse>> getScheduleSummary(
@@ -44,5 +51,12 @@ class ScheduleRepository {
 
   Future<List<MyGroupResponse>> getMyGroupSummary() {
     return managementClient.getMyGroupSummary();
+  }
+
+  Future<ScheduleResponse> getSchedules({
+    required int page,
+    required int groupId,
+  }) {
+    return scheduleClient.getSchedules(groupId, page, AppConsts.pageSize);
   }
 }

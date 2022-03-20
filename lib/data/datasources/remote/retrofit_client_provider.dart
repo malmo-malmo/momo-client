@@ -1,5 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:momo_flutter/data/datasources/remote/dio_provider.dart';
+import 'package:momo_flutter/data/datasources/remote/retrofit/attendance_client.dart';
 import 'package:momo_flutter/data/datasources/remote/retrofit/comment_client.dart';
 import 'package:momo_flutter/data/datasources/remote/retrofit/district_client.dart';
 import 'package:momo_flutter/data/datasources/remote/retrofit/favorite_client.dart';
@@ -22,6 +23,11 @@ final postClientProvider = Provider<PostClient>((ref) {
 final scheduleClientProvider = Provider<ScheduleClient>((ref) {
   final dio = ref.watch(dioProvider);
   return ScheduleClient(dio);
+});
+
+final attendanceClientProvider = Provider<AttendanceClient>((ref) {
+  final dio = ref.watch(dioProvider);
+  return AttendanceClient(dio);
 });
 
 final userClientProvider = Provider<UserClient>((ref) {
