@@ -73,6 +73,8 @@ class _ParticipantGroupCard extends StatelessWidget {
                         .first
                         .name,
                   ),
+                  width: 36,
+                  height: 36,
                 ),
                 const SizedBox(width: 16),
                 Text(

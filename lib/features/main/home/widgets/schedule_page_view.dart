@@ -31,6 +31,7 @@ class SchedulePageView extends StatelessWidget {
           children: [
             Expanded(
               child: PageView.builder(
+                itemCount: sepSchedules.length,
                 itemBuilder: (context, index) => ScheduleCardColumn(
                   sepSchedules[index],
                 ),

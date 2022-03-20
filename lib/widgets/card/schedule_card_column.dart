@@ -1,8 +1,10 @@
 import 'dart:math';
+import 'dart:ui';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:momo_flutter/data/models/schedule/schedule_summary_response.dart';
+import 'package:momo_flutter/features/schedule/schedule_list_page.dart';
 import 'package:momo_flutter/resources/resources.dart';
 import 'package:momo_flutter/utils/category_name_to_icon.dart';
 import 'package:momo_flutter/utils/format/schedule_time_format.dart';
@@ -40,38 +42,45 @@ class _ScheduleCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 24),
-      child: Row(
-        children: [
-          loadAsset(
-            categoryNameToIcon(schedule.category.name),
-          ),
-          const SizedBox(width: 14),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                schedule.title,
-                style: AppStyles.bold16,
-              ),
-              const SizedBox(height: 6),
-              Text(
-                scheduleTimeFormat(schedule.startDateTime),
-                style: AppStyles.regular12,
-              ),
-            ],
-          ),
-          const Spacer(),
-          InkWell(
-            onTap: () {},
-            child: Transform.rotate(
+      child: InkWell(
+        onTap: () => Navigator.pushNamed(
+          context,
+          ScheduleListPage.routeName,
+          arguments: schedule.groupId,
+        ),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            loadAsset(
+              categoryNameToIcon(schedule.category.name),
+              width: 36,
+              height: 36,
+            ),
+            const SizedBox(width: 14),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  schedule.title,
+                  style: AppStyles.bold16,
+                ),
+                const SizedBox(height: 6),
+                Text(
+                  scheduleTimeFormat(schedule.startDateTime),
+                  style: AppStyles.regular12,
+                ),
+              ],
+            ),
+            const Spacer(),
+            Transform.rotate(
               angle: pi,
               child: const Icon(
                 CupertinoIcons.back,
                 size: 18,
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
