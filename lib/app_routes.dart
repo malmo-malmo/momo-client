@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:momo_flutter/data/models/user/user_update_request.dart';
 import 'package:momo_flutter/features/%08report/report_page.dart';
+import 'package:momo_flutter/features/chat/chat_list_page.dart';
+import 'package:momo_flutter/features/chat/chat_room_page.dart';
 import 'package:momo_flutter/features/gallery/gallery_page.dart';
 import 'package:momo_flutter/features/group/favorite_group_list_page.dart';
 import 'package:momo_flutter/features/group/group_authority_page.dart';
@@ -142,6 +144,12 @@ abstract class AppRoutes {
         break;
       case TotalGroupListPage.routeName:
         _page = const TotalGroupListPage();
+        break;
+      case ChatListPage.routeName:
+        _page = const ChatListPage();
+        break;
+      case ChatRoomPage.routeName:
+        _page = const ChatRoomPage();
         break;
       default:
         break;

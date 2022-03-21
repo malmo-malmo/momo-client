@@ -6,7 +6,6 @@ import 'package:momo_flutter/data/models/group/group_response.dart';
 import 'package:momo_flutter/features/group/providers/group_list_provider.dart';
 import 'package:momo_flutter/resources/app_error_strings.dart';
 import 'package:momo_flutter/resources/resources.dart';
-import 'package:momo_flutter/utils/load_asset.dart';
 import 'package:momo_flutter/widgets/button/header_chat_button.dart';
 import 'package:momo_flutter/widgets/card/empty_item_card.dart';
 import 'package:momo_flutter/widgets/card/group_card.dart';
