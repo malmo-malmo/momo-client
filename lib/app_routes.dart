@@ -108,7 +108,7 @@ abstract class AppRoutes {
         _page = PostRequestPage(postRequestArg);
         break;
       case ScheduleRequestPage.routeName:
-        final groupId = settings.arguments as int;
+        final groupId = settings.arguments as int?;
         _page = ScheduleRequestPage(groupId);
         break;
       case GroupAuthorityPage.routeName:
