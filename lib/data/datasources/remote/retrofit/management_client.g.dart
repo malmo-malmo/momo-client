@@ -6,6 +6,8 @@ part of 'management_client.dart';
 // RetrofitGenerator
 // **************************************************************************
 
+// ignore_for_file: unnecessary_brace_in_string_interps
+
 class _ManagementClient implements ManagementClient {
   _ManagementClient(this._dio, {this.baseUrl}) {
     baseUrl ??= 'http://gunimon.iptime.org:8100/api';

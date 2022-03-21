@@ -8,7 +8,7 @@ final postDetailStateProvider = StateNotifierProvider.family.autoDispose<PostDet
     return PostDetailState(
       postId: postId,
       postRepository: postRepository,
-    );
+    )..getPostDetail();
   },
 );
 

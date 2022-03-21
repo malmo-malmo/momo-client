@@ -26,6 +26,6 @@ Map<String, dynamic> _$$_PostRequestToJson(_$_PostRequest instance) =>
     };
 
 const _$PostTypeEnumMap = {
-  PostType.NORMAR: 'NORMAR',
+  PostType.NORMAL: 'NORMAL',
   PostType.NOTICE: 'NOTICE',
 };

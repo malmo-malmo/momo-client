@@ -46,7 +46,7 @@ class PostRequestPage extends StatelessWidget {
                   child: const Icon(CupertinoIcons.xmark),
                 ),
                 title: Text(
-                  arg.postType == PostType.NORMAR ? AppStrings.createPost : AppStrings.createNotice,
+                  arg.postType == PostType.NORMAL ? AppStrings.createPost : AppStrings.createNotice,
                 ),
                 actions: [
                   Consumer(

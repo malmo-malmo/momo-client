@@ -6,6 +6,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:momo_flutter/data/models/enum/post_type.dart';
 import 'package:momo_flutter/data/models/post/post_response.dart';
+import 'package:momo_flutter/features/post/notice_list_page.dart';
 import 'package:momo_flutter/features/post/post_detail_page.dart';
 import 'package:momo_flutter/features/post/provider/post_list_provider.dart';
 import 'package:momo_flutter/resources/app_error_strings.dart';
@@ -67,7 +68,13 @@ class _NoticeHorizontalListViewState extends ConsumerState<NoticeHorizontalListV
               children: [
                 SubTitle(PostType.NOTICE.postTypeToName),
                 InkWell(
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.pushNamed(
+                      context,
+                      NoticeListPage.routeName,
+                      arguments: widget.groupId,
+                    );
+                  },
                   child: Transform.rotate(
                     angle: pi,
                     child: const Icon(

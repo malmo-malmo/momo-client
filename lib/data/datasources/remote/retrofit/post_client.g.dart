@@ -6,6 +6,8 @@ part of 'post_client.dart';
 // RetrofitGenerator
 // **************************************************************************
 
+// ignore_for_file: unnecessary_brace_in_string_interps
+
 class _PostClient implements PostClient {
   _PostClient(this._dio, {this.baseUrl}) {
     baseUrl ??= 'http://gunimon.iptime.org:8100/api';
@@ -24,7 +26,7 @@ class _PostClient implements PostClient {
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<PostDetailResponse>(
             Options(method: 'GET', headers: _headers, extra: _extra)
-                .compose(_dio.options, '/post/$postId',
+                .compose(_dio.options, '/post/${postId}',
                     queryParameters: queryParameters, data: _data)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = PostDetailResponse.fromJson(_result.data!);
@@ -62,7 +64,7 @@ class _PostClient implements PostClient {
     final _data = <String, dynamic>{};
     final _result = await _dio.fetch(_setStreamType<dynamic>(
         Options(method: 'DELETE', headers: _headers, extra: _extra)
-            .compose(_dio.options, '/post/$id',
+            .compose(_dio.options, '/post/${id}',
                 queryParameters: queryParameters, data: _data)
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = _result.data;

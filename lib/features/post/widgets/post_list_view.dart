@@ -29,7 +29,7 @@ class _PostListViewState extends ConsumerState<PostListView> {
     _pagingController.addPageRequestListener(
       (pageKey) => ref.read(postListStateProvider(widget.groupId).notifier).getPosts(
             page: pageKey,
-            postType: PostType.NORMAR,
+            postType: PostType.NORMAL,
           ),
     );
 

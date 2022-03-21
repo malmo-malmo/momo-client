@@ -38,7 +38,7 @@ class NormalBottomSheet extends StatelessWidget {
                     PostRequestPage.routeName,
                     arguments: PostRequestArg(
                       groupId: groupId,
-                      postType: PostType.NORMAR,
+                      postType: PostType.NORMAL,
                     ),
                   );
                   if (result != null) {

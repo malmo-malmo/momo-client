@@ -67,6 +67,7 @@ class _GroupDetailPageState extends ConsumerState<GroupDetailPage> {
       child: Stack(
         children: [
           Scaffold(
+            backgroundColor: AppColors.backgroundPurple,
             extendBodyBehindAppBar: true,
             appBar: AppBar(
               leading: InkWell(

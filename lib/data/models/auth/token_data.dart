@@ -13,6 +13,5 @@ class TokenData with _$TokenData {
     @HiveField(2) required String accessTokenType,
   }) = _TokenData;
 
-  factory TokenData.fromJson(Map<String, dynamic> json) =>
-      _$TokenDataFromJson(json);
+  factory TokenData.fromJson(Map<String, dynamic> json) => _$TokenDataFromJson(json);
 }

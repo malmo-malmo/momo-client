@@ -6,6 +6,8 @@ part of 'attendance_client.dart';
 // RetrofitGenerator
 // **************************************************************************
 
+// ignore_for_file: unnecessary_brace_in_string_interps
+
 class _AttendanceClient implements AttendanceClient {
   _AttendanceClient(this._dio, {this.baseUrl}) {
     baseUrl ??= 'http://gunimon.iptime.org:8100/api';
@@ -56,7 +58,7 @@ class _AttendanceClient implements AttendanceClient {
     final _result = await _dio.fetch<List<dynamic>>(
         _setStreamType<List<AttendanceResponse>>(
             Options(method: 'GET', headers: _headers, extra: _extra)
-                .compose(_dio.options, '/attendances/schedule/$scheduleId',
+                .compose(_dio.options, '/attendances/schedule/${scheduleId}',
                     queryParameters: queryParameters, data: _data)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     var value = _result.data!
