@@ -4,9 +4,13 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:momo_flutter/data/models/group/group_response.dart';
 import 'package:momo_flutter/features/group/providers/group_list_provider.dart';
+import 'package:momo_flutter/resources/app_error_strings.dart';
 import 'package:momo_flutter/resources/resources.dart';
 import 'package:momo_flutter/utils/load_asset.dart';
+import 'package:momo_flutter/widgets/button/header_chat_button.dart';
+import 'package:momo_flutter/widgets/card/empty_item_card.dart';
 import 'package:momo_flutter/widgets/card/group_card.dart';
+import 'package:momo_flutter/widgets/indicator/loading_indicator.dart';
 
 class GroupListArg {
   final String name;
@@ -80,8 +84,8 @@ class _GroupListPageState extends ConsumerState<GroupListPage> {
             child: const Icon(CupertinoIcons.back),
           ),
           title: Text(widget.name + AppStrings.more),
-          actions: [
-            loadAsset(AppIcons.chat),
+          actions: const [
+            HeaderChatButton(),
           ],
         ),
         body: Padding(
@@ -93,6 +97,9 @@ class _GroupListPageState extends ConsumerState<GroupListPage> {
                 child: PagedGridView(
                   pagingController: _pagingController,
                   builderDelegate: PagedChildBuilderDelegate<GroupResponse>(
+                    newPageProgressIndicatorBuilder: (context) => const LoadingIndicator(),
+                    firstPageProgressIndicatorBuilder: (context) => const LoadingIndicator(),
+                    noItemsFoundIndicatorBuilder: (context) => const EmptyItemCard(AppErrorString.homeGroupEmpty),
                     itemBuilder: (context, item, index) => GroupCard(
                       item,
                       setLike: () async {

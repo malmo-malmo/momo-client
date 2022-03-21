@@ -66,7 +66,9 @@ class _ScheduleCard extends StatelessWidget {
                 const SizedBox(height: 6),
                 Text(
                   scheduleTimeFormat(schedule.startDateTime),
-                  style: AppStyles.regular12,
+                  style: AppStyles.regular12.copyWith(
+                    color: AppColors.gray6,
+                  ),
                 ),
               ],
             ),

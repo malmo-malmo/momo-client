@@ -62,6 +62,12 @@ class ScheduleRequestPage extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
+                          groupId == null
+                              ? const Padding(
+                                  padding: EdgeInsets.only(top: 40, bottom: 14),
+                                  child: SubTitle(AppStrings.choiceGroup),
+                                )
+                              : const SizedBox(),
                           groupId == null ? const GroupNameInputField() : const SizedBox(),
                           const _SubTitle(AppStrings.scheduleName),
                           Consumer(
