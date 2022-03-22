@@ -6,6 +6,7 @@ import 'package:momo_flutter/data/datasources/remote/retrofit/district_client.da
 import 'package:momo_flutter/data/datasources/remote/retrofit/group_client.dart';
 import 'package:momo_flutter/data/models/auth/token_data.dart';
 import 'package:momo_flutter/data/models/common/code_name_pair.dart';
+import 'package:momo_flutter/provider/recent_searched_data.dart';
 
 abstract class AppConfig {
   static const baseUrl = 'http://gunimon.iptime.org:8100/api';
@@ -20,7 +21,9 @@ abstract class AppConfig {
   static Future<void> initConfig() async {
     await Hive.initFlutter();
     Hive.registerAdapter(TokenDataAdapter());
+    Hive.registerAdapter(RecentSearchedDataAdapter());
     await Hive.openBox<TokenData>(AppDatabase.authKey);
+    await Hive.openBox<TokenData>(AppDatabase.searchBoxKey);
     final androidInfo = await DeviceInfoPlugin().androidInfo;
     deviceCode = androidInfo.androidId ?? unknown;
   }
