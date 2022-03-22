@@ -73,4 +73,5 @@ abstract class AppIcons {
   static const closeGroup = 'assets/icon/icon_moimclose.svg';
 
   static const sendButton = 'assets/icon/icon_sendgray_44.svg';
+  static const filter = 'assets/icon/search/icon_filter_28.svg';
 }
