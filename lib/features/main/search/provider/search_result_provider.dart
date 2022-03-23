@@ -5,7 +5,7 @@ import 'package:momo_flutter/data/models/group/group_response.dart';
 import 'package:momo_flutter/data/repositories/group_repository.dart';
 import 'package:momo_flutter/features/main/search/provider/search_data_provider.dart';
 
-final isSearchedProvider = StateProvider<bool>((ref) => false);
+final isSearchedProvider = StateProvider.autoDispose<bool>((ref) => false);
 
 final searchReulstPagingController = Provider.autoDispose<PagingController<int, GroupResponse>>(
   (ref) {

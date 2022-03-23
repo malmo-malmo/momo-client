@@ -30,7 +30,7 @@ class RecentSearchedDataStateNotifier extends StateNotifier<RecentSearchedDataSt
             words: words,
             groupIds: groupIds,
             groups: [],
-            isLoading: true,
+            isLoading: false,
           ),
         );
 

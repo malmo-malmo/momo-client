@@ -23,7 +23,7 @@ abstract class AppConfig {
     Hive.registerAdapter(TokenDataAdapter());
     Hive.registerAdapter(RecentSearchedDataAdapter());
     await Hive.openBox<TokenData>(AppDatabase.authKey);
-    await Hive.openBox<TokenData>(AppDatabase.searchBoxKey);
+    await Hive.openBox<RecentSearchedData>(AppDatabase.searchBoxKey);
     final androidInfo = await DeviceInfoPlugin().androidInfo;
     deviceCode = androidInfo.androidId ?? unknown;
   }

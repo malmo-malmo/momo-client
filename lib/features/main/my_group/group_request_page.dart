@@ -85,20 +85,22 @@ class GroupRequestPage extends StatelessWidget {
                       child: Consumer(
                         builder: (context, ref, child) {
                           final checks = ref.watch(groupRequestCategoryStateProvider);
-                          return Wrap(
-                            spacing: 20,
-                            runSpacing: 20,
-                            children: [
-                              for (int i = 0; i < checks.length; i++)
-                                CategoryButton(
-                                  check: checks[i],
-                                  index: i,
-                                  onTabIcon: (index) {
-                                    ref.read(groupRequestCategoryStateProvider.notifier).checkCategory(index);
-                                    ref.read(groupRequestStateProvider.notifier).setGroupCategory(index);
-                                  },
-                                )
-                            ],
+                          return Center(
+                            child: Wrap(
+                              spacing: 16,
+                              runSpacing: 20,
+                              children: [
+                                for (int i = 0; i < checks.length; i++)
+                                  CategoryButton(
+                                    check: checks[i],
+                                    index: i,
+                                    onTabIcon: (index) {
+                                      ref.read(groupRequestCategoryStateProvider.notifier).checkCategory(index);
+                                      ref.read(groupRequestStateProvider.notifier).setGroupCategory(index);
+                                    },
+                                  )
+                              ],
+                            ),
                           );
                         },
                       ),

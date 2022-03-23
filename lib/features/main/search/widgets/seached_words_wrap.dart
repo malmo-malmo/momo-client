@@ -2,7 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:momo_flutter/provider/recent_searched_data.dart';
+import 'package:momo_flutter/resources/app_error_strings.dart';
 import 'package:momo_flutter/resources/resources.dart';
+import 'package:momo_flutter/widgets/card/empty_item_card.dart';
 
 class SearchedWordsWrap extends ConsumerWidget {
   const SearchedWordsWrap({Key? key}) : super(key: key);
@@ -12,7 +14,10 @@ class SearchedWordsWrap extends ConsumerWidget {
     final searchedWords = ref.watch(searchedDataStateProvider).words;
 
     if (searchedWords.isEmpty) {
-      return const SizedBox();
+      return const Padding(
+        padding: EdgeInsets.only(top: 40),
+        child: EmptyItemCard(AppErrorString.recentWordsEmpty),
+      );
     }
     return Wrap(
       spacing: 8,
@@ -43,7 +48,10 @@ class _SearchedWordCard extends StatelessWidget {
       height: 40,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20),
-        boxShadow: const [BoxShadow()],
+        boxShadow: const [
+          BoxShadow(offset: Offset(0, 0.3)),
+        ],
+        color: AppColors.gray0,
       ),
       child: Center(
         child: Row(

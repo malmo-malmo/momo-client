@@ -16,57 +16,68 @@ class SearchPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      bottomNavigationBar: const MainBottomNavigationBar(),
-      appBar: AppBar(
+    return GestureDetector(
+      onTap: () => FocusScope.of(context).unfocus(),
+      child: Scaffold(
+        bottomNavigationBar: const MainBottomNavigationBar(),
         backgroundColor: AppColors.backgroundPurple,
-        actions: const [
-          HeaderChatButton(),
-        ],
-      ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16),
-        child: Consumer(
-          builder: (context, ref, child) {
-            final isSearched = ref.watch(isSearchedProvider);
-            final pagingController = ref.watch(searchReulstPagingController);
-            return CustomScrollView(
-              slivers: [
-                SliverToBoxAdapter(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      MainTitle(!isSearched ? '검색' : '검색결과'),
-                      const SizedBox(height: 12),
-                      const SearchQueryInputField(),
-                    ],
+        appBar: AppBar(
+          automaticallyImplyLeading: false,
+          backgroundColor: AppColors.backgroundPurple,
+          actions: const [
+            HeaderChatButton(),
+          ],
+        ),
+        body: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          child: Consumer(
+            builder: (context, ref, child) {
+              final isSearched = ref.watch(isSearchedProvider);
+              final pagingController = ref.watch(searchReulstPagingController);
+              return CustomScrollView(
+                slivers: [
+                  SliverToBoxAdapter(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        MainTitle(!isSearched ? '검색' : '검색결과'),
+                        const SizedBox(height: 12),
+                        const SearchQueryInputField(),
+                      ],
+                    ),
                   ),
-                ),
-                !isSearched
-                    ? SliverToBoxAdapter(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: const [
-                            SubTitleRow(
-                              title: '최근검색어',
-                              icon: 'assets/icon/search/icon_recentsearch_28.svg',
-                            ),
-                            SearchedWordsWrap(),
-                            SubTitleRow(
-                              title: '최근 본 모임',
-                              icon: 'assets/icon/search/icon_recentsee_28.svg',
-                            )
-                          ],
+                  !isSearched
+                      ? SliverToBoxAdapter(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: const [
+                              Padding(
+                                padding: EdgeInsets.only(top: 40, bottom: 16),
+                                child: SubTitleRow(
+                                  title: '최근검색어',
+                                  icon: 'assets/icon/search/icon_recentsearch_28.svg',
+                                ),
+                              ),
+                              SearchedWordsWrap(),
+                              Padding(
+                                padding: EdgeInsets.only(top: 40, bottom: 16),
+                                child: SubTitleRow(
+                                  title: '최근 본 모임',
+                                  icon: 'assets/icon/search/icon_recentsee_28.svg',
+                                ),
+                              )
+                            ],
+                          ),
+                        )
+                      : SliverPadding(
+                          padding: const EdgeInsets.only(top: 30),
+                          sliver: SearchResultListView(pagingController),
                         ),
-                      )
-                    : SliverPadding(
-                        padding: const EdgeInsets.only(top: 30),
-                        sliver: SearchResultListView(pagingController),
-                      ),
-                !isSearched ? const RecentGroupListView() : const SliverToBoxAdapter(),
-              ],
-            );
-          },
+                  !isSearched ? const RecentGroupListView() : const SliverToBoxAdapter(),
+                ],
+              );
+            },
+          ),
         ),
       ),
     );

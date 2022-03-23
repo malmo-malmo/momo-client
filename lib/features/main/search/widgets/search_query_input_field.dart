@@ -2,11 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:momo_flutter/features/main/search/provider/search_result_provider.dart';
 import 'package:momo_flutter/features/main/search/widgets/search_filter_bottom_sheet.dart';
+import 'package:momo_flutter/provider/recent_searched_data.dart';
 import 'package:momo_flutter/resources/resources.dart';
 import 'package:momo_flutter/utils/load_asset.dart';
 
-class SearchQueryInputField extends StatelessWidget {
+class SearchQueryInputField extends StatefulWidget {
   const SearchQueryInputField({Key? key}) : super(key: key);
+
+  @override
+  State<SearchQueryInputField> createState() => _SearchQueryInputFieldState();
+}
+
+class _SearchQueryInputFieldState extends State<SearchQueryInputField> {
+  final _controller = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -15,10 +23,12 @@ class SearchQueryInputField extends StatelessWidget {
       height: 44,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20),
-        boxShadow: const [BoxShadow()],
+        color: AppColors.gray0,
+        boxShadow: const [
+          BoxShadow(offset: Offset(0, 0.3)),
+        ],
       ),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           InkWell(
@@ -38,16 +48,22 @@ class SearchQueryInputField extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 14),
               child: TextFormField(
+                controller: _controller,
                 decoration: const InputDecoration(
                   hintText: '검색어를 입력하세요',
                 ),
               ),
             ),
           ),
+          const Spacer(),
           Consumer(
             builder: (context, ref, child) {
               return InkWell(
-                onTap: () => ref.read(isSearchedProvider.state).state = true,
+                onTap: () {
+                  FocusScope.of(context).unfocus();
+                  ref.read(isSearchedProvider.state).state = true;
+                  ref.read(searchedDataStateProvider.notifier).addSearchedWord(_controller.text);
+                },
                 child: loadAsset(AppIcons.search),
               );
             },

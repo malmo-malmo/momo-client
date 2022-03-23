@@ -63,6 +63,7 @@ class _SearchResultCard extends StatelessWidget {
                 MemberDateRow(
                   headNum: group.participantCnt,
                   startDay: group.startDate,
+                  color: AppColors.gray6,
                 ),
               ],
             ),
