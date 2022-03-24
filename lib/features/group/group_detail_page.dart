@@ -52,6 +52,18 @@ class _GroupDetailPageState extends ConsumerState<GroupDetailPage> {
           );
           Navigator.pop(context);
         }
+        if (pre != null && (pre.managerId != next.managerId)) {
+          _fToast.showToast(
+            child: const CustomToast(AppStrings.toastAuthority),
+            gravity: ToastGravity.BOTTOM,
+          );
+        }
+        if (pre != null && (pre.end && !next.end)) {
+          _fToast.showToast(
+            child: const CustomToast(AppStrings.toastEndGroup),
+            gravity: ToastGravity.BOTTOM,
+          );
+        }
       },
     );
 

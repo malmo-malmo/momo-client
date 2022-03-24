@@ -64,10 +64,10 @@ class NormalBottomSheet extends StatelessWidget {
                     ),
                   );
                   if (isWithdrawal != null && isWithdrawal) {
+                    Navigator.pop(context);
                     ref.read(loadingProvider.state).state = true;
                     await ref.read(groupDetailStateProvider(groupId).notifier).withdrawalGroup();
                     ref.read(loadingProvider.state).state = false;
-                    Navigator.pop(context);
                   }
                 },
               );

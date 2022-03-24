@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:momo_flutter/data/models/attendance/attendance_response.dart';
-import 'package:momo_flutter/features/group/providers/participant_user_provider.dart';
 import 'package:momo_flutter/features/schedule/provider/attendance_create_provider.dart';
 import 'package:momo_flutter/features/schedule/provider/attendance_list_provider.dart';
 import 'package:momo_flutter/features/schedule/widgets/attendance_card.dart';
@@ -11,6 +10,7 @@ import 'package:momo_flutter/resources/resources.dart';
 import 'package:momo_flutter/widgets/button/action_button.dart';
 import 'package:momo_flutter/widgets/card/error_card.dart';
 import 'package:momo_flutter/widgets/dialog/confirm_dialog.dart';
+import 'package:momo_flutter/widgets/dialog/question_dialog.dart';
 import 'package:momo_flutter/widgets/indicator/custom_loader.dart';
 import 'package:momo_flutter/widgets/indicator/loading_indicator.dart';
 
@@ -57,10 +57,21 @@ class AttendanceListPage extends ConsumerWidget {
                     onPressed: !isUpdateRequest
                         ? () => ref.read(isUpdateRequested.state).state = true
                         : () async {
-                            ref.read(loadingProvider.state).state = true;
-                            await ref.read(attendanceResponseStateProvider(arg.scheduleId).notifier).updateAttendance();
-                            ref.read(loadingProvider.state).state = false;
-                            Navigator.pop(context, true);
+                            final result = await showDialog<bool?>(
+                              context: context,
+                              builder: (_) => const QuestionDialog(
+                                dialogText: '이미 출석체크를 완료했어요.\n수정하시겠어요?',
+                                yesText: '수정하기',
+                              ),
+                            );
+                            if (result != null && result) {
+                              ref.read(loadingProvider.state).state = true;
+                              await ref
+                                  .read(attendanceResponseStateProvider(arg.scheduleId).notifier)
+                                  .updateAttendance();
+                              ref.read(loadingProvider.state).state = false;
+                              Navigator.pop(context, true);
+                            }
                           },
                   ),
                 ],

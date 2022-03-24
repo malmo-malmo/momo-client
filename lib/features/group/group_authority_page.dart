@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:momo_flutter/app_consts.dart';
 import 'package:momo_flutter/data/models/user/participant_user_response.dart';
 import 'package:momo_flutter/features/group/providers/participant_user_provider.dart';
 import 'package:momo_flutter/resources/resources.dart';
@@ -31,6 +32,7 @@ class GroupAuthorityPage extends ConsumerWidget {
 
           return Scaffold(
             appBar: AppBar(
+              backgroundColor: AppColors.backgroundWhite,
               leading: InkWell(
                 onTap: () => Navigator.pop(context),
                 child: const Icon(CupertinoIcons.xmark),
@@ -51,6 +53,7 @@ class GroupAuthorityPage extends ConsumerWidget {
                 ),
               ],
             ),
+            backgroundColor: AppColors.gray1,
             body: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: SingleChildScrollView(
@@ -72,13 +75,8 @@ class GroupAuthorityPage extends ConsumerWidget {
                       height: 32 + 72.0 * users.length,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(20),
-                        boxShadow: const [
-                          BoxShadow(
-                            offset: Offset(0, 3),
-                            blurRadius: 6,
-                            spreadRadius: 0,
-                          )
-                        ],
+                        color: AppColors.backgroundWhite,
+                        boxShadow: const [BoxShadow(offset: Offset(0, 0.5))],
                       ),
                       child: ListView.builder(
                         itemCount: users.length,
@@ -128,7 +126,7 @@ class _UserCard extends StatelessWidget {
           Row(
             children: [
               ProfileImageCard(
-                img: user.imageUrl ?? 'https://img.insight.co.kr/static/2019/04/20/700/mev0r133kiy3hx0u4c48.jpg',
+                img: user.imageUrl ?? AppConsts.defalutProfile,
                 rad: 18,
               ),
               const SizedBox(width: 10),

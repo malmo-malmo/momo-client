@@ -98,13 +98,13 @@ class AdminBottomSheet extends StatelessWidget {
                 title: AppStrings.manageAuthority,
                 icon: AppIcons.managerAuthority,
                 onTap: () async {
-                  final result = await Navigator.pushNamed<int?>(
+                  final result = await Navigator.pushNamed(
                     context,
                     GroupAuthorityPage.routeName,
                     arguments: groupId,
                   );
                   if (result != null) {
-                    ref.read(groupDetailStateProvider(groupId).notifier).managerGroup(result);
+                    ref.read(groupDetailStateProvider(groupId).notifier).managerGroup(result as int);
                     Navigator.pop(context);
                   }
                 },
