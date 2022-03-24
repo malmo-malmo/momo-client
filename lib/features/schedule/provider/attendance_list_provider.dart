@@ -1,14 +1,17 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:momo_flutter/data/models/attendance/attendance_check_update_request.dart';
 import 'package:momo_flutter/data/models/attendance/attendance_response.dart';
 import 'package:momo_flutter/data/models/attendance/attendance_update_request.dart';
 import 'package:momo_flutter/data/repositories/schedule_repository.dart';
 
+part 'attendance_list_provider.freezed.dart';
+
 final attendanceResponseStateProvider =
-    StateNotifierProvider.family.autoDispose<AttendanceResponseState, List<AttendanceResponse>, int>(
+    StateNotifierProvider.family.autoDispose<AttendanceResponseStateNotifier, AttendanceResponseState, int>(
   (ref, scheduleId) {
     final scheduleRepository = ref.watch(scheduleRepositoryProvider);
-    final stateNotifier = AttendanceResponseState(
+    final stateNotifier = AttendanceResponseStateNotifier(
       scheduleId: scheduleId,
       scheduleRepository: scheduleRepository,
     );
@@ -17,36 +20,50 @@ final attendanceResponseStateProvider =
   },
 );
 
-class AttendanceResponseState extends StateNotifier<List<AttendanceResponse>> {
-  AttendanceResponseState({
+final isUpdateRequested = StateProvider.autoDispose<bool>((ref) => false);
+
+class AttendanceResponseStateNotifier extends StateNotifier<AttendanceResponseState> {
+  AttendanceResponseStateNotifier({
     required this.scheduleId,
     required this.scheduleRepository,
-  }) : super([]);
+  }) : super(
+          AttendanceResponseState(
+            scheduleId: scheduleId,
+            attendances: [],
+            isLoading: false,
+          ),
+        );
 
   final ScheduleRepository scheduleRepository;
   final int scheduleId;
 
   Future<void> getAttendance() async {
+    state = state.copyWith(isLoading: true);
     final response = await scheduleRepository.getAttendance(scheduleId);
 
-    state = response;
+    state = state.copyWith(
+      attendances: [...response],
+      isLoading: false,
+    );
   }
 
   void checkAttendance({
     required int userId,
     required bool isAttend,
   }) {
-    state = [
-      ...state
-          .map(
-            (e) => e.attendanceId == userId
-                ? e.copyWith(
-                    isAttend: isAttend,
-                  )
-                : e,
-          )
-          .toList(),
-    ];
+    state = state.copyWith(
+      attendances: [
+        ...state.attendances
+            .map(
+              (e) => e.attendanceId == userId
+                  ? e.copyWith(
+                      isAttend: isAttend,
+                    )
+                  : e,
+            )
+            .toList(),
+      ],
+    );
   }
 
   Future<dynamic> updateAttendance() async {
@@ -54,10 +71,10 @@ class AttendanceResponseState extends StateNotifier<List<AttendanceResponse>> {
       AttendanceCheckUpdateRequest(
         scheduleId: scheduleId,
         attendanceUpdateRequests: List.generate(
-          state.length,
+          state.attendances.length,
           (index) => AttendanceUpdateRequest(
-            attendanceId: state[index].attendanceId,
-            attend: state[index].isAttend,
+            attendanceId: state.attendances[index].attendanceId,
+            attend: state.attendances[index].isAttend,
           ),
         ),
       ),
@@ -65,4 +82,13 @@ class AttendanceResponseState extends StateNotifier<List<AttendanceResponse>> {
 
     return response;
   }
+}
+
+@freezed
+class AttendanceResponseState with _$AttendanceResponseState {
+  factory AttendanceResponseState({
+    required int scheduleId,
+    required List<AttendanceResponse> attendances,
+    required bool isLoading,
+  }) = _AttendanceResponseState;
 }

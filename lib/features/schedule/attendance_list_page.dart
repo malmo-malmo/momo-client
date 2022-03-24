@@ -1,8 +1,18 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:momo_flutter/data/models/attendance/attendance_response.dart';
+import 'package:momo_flutter/features/group/providers/participant_user_provider.dart';
+import 'package:momo_flutter/features/schedule/provider/attendance_create_provider.dart';
 import 'package:momo_flutter/features/schedule/provider/attendance_list_provider.dart';
 import 'package:momo_flutter/features/schedule/widgets/attendance_card.dart';
+import 'package:momo_flutter/provider/loading_provider.dart';
 import 'package:momo_flutter/resources/resources.dart';
+import 'package:momo_flutter/widgets/button/action_button.dart';
+import 'package:momo_flutter/widgets/card/error_card.dart';
+import 'package:momo_flutter/widgets/dialog/confirm_dialog.dart';
+import 'package:momo_flutter/widgets/indicator/custom_loader.dart';
+import 'package:momo_flutter/widgets/indicator/loading_indicator.dart';
 
 class AttendanceListPageArg {
   final int groupId;
@@ -25,160 +35,221 @@ class AttendanceListPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    // if (arg.isCheck) {
-    final attendanceResponse = ref.watch(attendanceResponseStateProvider(arg.scheduleId));
+    if (arg.isCheck) {
+      final attendanceResponse = ref.watch(attendanceResponseStateProvider(arg.scheduleId));
+      final isUpdateRequest = ref.watch(isUpdateRequested);
 
-    return SafeArea(
-      child: Scaffold(
-        backgroundColor: AppColors.gray1,
-        appBar: AppBar(),
-        body: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16),
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(top: 30, right: 24, left: 24, bottom: 16),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      return SafeArea(
+        child: Stack(
+          children: [
+            Scaffold(
+              backgroundColor: AppColors.gray1,
+              appBar: AppBar(
+                backgroundColor: AppColors.backgroundWhite,
+                leading: InkWell(
+                  onTap: () => Navigator.pop(context),
+                  child: const Icon(CupertinoIcons.xmark),
+                ),
+                actions: [
+                  ActionButton(
+                    buttonTitle: !isUpdateRequest ? AppStrings.edit : AppStrings.complete,
+                    isEnable: true,
+                    onPressed: !isUpdateRequest
+                        ? () => ref.read(isUpdateRequested.state).state = true
+                        : () async {
+                            ref.read(loadingProvider.state).state = true;
+                            await ref.read(attendanceResponseStateProvider(arg.scheduleId).notifier).updateAttendance();
+                            ref.read(loadingProvider.state).state = false;
+                            Navigator.pop(context, true);
+                          },
+                  ),
+                ],
+              ),
+              body: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: SingleChildScrollView(
+                  child: Column(
                     children: [
-                      const Text('닉네임', style: AppStyles.bold16),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: const [
-                          Text('출석', style: AppStyles.bold16),
-                          SizedBox(width: 27),
-                          Text('결석', style: AppStyles.bold16),
-                        ],
+                      Padding(
+                        padding: const EdgeInsets.only(top: 30, right: 24, left: 24, bottom: 16),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            const Text('닉네임', style: AppStyles.bold16),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: const [
+                                Text('출석', style: AppStyles.bold16),
+                                SizedBox(width: 27),
+                                Text('결석', style: AppStyles.bold16),
+                              ],
+                            ),
+                          ],
+                        ),
                       ),
+                      attendanceResponse.isLoading
+                          ? const Padding(
+                              padding: EdgeInsets.only(top: 40),
+                              child: LoadingIndicator(),
+                            )
+                          : Material(
+                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+                              elevation: 2,
+                              child: Container(
+                                padding: const EdgeInsets.symmetric(vertical: 16),
+                                width: double.infinity,
+                                height: 32 + 72.0 * attendanceResponse.attendances.length,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(20),
+                                  color: AppColors.backgroundWhite,
+                                ),
+                                child: ListView.builder(
+                                  itemCount: attendanceResponse.attendances.length,
+                                  physics: const NeverScrollableScrollPhysics(),
+                                  itemBuilder: (context, index) => AttendanceCard(
+                                    attendanceResponse.attendances[index],
+                                    onSelect: ({
+                                      required bool isAttend,
+                                      required int userId,
+                                    }) {
+                                      if (isUpdateRequest) {
+                                        ref
+                                            .read(attendanceResponseStateProvider(arg.scheduleId).notifier)
+                                            .checkAttendance(
+                                              isAttend: isAttend,
+                                              userId: userId,
+                                            );
+                                      }
+                                    },
+                                  ),
+                                ),
+                              ),
+                            ),
                     ],
                   ),
                 ),
-                Material(
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-                  elevation: 2,
-                  child: Container(
-                    padding: const EdgeInsets.symmetric(vertical: 16),
-                    width: double.infinity,
-                    height: 32 + 72.0 * attendanceResponse.length,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20),
+              ),
+            ),
+            ...customLoader,
+          ],
+        ),
+      );
+    } else {
+      final memeberResponse = ref.watch(attendanceUserProvider(arg.groupId));
+
+      return SafeArea(
+        child: memeberResponse.when(
+          error: (error, stackTrace) => const Scaffold(body: ErrorCard()),
+          loading: () => const Scaffold(body: LoadingIndicator()),
+          data: (users) {
+            final attendacneCheckState = ref.watch(
+              attendacneCreateStateProvider(
+                AttendanceProviderArg(
+                  scheduleId: arg.scheduleId,
+                  userIds: users.map((e) => e.participantId).toList(),
+                ),
+              ),
+            );
+
+            return Stack(
+              children: [
+                Scaffold(
+                  backgroundColor: AppColors.gray1,
+                  appBar: AppBar(
+                    backgroundColor: AppColors.backgroundWhite,
+                    leading: InkWell(
+                      onTap: () => Navigator.pop(context),
+                      child: const Icon(CupertinoIcons.xmark),
                     ),
-                    child: ListView.builder(
-                      itemCount: attendanceResponse.length,
-                      physics: const NeverScrollableScrollPhysics(),
-                      itemBuilder: (context, index) => AttendanceCard(
-                        attendanceResponse[index],
-                        onSelect: ref.read(attendanceResponseStateProvider(arg.scheduleId).notifier).checkAttendance,
+                    actions: [
+                      ActionButton(
+                        buttonTitle: AppStrings.complete,
+                        isEnable: true,
+                        onPressed: () async {
+                          ref.read(loadingProvider.state).state = true;
+                          await ref
+                              .read(attendacneCreateStateProvider(
+                                AttendanceProviderArg(
+                                  scheduleId: arg.scheduleId,
+                                  userIds: users.map((e) => e.participantId).toList(),
+                                ),
+                              ).notifier)
+                              .createAttendance();
+                          ref.read(loadingProvider.state).state = false;
+                          await showDialog(
+                            context: context,
+                            builder: (_) => const ConfirmDialog('출석체크를 완료했어요'),
+                          );
+                          Navigator.pop(context, true);
+                        },
+                      ),
+                    ],
+                  ),
+                  body: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    child: SingleChildScrollView(
+                      child: Column(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(top: 30, right: 24, left: 24, bottom: 16),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                const Text(AppStrings.nickname, style: AppStyles.bold16),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.end,
+                                  children: const [
+                                    Text('출석', style: AppStyles.bold16),
+                                    SizedBox(width: 27),
+                                    Text('결석', style: AppStyles.bold16),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
+                          Material(
+                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+                            elevation: 1,
+                            child: Container(
+                              padding: const EdgeInsets.symmetric(vertical: 16),
+                              width: double.infinity,
+                              height: 32 + 72.0 * users.length,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(20),
+                                color: AppColors.backgroundWhite,
+                              ),
+                              child: ListView.builder(
+                                itemCount: users.length,
+                                physics: const NeverScrollableScrollPhysics(),
+                                itemBuilder: (context, index) => AttendanceCard(
+                                  AttendanceResponse(
+                                    attendanceId: attendacneCheckState.attendanceCreateRequests[index].participantId,
+                                    isAttend: attendacneCheckState.attendanceCreateRequests[index].attend,
+                                    nickname: users[index].nickname,
+                                    imageUrl: users[index].imageUrl,
+                                    attendanceRate: users[index].attendanceRate,
+                                  ),
+                                  onSelect: ref
+                                      .read(attendacneCreateStateProvider(AttendanceProviderArg(
+                                        scheduleId: arg.scheduleId,
+                                        userIds: users.map((e) => e.participantId).toList(),
+                                      )).notifier)
+                                      .checkAttendacne,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                   ),
                 ),
+                ...customLoader,
               ],
-            ),
-          ),
+            );
+          },
         ),
-      ),
-    );
-    // } else {
-    //   final memeberResponse = ref.watch(participantUsersProvider(groupId));
-
-    //   return SafeArea(
-    //     child: memeberResponse.when(
-    //       error: (error, stackTrace) => const Scaffold(body: ErrorCard()),
-    //       loading: () => const Scaffold(body: LoadingCard()),
-    //       data: (data) {
-    //         final attendacneCheckState = ref.watch(
-    //           attendacneCreateStateProvider(
-    //             AttendanceProviderArg(
-    //               scheduleId: scheduleId,
-    //               userIds: data.map((e) => e.participantId).toList(),
-    //             ),
-    //           ),
-    //         );
-
-    //         return Scaffold(
-    //           backgroundColor: MomoColor.backgroundColor,
-    //           appBar: CustomAppBar(
-    //             leadingIcon: CupertinoIcons.xmark,
-    //             isAction: true,
-    //             actionWidget: ConfirmActionIcon(
-    //               check: true,
-    //               title: isCheck ? '수정' : '완료',
-    //               onTapIcon: () async {
-    //                 await ref
-    //                     .read(attendacneCreateStateProvider(AttendanceProviderArg(
-    //                       scheduleId: scheduleId,
-    //                       userIds: data.map((e) => e.participantId).toList(),
-    //                     )).notifier)
-    //                     .createAttendance();
-    //                 ref.read(navigatorProvider).pop(result: true);
-    //               },
-    //               isShowDialog: true,
-    //               dialogText: '출석체크를 완료했어요!',
-    //             ),
-    //           ),
-    //           body: Padding(
-    //             padding: const EdgeInsets.symmetric(horizontal: 16),
-    //             child: SingleChildScrollView(
-    //               child: Column(
-    //                 children: [
-    //                   Padding(
-    //                     padding: const EdgeInsets.only(top: 30, right: 24, left: 24, bottom: 16),
-    //                     child: Row(
-    //                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-    //                       children: [
-    //                         const Text('닉네임', style: MomoTextStyle.defaultStyle),
-    //                         Row(
-    //                           mainAxisAlignment: MainAxisAlignment.end,
-    //                           children: const [
-    //                             Text('출석', style: MomoTextStyle.defaultStyle),
-    //                             SizedBox(width: 27),
-    //                             Text('결석', style: MomoTextStyle.defaultStyle),
-    //                           ],
-    //                         ),
-    //                       ],
-    //                     ),
-    //                   ),
-    //                   Material(
-    //                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-    //                     elevation: 2,
-    //                     child: Container(
-    //                       padding: const EdgeInsets.symmetric(vertical: 16),
-    //                       width: double.infinity,
-    //                       height: 32 + 72.0 * data.length,
-    //                       decoration: BoxDecoration(
-    //                         borderRadius: BorderRadius.circular(20),
-    //                         color: MomoColor.flutterWhite,
-    //                       ),
-    //                       child: ListView.builder(
-    //                         itemCount: data.length,
-    //                         physics: const NeverScrollableScrollPhysics(),
-    //                         itemBuilder: (context, index) => attendanceCard(
-    //                           name: data[index].nickname,
-    //                           profile: data[index].imageUrl ??
-    //                               'https://img.insight.co.kr/static/2019/04/20/700/mev0r133kiy3hx0u4c48.jpg',
-    //                           rate: data[index].attendanceRate,
-    //                           onSelect: ref
-    //                               .read(attendacneCreateStateProvider(AttendanceProviderArg(
-    //                                 scheduleId: scheduleId,
-    //                                 userIds: data.map((e) => e.participantId).toList(),
-    //                               )).notifier)
-    //                               .checkAttendacne,
-    //                           attend: attendacneCheckState.attendanceCreateRequests[index].attend,
-    //                           userId: attendacneCheckState.attendanceCreateRequests[index].participantId,
-    //                         ),
-    //                       ),
-    //                     ),
-    //                   ),
-    //                 ],
-    //               ),
-    //             ),
-    //           ),
-    //         );
-    //       },
-    //     ),
-    //   );
-    // }
+      );
+    }
   }
 }

@@ -59,6 +59,7 @@ class _ScheduleListViewState extends ConsumerState<ScheduleListView> {
               ? AdminScheduleCard(
                   groupId: widget.groupId,
                   schedule: item,
+                  index: index,
                 )
               : ScheduleCard(item);
         },

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:momo_flutter/features/schedule/widgets/schedule_list_view.dart';
 import 'package:momo_flutter/resources/resources.dart';
 import 'package:momo_flutter/utils/load_asset.dart';
+import 'package:momo_flutter/widgets/button/header_chat_button.dart';
 
 class ScheduleListPage extends StatelessWidget {
   const ScheduleListPage(this.groupId, {Key? key}) : super(key: key);
@@ -21,9 +22,7 @@ class ScheduleListPage extends StatelessWidget {
             onTap: () => Navigator.pop(context),
             child: const Icon(CupertinoIcons.back),
           ),
-          actions: [
-            loadAsset(AppIcons.chat),
-          ],
+          actions: const [HeaderChatButton()],
         ),
         body: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16),

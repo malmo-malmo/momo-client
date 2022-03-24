@@ -48,13 +48,10 @@ class ScheduleListStateNotifier extends StateNotifier<ScheduleListState> {
     }
   }
 
-  void attendanceCallback(int scheduleId) {
-    state = state.copyWith(
-        schedules: state.schedules
-            .map(
-              (element) => element.scheduleId == scheduleId ? element.copyWith(attendanceCheck: true) : element,
-            )
-            .toList());
+  void attendanceCallback(int index) {
+    var cur = state.schedules;
+    cur[index] = cur[index].copyWith(attendanceCheck: true);
+    state = state.copyWith(schedules: [...cur]);
   }
 }
 
