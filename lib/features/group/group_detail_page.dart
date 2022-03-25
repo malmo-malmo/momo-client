@@ -229,7 +229,6 @@ class _BuildBody extends StatelessWidget {
           ),
         ],
       );
-      ;
     }
   }
 }

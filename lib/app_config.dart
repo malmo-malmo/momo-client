@@ -29,8 +29,8 @@ abstract class AppConfig {
   }
 
   static void initCategoryAndLocation() async {
-    // final dio = Dio();
-    // categoryCodeNamePair = await GroupClient(dio).getGroupCategories();
-    // locationCodeNamePair = await DistrictClient(dio).getCities();
+    final dio = Dio();
+    categoryCodeNamePair = await GroupClient(dio).getGroupCategories();
+    locationCodeNamePair = await DistrictClient(dio).getCities();
   }
 }
