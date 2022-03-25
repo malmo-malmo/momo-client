@@ -11,11 +11,13 @@ import 'package:momo_flutter/widgets/indicator/loading_indicator.dart';
 
 class PostListView extends ConsumerStatefulWidget {
   const PostListView(
-    this.groupId, {
+    this.groupId,
+    this.isEnd, {
     Key? key,
   }) : super(key: key);
 
   final int groupId;
+  final bool isEnd;
 
   @override
   ConsumerState<PostListView> createState() => _PostListViewState();
@@ -58,7 +60,10 @@ class _PostListViewState extends ConsumerState<PostListView> {
     return PagedSliverList<int, PostResponse>(
       pagingController: _pagingController,
       builderDelegate: PagedChildBuilderDelegate<PostResponse>(
-        itemBuilder: (context, item, index) => PostCard(item),
+        itemBuilder: (context, item, index) => PostCard(
+          item,
+          isEnd: widget.isEnd,
+        ),
         newPageProgressIndicatorBuilder: (context) => const LoadingIndicator(),
         firstPageProgressIndicatorBuilder: (context) => const LoadingIndicator(),
         noItemsFoundIndicatorBuilder: (context) => const EmptyItemCard(AppErrorString.postEmpty),

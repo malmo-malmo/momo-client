@@ -113,7 +113,7 @@ abstract class AppStrings {
   static const weeklyTop4 = '주간 달성률 Top4';
 
   static const noUniversity = '대학교 없음';
-  static const groupInformation = '모임 안내';
+  static const groupInformation = '소개글';
 
   static const createPost = '게시물 작성';
   static const createNotice = '공지사항 작성';

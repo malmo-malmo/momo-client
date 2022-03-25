@@ -6,22 +6,29 @@ import 'package:momo_flutter/utils/format/post_card_date_format.dart';
 import 'package:momo_flutter/widgets/card/profile_image_card.dart';
 
 class PostCard extends StatelessWidget {
-  const PostCard(this.post, {Key? key}) : super(key: key);
+  const PostCard(
+    this.post, {
+    Key? key,
+    this.isEnd = false,
+  }) : super(key: key);
 
   final PostResponse post;
+  final bool isEnd;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 7),
       child: InkWell(
-        onTap: () async {
-          Navigator.pushNamed(
-            context,
-            PostDetailPage.routeName,
-            arguments: post.id,
-          );
-        },
+        onTap: !isEnd
+            ? () async {
+                Navigator.pushNamed(
+                  context,
+                  PostDetailPage.routeName,
+                  arguments: post.id,
+                );
+              }
+            : null,
         child: Container(
           height: 182,
           decoration: BoxDecoration(

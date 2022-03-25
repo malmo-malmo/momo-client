@@ -16,9 +16,10 @@ import 'package:momo_flutter/widgets/indicator/loading_indicator.dart';
 import 'package:momo_flutter/widgets/title/sub_title.dart';
 
 class NoticeHorizontalListView extends ConsumerStatefulWidget {
-  const NoticeHorizontalListView(this.groupId, {Key? key}) : super(key: key);
+  const NoticeHorizontalListView(this.groupId, this.isEnd, {Key? key}) : super(key: key);
 
   final int groupId;
+  final bool isEnd;
 
   @override
   ConsumerState<NoticeHorizontalListView> createState() => _NoticeHorizontalListViewState();
@@ -57,7 +58,8 @@ class _NoticeHorizontalListViewState extends ConsumerState<NoticeHorizontalListV
       },
     );
 
-    return SizedBox(
+    return Container(
+      color: AppColors.backgroundWhite,
       height: 182,
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
@@ -68,13 +70,15 @@ class _NoticeHorizontalListViewState extends ConsumerState<NoticeHorizontalListV
               children: [
                 SubTitle(PostType.NOTICE.postTypeToName),
                 InkWell(
-                  onTap: () {
-                    Navigator.pushNamed(
-                      context,
-                      NoticeListPage.routeName,
-                      arguments: widget.groupId,
-                    );
-                  },
+                  onTap: !widget.isEnd
+                      ? () {
+                          Navigator.pushNamed(
+                            context,
+                            NoticeListPage.routeName,
+                            arguments: widget.groupId,
+                          );
+                        }
+                      : null,
                   child: Transform.rotate(
                     angle: pi,
                     child: const Icon(

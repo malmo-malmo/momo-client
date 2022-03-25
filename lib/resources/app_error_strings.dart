@@ -12,7 +12,7 @@ abstract class AppErrorString {
   static const recentGroupEmpty = '최근 본 모임이 존재하지 않아요!';
   static const recentWordsEmpty = '최근 검색어가 존재하지 않습니다';
 
-  static const upcomingScheduleEmpty = '다가오는 모임이 없어요!';
+  static const upcomingScheduleEmpty = '다가오는 일정이 없어요!';
 
   static const noticeEmpty = '공지사항이 없습니다!';
   static const postEmpty = '게시물이 없습니다!';
