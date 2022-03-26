@@ -27,24 +27,28 @@ class _FloatingInputFieldState extends State<FloatingInputField> {
       child: Row(
         children: [
           Expanded(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 14),
-              child: Container(
-                height: 44,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(16),
-                  color: AppColors.gray1,
+            child: Container(
+              margin: const EdgeInsets.symmetric(vertical: 14),
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(16),
+                color: AppColors.gray1,
+              ),
+              constraints: const BoxConstraints(maxHeight: 88),
+              child: TextFormField(
+                scrollPadding: EdgeInsets.zero,
+                controller: _controller,
+                maxLength: 150,
+                maxLines: null,
+                strutStyle: StrutStyle.disabled,
+                style: AppStyles.regular14.copyWith(height: 22 / 14),
+                decoration: InputDecoration(
+                  hintText: widget.hintText,
+                  border: InputBorder.none,
+                  counterText: '',
                 ),
-                padding: const EdgeInsets.only(left: 16.0),
-                child: TextFormField(
-                  controller: _controller,
-                  decoration: InputDecoration(
-                    hintText: widget.hintText,
-                    border: InputBorder.none,
-                  ),
-                  onChanged: (text) => setState(
-                    () => check = _controller.text.isNotEmpty,
-                  ),
+                onChanged: (text) => setState(
+                  () => check = _controller.text.isNotEmpty,
                 ),
               ),
             ),

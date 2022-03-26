@@ -27,39 +27,45 @@ class PostDetailPage extends ConsumerWidget {
       );
     }
     return SafeArea(
-      child: Scaffold(
-        appBar: AppBar(
-          leading: InkWell(
-            onTap: () => Navigator.pop(context),
-            child: const Icon(CupertinoIcons.back),
-          ),
-          actions: [
-            InkWell(
-              child: loadAsset(
-                AppIcons.ooo,
-              ),
+      child: GestureDetector(
+        onTap: () => FocusScope.of(context).unfocus(),
+        child: Scaffold(
+          appBar: AppBar(
+            leading: InkWell(
+              onTap: () => Navigator.pop(context),
+              child: const Icon(CupertinoIcons.back),
             ),
-          ],
-        ),
-        body: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16),
-          child: Column(
-            children: [
-              Expanded(
-                child: CustomScrollView(
-                  slivers: [
-                    PostDetailCard(postDetail),
-                    CommentListView(postDetail.id),
-                  ],
+            actions: [
+              Padding(
+                padding: const EdgeInsets.only(right: 16),
+                child: InkWell(
+                  child: loadAsset(
+                    AppIcons.ooo,
+                  ),
                 ),
               ),
-              FloatingInputField(
-                hintText: AppStrings.commentHint,
-                sendMessage: (text) async {
-                  await ref.read(commentListStateProvider(postDetail.id).notifier).createComment(text);
-                },
-              ),
             ],
+          ),
+          body: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: Column(
+              children: [
+                Expanded(
+                  child: CustomScrollView(
+                    slivers: [
+                      PostDetailCard(postDetail),
+                      CommentListView(postDetail.id),
+                    ],
+                  ),
+                ),
+                FloatingInputField(
+                  hintText: AppStrings.commentHint,
+                  sendMessage: (text) async {
+                    await ref.read(commentListStateProvider(postDetail.id).notifier).createComment(text);
+                  },
+                ),
+              ],
+            ),
           ),
         ),
       ),

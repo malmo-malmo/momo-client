@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
+import 'package:momo_flutter/app_consts.dart';
 import 'package:momo_flutter/data/models/comment/comment.dart';
 import 'package:momo_flutter/features/post/provider/comment_list_provider.dart';
 import 'package:momo_flutter/resources/app_error_strings.dart';
@@ -71,28 +72,27 @@ class _CommentCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 24),
-      height: 80,
+      padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20),
         color: AppColors.gray1,
       ),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(
-            children: [
-              ProfileImageCard(
-                img: comment.authorImage ??
-                    'https://biz.chosun.com/resizer/kh_pcdsIH0PJWIXenLBD4Oi94Wg=/464x0/smart/cloudfront-ap-northeast-1.images.arcpublishing.com/chosunbiz/HAXYB5XB4CCHXUB6VQVALOZFVY.jpg',
-                rad: 18,
-              ),
-              const SizedBox(width: 16),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
+          ProfileImageCard(
+            img: comment.authorImage ?? AppConsts.defalutProfile,
+            rad: 18,
+          ),
+          const SizedBox(width: 12),
+          Expanded(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(
+                  width: MediaQuery.of(context).size.width / 360 * 241,
+                  child: Row(
                     children: [
                       Text(
                         comment.authorNickname,
@@ -107,21 +107,25 @@ class _CommentCard extends StatelessWidget {
                           color: AppColors.gray4,
                         ),
                       ),
+                      const Spacer(),
+                      Text(
+                        AppStrings.delete,
+                        style: AppStyles.regular12.copyWith(
+                          color: AppColors.gray5,
+                        ),
+                      ),
                     ],
                   ),
-                  Text(
-                    comment.contents,
-                    style: AppStyles.regular14,
+                ),
+                const SizedBox(height: 8),
+                Text(
+                  comment.contents,
+                  style: AppStyles.regular14.copyWith(
+                    height: 22 / 14,
+                    letterSpacing: -0.14,
                   ),
-                ],
-              ),
-            ],
-          ),
-          Text(
-            AppStrings.delete,
-            style: AppStyles.regular12.copyWith(
-              color: AppColors.gray5,
-              decoration: TextDecoration.underline,
+                ),
+              ],
             ),
           ),
         ],
