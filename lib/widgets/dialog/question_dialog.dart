@@ -28,7 +28,10 @@ class QuestionDialog extends StatelessWidget {
               padding: const EdgeInsets.only(top: 40),
               child: Text(
                 dialogText,
-                style: AppStyles.bold16,
+                style: AppStyles.bold16.copyWith(
+                  height: 24 / 16,
+                  letterSpacing: -0.16,
+                ),
                 textAlign: TextAlign.center,
               ),
             ),

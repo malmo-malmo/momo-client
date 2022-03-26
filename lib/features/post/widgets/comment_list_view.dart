@@ -4,6 +4,9 @@ import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:momo_flutter/app_consts.dart';
 import 'package:momo_flutter/data/models/comment/comment.dart';
 import 'package:momo_flutter/features/post/provider/comment_list_provider.dart';
+import 'package:momo_flutter/features/post/widgets/delete_bottom_sheet.dart';
+import 'package:momo_flutter/features/post/widgets/report_bottom_sheet.dart';
+import 'package:momo_flutter/provider/user_provider.dart';
 import 'package:momo_flutter/resources/app_error_strings.dart';
 import 'package:momo_flutter/resources/resources.dart';
 import 'package:momo_flutter/utils/format/post_card_date_format.dart';
@@ -108,11 +111,31 @@ class _CommentCard extends StatelessWidget {
                         ),
                       ),
                       const Spacer(),
-                      Text(
-                        AppStrings.delete,
-                        style: AppStyles.regular12.copyWith(
-                          color: AppColors.gray5,
-                        ),
+                      Consumer(
+                        builder: (context, ref, child) {
+                          final userId = ref.watch(userDataStateProvider).id;
+                          return InkWell(
+                            onTap: userId == comment.authorId
+                                ? () {
+                                    showModalBottomSheet(
+                                      context: context,
+                                      builder: (_) => DeleteBottomSheet(comment.id),
+                                    );
+                                  }
+                                : () {
+                                    showModalBottomSheet(
+                                      context: context,
+                                      builder: (_) => ReportBottomSheet(comment.id),
+                                    );
+                                  },
+                            child: Text(
+                              userId == comment.authorId ? AppStrings.delete : AppStrings.report,
+                              style: AppStyles.regular12.copyWith(
+                                color: AppColors.gray5,
+                              ),
+                            ),
+                          );
+                        },
                       ),
                     ],
                   ),

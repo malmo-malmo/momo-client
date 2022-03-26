@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class ReportPage extends StatelessWidget {
@@ -7,6 +8,18 @@ class ReportPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return SafeArea(
+      child: Scaffold(
+        appBar: AppBar(
+          leading: InkWell(
+            onTap: () => Navigator.pop(context),
+            child: const Icon(CupertinoIcons.back),
+          ),
+        ),
+        body: const Center(
+          child: Text('신고페이지'),
+        ),
+      ),
+    );
   }
 }

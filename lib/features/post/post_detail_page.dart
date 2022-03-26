@@ -4,7 +4,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:momo_flutter/features/post/provider/comment_list_provider.dart';
 import 'package:momo_flutter/features/post/provider/post_detail_provider.dart';
 import 'package:momo_flutter/features/post/widgets/comment_list_view.dart';
+import 'package:momo_flutter/features/post/widgets/delete_bottom_sheet.dart';
 import 'package:momo_flutter/features/post/widgets/post_detail_card.dart';
+import 'package:momo_flutter/features/post/widgets/report_bottom_sheet.dart';
+import 'package:momo_flutter/provider/user_provider.dart';
 import 'package:momo_flutter/resources/resources.dart';
 import 'package:momo_flutter/utils/load_asset.dart';
 import 'package:momo_flutter/widgets/indicator/loading_indicator.dart';
@@ -20,6 +23,7 @@ class PostDetailPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final postDetail = ref.watch(postDetailStateProvider(postId));
+    final userId = ref.watch(userDataStateProvider).id;
 
     if (postDetail.authorId == -1) {
       return const Scaffold(
@@ -39,6 +43,19 @@ class PostDetailPage extends ConsumerWidget {
               Padding(
                 padding: const EdgeInsets.only(right: 16),
                 child: InkWell(
+                  onTap: userId == postDetail.authorId
+                      ? () {
+                          showModalBottomSheet(
+                            context: context,
+                            builder: (_) => DeleteBottomSheet(postDetail.id),
+                          );
+                        }
+                      : () {
+                          showModalBottomSheet(
+                            context: context,
+                            builder: (_) => ReportBottomSheet(postDetail.id),
+                          );
+                        },
                   child: loadAsset(
                     AppIcons.ooo,
                   ),

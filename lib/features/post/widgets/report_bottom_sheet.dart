@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:momo_flutter/features/%08report/report_page.dart';
 import 'package:momo_flutter/resources/resources.dart';
 import 'package:momo_flutter/widgets/button/bottom_sheet_tab_button.dart';
 import 'package:momo_flutter/widgets/indicator/bottom_sheet_indicator.dart';
 
-class PostAdminBottomSheet extends StatelessWidget {
-  const PostAdminBottomSheet(this.postId, {Key? key}) : super(key: key);
+class ReportBottomSheet extends StatelessWidget {
+  const ReportBottomSheet(this.id, {Key? key}) : super(key: key);
 
-  final int postId;
+  final int id;
 
   @override
   Widget build(BuildContext context) {
@@ -25,16 +26,10 @@ class PostAdminBottomSheet extends StatelessWidget {
               return BottomSheetTabButton(
                 title: AppStrings.toReport,
                 icon: AppIcons.report,
-                onTap: () async {},
-              );
-            },
-          ),
-          Consumer(
-            builder: (context, ref, child) {
-              return BottomSheetTabButton(
-                title: AppStrings.toDelte,
-                icon: AppIcons.delete,
-                onTap: () async {},
+                onTap: () => Navigator.popAndPushNamed(
+                  context,
+                  ReportPage.routeName,
+                ),
               );
             },
           ),
