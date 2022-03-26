@@ -21,7 +21,7 @@ class _$ScheduleListStateTearOff {
   _ScheduleListState call(
       {required List<ScheduleDetailResponse> schedules,
       required int manageId,
-      int? nextPage,
+      String? nextPage,
       dynamic error}) {
     return _ScheduleListState(
       schedules: schedules,
@@ -40,7 +40,7 @@ mixin _$ScheduleListState {
   List<ScheduleDetailResponse> get schedules =>
       throw _privateConstructorUsedError;
   int get manageId => throw _privateConstructorUsedError;
-  int? get nextPage => throw _privateConstructorUsedError;
+  String? get nextPage => throw _privateConstructorUsedError;
   dynamic get error => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -56,7 +56,7 @@ abstract class $ScheduleListStateCopyWith<$Res> {
   $Res call(
       {List<ScheduleDetailResponse> schedules,
       int manageId,
-      int? nextPage,
+      String? nextPage,
       dynamic error});
 }
 
@@ -88,7 +88,7 @@ class _$ScheduleListStateCopyWithImpl<$Res>
       nextPage: nextPage == freezed
           ? _value.nextPage
           : nextPage // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as String?,
       error: error == freezed
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
@@ -107,7 +107,7 @@ abstract class _$ScheduleListStateCopyWith<$Res>
   $Res call(
       {List<ScheduleDetailResponse> schedules,
       int manageId,
-      int? nextPage,
+      String? nextPage,
       dynamic error});
 }
 
@@ -141,7 +141,7 @@ class __$ScheduleListStateCopyWithImpl<$Res>
       nextPage: nextPage == freezed
           ? _value.nextPage
           : nextPage // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as String?,
       error: error == freezed
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
@@ -164,7 +164,7 @@ class _$_ScheduleListState implements _ScheduleListState {
   @override
   final int manageId;
   @override
-  final int? nextPage;
+  final String? nextPage;
   @override
   final dynamic error;
 
@@ -202,7 +202,7 @@ abstract class _ScheduleListState implements ScheduleListState {
   factory _ScheduleListState(
       {required List<ScheduleDetailResponse> schedules,
       required int manageId,
-      int? nextPage,
+      String? nextPage,
       dynamic error}) = _$_ScheduleListState;
 
   @override
@@ -210,7 +210,7 @@ abstract class _ScheduleListState implements ScheduleListState {
   @override
   int get manageId;
   @override
-  int? get nextPage;
+  String? get nextPage;
   @override
   dynamic get error;
   @override

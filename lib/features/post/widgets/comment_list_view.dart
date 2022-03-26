@@ -25,7 +25,7 @@ class _CommentListViewState extends ConsumerState<CommentListView> {
   @override
   void initState() {
     _pagingController.addPageRequestListener(
-      (pageKey) => ref.read(commentListStateProvider(widget.postId).notifier).getComments(pageKey),
+      (_) => ref.read(commentListStateProvider(widget.postId).notifier).getComments(),
     );
 
     super.initState();

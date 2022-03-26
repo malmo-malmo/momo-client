@@ -21,8 +21,9 @@ abstract class GroupClient {
   @GET('/group/categories')
   Future<List<CodeNamePair>> getGroupCategories();
 
-  @GET('/groups/search/paging')
+  @GET('/groups/search-v2/paging')
   Future<List<GroupResponse>> getGroupsBySearch(
+    @Query('groupName') String groupName,
     @Query('page') int page,
     @Query('size') int size,
     @Query('categories') List<String> categories,
@@ -31,19 +32,19 @@ abstract class GroupClient {
 
   @GET('/groups/user-categories/paging')
   Future<List<GroupResponse>> getGroupsByCategories(
-    @Query('page') int page,
+    @Query('lastGroupId') int? lastGroupId,
     @Query('size') int size,
   );
 
   @GET('/groups/user-district/paging')
   Future<List<GroupResponse>> getGroupsByDistrict(
-    @Query('page') int page,
+    @Query('lastGroupId') int? lastGroupId,
     @Query('size') int size,
   );
 
   @GET('/groups/user-university/paging')
   Future<List<GroupResponse>> getGroupsByUniversity(
-    @Query('page') int page,
+    @Query('lastGroupId') int? lastGroupId,
     @Query('size') int size,
   );
 
@@ -54,8 +55,7 @@ abstract class GroupClient {
   Future<dynamic> withdrawalGroup(@Path() int groupId);
 
   @GET('/group/participants')
-  Future<List<ParticipantUserResponse>> getParticipantUsers(
-      @Query('groupId') int groupId);
+  Future<List<ParticipantUserResponse>> getParticipantUsers(@Query('groupId') int groupId);
 
   @PATCH('/group/{id}/end')
   Future<dynamic> endGroup(

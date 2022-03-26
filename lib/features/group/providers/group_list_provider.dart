@@ -16,12 +16,7 @@ final groupListStateProvider = StateNotifierProvider.autoDispose<GroupListStateN
 class GroupListStateNotifier extends StateNotifier<GroupListState> {
   GroupListStateNotifier({
     required this.groupRepository,
-  }) : super(
-          GroupListState(
-            groups: [],
-            nextPage: 0,
-          ),
-        );
+  }) : super(GroupListState(groups: []));
 
   final GroupRepository groupRepository;
 
@@ -49,45 +44,45 @@ class GroupListStateNotifier extends StateNotifier<GroupListState> {
         error: null,
       );
 
-  Future<void> getGroupsByDistrict(int page) async {
+  Future<void> getGroupsByDistrict() async {
     try {
-      final response = await groupRepository.getGroupsByLocation(page++);
+      final response = await groupRepository.getGroupsByLocation(lastGroupId: state.nextPage);
       state = state.copyWith(
         groups: [
           ...state.groups,
           ...response,
         ],
-        nextPage: response.length == AppConsts.pageSize ? page : null,
+        nextPage: response.length == AppConsts.pageSize ? response.last.id : null,
       );
     } catch (e) {
       state = state.copyWith(error: e);
     }
   }
 
-  Future<void> getGroupsByCategories(int page) async {
+  Future<void> getGroupsByCategories() async {
     try {
-      final response = await groupRepository.getGroupsByCategories(page++);
+      final response = await groupRepository.getGroupsByCategories(lastGroupId: state.nextPage);
       state = state.copyWith(
         groups: [
           ...state.groups,
           ...response,
         ],
-        nextPage: response.length == AppConsts.pageSize ? page : null,
+        nextPage: response.length == AppConsts.pageSize ? response.last.id : null,
       );
     } catch (e) {
       state = state.copyWith(error: e);
     }
   }
 
-  Future<void> getGroupsByUniversity(int page) async {
+  Future<void> getGroupsByUniversity() async {
     try {
-      final response = await groupRepository.getGroupsByUniversity(page++);
+      final response = await groupRepository.getGroupsByUniversity(lastGroupId: state.nextPage);
       state = state.copyWith(
         groups: [
           ...state.groups,
           ...response,
         ],
-        nextPage: response.length == AppConsts.pageSize ? page : null,
+        nextPage: response.length == AppConsts.pageSize ? response.last.id : null,
       );
     } catch (e) {
       state = state.copyWith(error: e);

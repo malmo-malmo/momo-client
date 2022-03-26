@@ -24,7 +24,7 @@ abstract class ScheduleClient {
   @GET('/schedule/group-schedules')
   Future<ScheduleResponse> getSchedules(
     @Query('groupId') int groupId,
-    @Query('page') int page,
+    @Query('lastScheduleStartDateTime') String? lastScheduleStartDateTime,
     @Query('size') int size,
   );
 

@@ -29,9 +29,9 @@ class HomeGroupStateNotifier extends StateNotifier<HomeGroupState> {
   Future<void> getGroups() async {
     state = state.copyWith(isLoading: true);
     try {
-      final categoryGroupResponse = groupRepository.getGroupsByCategories(0, size: 10);
-      final districtGroupResponse = groupRepository.getGroupsByLocation(0, size: 10);
-      final universityGroupResponse = groupRepository.getGroupsByUniversity(0, size: 10);
+      final categoryGroupResponse = groupRepository.getGroupsByCategories(size: 10);
+      final districtGroupResponse = groupRepository.getGroupsByLocation(size: 10);
+      final universityGroupResponse = groupRepository.getGroupsByUniversity(size: 10);
 
       final groupResponse = await Future.wait([
         categoryGroupResponse,

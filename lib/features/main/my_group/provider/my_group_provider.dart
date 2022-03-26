@@ -1,6 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:momo_flutter/data/models/group/group_detail_response.dart';
 import 'package:momo_flutter/data/models/management/group_summary_response.dart';
 import 'package:momo_flutter/data/models/management/my_group_response.dart';
 import 'package:momo_flutter/data/repositories/group_repository.dart';
@@ -43,15 +42,9 @@ class MyGroupStateNotifier extends StateNotifier<MyGroupState> {
     );
   }
 
-  void createGroupCallback(GroupDetailResponse group) {
-    final newGruop = MyGroupResponse(
-      id: group.id,
-      name: group.name,
-      imageUrl: group.imageUrl,
-      achievementRate: 0,
-    );
+  void createGroupCallback(MyGroupResponse group) {
     state = state.copyWith(
-      myGroups: [newGruop, ...state.myGroups],
+      myGroups: [group, ...state.myGroups],
     );
   }
 }

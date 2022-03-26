@@ -33,10 +33,7 @@ class _NoticeListPageState extends ConsumerState<NoticeListPage> {
       error: ref.read(noticeListStateProvider(widget.groupId)).error,
     );
     _pagingController.addPageRequestListener(
-      (pageKey) => ref.read(noticeListStateProvider(widget.groupId).notifier).getPosts(
-            page: pageKey,
-            postType: PostType.NOTICE,
-          ),
+      (_) => ref.read(noticeListStateProvider(widget.groupId).notifier).getPosts(postType: PostType.NOTICE),
     );
 
     super.initState();

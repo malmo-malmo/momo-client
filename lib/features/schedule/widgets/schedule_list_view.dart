@@ -43,7 +43,7 @@ class _ScheduleListViewState extends ConsumerState<ScheduleListView> {
       (previous, next) {
         _pagingController.value = PagingState(
           itemList: next.schedules,
-          nextPageKey: next.nextPage,
+          nextPageKey: next.nextPage != null ? 0 : null,
           error: next.error,
         );
       },

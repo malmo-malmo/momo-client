@@ -35,13 +35,14 @@ class _CommentClient implements CommentClient {
   }
 
   @override
-  Future<CommentResponse> getComments(page, postId, size) async {
+  Future<CommentResponse> getComments(lastCommentId, postId, size) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
-      r'page': page,
+      r'lastCommentId': lastCommentId,
       r'postId': postId,
       r'size': size
     };
+    queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     final _result = await _dio.fetch<Map<String, dynamic>>(

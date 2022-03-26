@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:momo_flutter/app_config.dart';
 import 'package:momo_flutter/data/datasources/local/app_database.dart';
-import 'package:momo_flutter/data/datasources/remote/retrofit_client_provider.dart';
 import 'package:momo_flutter/features/intro/login_page.dart';
 import 'package:momo_flutter/features/intro/terms_page.dart';
 import 'package:momo_flutter/features/main/main_page.dart';
@@ -31,8 +29,8 @@ class _SplashPageState extends ConsumerState<SplashPage> {
 
     if (!_tokenCheck) {
       final _userDataCheck = await _isFirstLogin();
-      AppConfig.categoryCodeNamePair = await ref.watch(groupClientProvider).getGroupCategories();
-      AppConfig.locationCodeNamePair = await ref.watch(districtClientProvider).getCities();
+      // AppConfig.categoryCodeNamePair = await ref.watch(groupClientProvider).getGroupCategories();
+      // AppConfig.locationCodeNamePair = await ref.watch(districtClientProvider).getCities();
       if (!_userDataCheck) {
         Navigator.pushNamed(context, MainPage.routeName);
       } else {

@@ -19,7 +19,7 @@ abstract class CommentClient {
 
   @GET('/comments/paging')
   Future<CommentResponse> getComments(
-    @Query('page') int page,
+    @Query('lastCommentId') int? lastCommentId,
     @Query('postId') int postId,
     @Query('size') int size,
   );

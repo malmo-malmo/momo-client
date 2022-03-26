@@ -21,10 +21,10 @@ class CommentRepository {
   });
 
   Future<CommentResponse> getComments({
-    required int page,
+    int? lastCommentId,
     required int postId,
   }) {
-    return commentClient.getComments(page, postId, AppConsts.pageSize);
+    return commentClient.getComments(lastCommentId, postId, AppConsts.pageSize);
   }
 
   Future<Comment> createComment(CommentRequest commentRequest) {

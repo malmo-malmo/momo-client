@@ -34,14 +34,15 @@ class _PostClient implements PostClient {
   }
 
   @override
-  Future<List<PostResponse>> getPosts(groupId, page, size, type) async {
+  Future<List<PostResponse>> getPosts(groupId, lastPostId, size, type) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
       r'groupId': groupId,
-      r'page': page,
+      r'lastPostId': lastPostId,
       r'size': size,
       r'postType': type
     };
+    queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     final _result = await _dio.fetch<List<dynamic>>(

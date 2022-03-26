@@ -25,7 +25,6 @@ class ScheduleListStateNotifier extends StateNotifier<ScheduleListState> {
           ScheduleListState(
             schedules: [],
             manageId: -1,
-            nextPage: 0,
           ),
         );
 
@@ -35,13 +34,15 @@ class ScheduleListStateNotifier extends StateNotifier<ScheduleListState> {
   Future<void> getSchedules(int page) async {
     try {
       final response = await scheduleRepository.getSchedules(
-        page: page++,
+        lastScheduleStartDateTime: state.nextPage,
         groupId: groupId,
       );
       state = state.copyWith(
         manageId: response.managerId,
         schedules: [...state.schedules, ...response.groupScheduleResponses],
-        nextPage: response.groupScheduleResponses.length == AppConsts.pageSize ? page : null,
+        nextPage: response.groupScheduleResponses.length == AppConsts.pageSize
+            ? response.groupScheduleResponses.last.startDateTime
+            : null,
       );
     } catch (e) {
       state = state.copyWith(error: e);
@@ -60,7 +61,7 @@ class ScheduleListState with _$ScheduleListState {
   factory ScheduleListState({
     required List<ScheduleDetailResponse> schedules,
     required int manageId,
-    int? nextPage,
+    String? nextPage,
     dynamic error,
   }) = _ScheduleListState;
 }

@@ -33,29 +33,23 @@ class PostListStateNotifier extends StateNotifier<PostListState> {
     required this.groupId,
     required this.postRepository,
   }) : super(
-          PostListState(
-            posts: [],
-            nextPage: 0,
-          ),
+          PostListState(posts: []),
         );
 
   final int groupId;
   final PostRepository postRepository;
 
-  Future<void> getPosts({
-    required int page,
-    required PostType postType,
-  }) async {
+  Future<void> getPosts({required PostType postType}) async {
     try {
       final response = await postRepository.getPosts(
         groupId: groupId,
-        page: page,
+        lastPostId: state.nextPage,
         type: postType,
       );
 
       state = state.copyWith(
         posts: [...state.posts, ...response],
-        nextPage: response.length == AppConsts.pageSize ? page : null,
+        nextPage: response.length == AppConsts.pageSize ? response.last.id : null,
       );
     } catch (e) {
       state = state.copyWith(error: e);

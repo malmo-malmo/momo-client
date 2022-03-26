@@ -2,7 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:momo_flutter/app_config.dart';
 import 'package:momo_flutter/data/datasources/remote/dio_provider.dart';
-import 'package:momo_flutter/data/models/group/group_detail_response.dart';
+import 'package:momo_flutter/data/models/group/group_create_response.dart';
 import 'package:momo_flutter/data/models/group/group_request.dart';
 import 'package:momo_flutter/data/models/post/post_detail_response.dart';
 import 'package:momo_flutter/data/models/post/post_request.dart';
@@ -19,7 +19,7 @@ class FormDataClient {
 
   FormDataClient(this.dio);
 
-  Future<GroupDetailResponse> createGroup(GroupRequest groupRequest) async {
+  Future<GroupCreateResponse> createGroup(GroupRequest groupRequest) async {
     final response = await dio.post(
       AppConfig.baseUrl + '/group',
       data: FormData.fromMap(
@@ -38,7 +38,7 @@ class FormDataClient {
       ),
     );
 
-    return GroupDetailResponse.fromJson(response.data);
+    return GroupCreateResponse.fromJson(response.data);
   }
 
   Future<PostDetailResponse> createPost(PostRequest postRequest) async {

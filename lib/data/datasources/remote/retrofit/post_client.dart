@@ -21,7 +21,7 @@ abstract class PostClient {
   @GET('/posts/paging')
   Future<List<PostResponse>> getPosts(
     @Query('groupId') int groupId,
-    @Query('page') int page,
+    @Query('lastPostId') int? lastPostId,
     @Query('size') int size,
     @Query('postType') String type,
   );

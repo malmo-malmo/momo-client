@@ -25,7 +25,7 @@ class CommentListStateNotifier extends StateNotifier<CommentListState> {
   }) : super(
           CommentListState(
             comments: [],
-            nextPage: 0,
+            nextPage: null,
             commentCnt: 0,
           ),
         );
@@ -33,15 +33,15 @@ class CommentListStateNotifier extends StateNotifier<CommentListState> {
   final CommentRepository commentRepository;
   final int postId;
 
-  Future<void> getComments(int page) async {
+  Future<void> getComments() async {
     try {
-      final response = await commentRepository.getComments(page: page++, postId: postId);
+      final response = await commentRepository.getComments(postId: postId, lastCommentId: state.nextPage);
       state = state.copyWith(
         comments: [
           ...state.comments,
           ...response.comments,
         ],
-        nextPage: response.comments.length == AppConsts.pageSize ? page : null,
+        nextPage: response.comments.length == AppConsts.pageSize ? response.comments.last.id : null,
         commentCnt: response.commentCnt,
       );
     } catch (e) {

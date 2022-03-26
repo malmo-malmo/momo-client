@@ -1,8 +1,8 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:momo_flutter/app_config.dart';
-import 'package:momo_flutter/data/models/group/group_detail_response.dart';
 import 'package:momo_flutter/data/models/group/group_request.dart';
+import 'package:momo_flutter/data/models/management/my_group_response.dart';
 import 'package:momo_flutter/data/repositories/group_repository.dart';
 
 final groupRequestCheckProvider = Provider.autoDispose<bool>((ref) {
@@ -77,8 +77,14 @@ class GroupRequestState extends StateNotifier<GroupRequest> {
 
   void setImageUrl(String imageUrl) => state = state.copyWith(imagePath: imageUrl);
 
-  Future<GroupDetailResponse> createGroup() async {
+  Future<MyGroupResponse> createGroup() async {
     final response = await groupRepository.createGroup(state);
-    return response;
+    final createdGroup = MyGroupResponse(
+      id: response.id,
+      imageUrl: response.imageUrl,
+      achievementRate: 0,
+      name: state.name,
+    );
+    return createdGroup;
   }
 }

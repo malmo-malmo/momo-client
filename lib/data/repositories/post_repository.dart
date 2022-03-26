@@ -39,10 +39,10 @@ class PostRepository {
 
   Future<List<PostResponse>> getPosts({
     required int groupId,
-    required int page,
+    int? lastPostId,
     required PostType type,
   }) {
-    return postClient.getPosts(groupId, page, AppConsts.pageSize, type.name);
+    return postClient.getPosts(groupId, lastPostId, AppConsts.pageSize, type.name);
   }
 
   Future<PostDetailResponse> getPostDetail(int postId) {

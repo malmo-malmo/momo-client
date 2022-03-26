@@ -53,9 +53,10 @@ class _GroupClient implements GroupClient {
 
   @override
   Future<List<GroupResponse>> getGroupsBySearch(
-      page, size, categories, cities) async {
+      groupName, page, size, categories, cities) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
+      r'groupName': groupName,
       r'page': page,
       r'size': size,
       r'categories': categories,
@@ -66,7 +67,7 @@ class _GroupClient implements GroupClient {
     final _result = await _dio.fetch<List<dynamic>>(
         _setStreamType<List<GroupResponse>>(
             Options(method: 'GET', headers: _headers, extra: _extra)
-                .compose(_dio.options, '/groups/search/paging',
+                .compose(_dio.options, '/groups/search-v2/paging',
                     queryParameters: queryParameters, data: _data)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     var value = _result.data!
@@ -76,9 +77,13 @@ class _GroupClient implements GroupClient {
   }
 
   @override
-  Future<List<GroupResponse>> getGroupsByCategories(page, size) async {
+  Future<List<GroupResponse>> getGroupsByCategories(lastGroupId, size) async {
     const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{r'page': page, r'size': size};
+    final queryParameters = <String, dynamic>{
+      r'lastGroupId': lastGroupId,
+      r'size': size
+    };
+    queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     final _result = await _dio.fetch<List<dynamic>>(
@@ -94,9 +99,13 @@ class _GroupClient implements GroupClient {
   }
 
   @override
-  Future<List<GroupResponse>> getGroupsByDistrict(page, size) async {
+  Future<List<GroupResponse>> getGroupsByDistrict(lastGroupId, size) async {
     const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{r'page': page, r'size': size};
+    final queryParameters = <String, dynamic>{
+      r'lastGroupId': lastGroupId,
+      r'size': size
+    };
+    queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     final _result = await _dio.fetch<List<dynamic>>(
@@ -112,9 +121,13 @@ class _GroupClient implements GroupClient {
   }
 
   @override
-  Future<List<GroupResponse>> getGroupsByUniversity(page, size) async {
+  Future<List<GroupResponse>> getGroupsByUniversity(lastGroupId, size) async {
     const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{r'page': page, r'size': size};
+    final queryParameters = <String, dynamic>{
+      r'lastGroupId': lastGroupId,
+      r'size': size
+    };
+    queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     final _result = await _dio.fetch<List<dynamic>>(

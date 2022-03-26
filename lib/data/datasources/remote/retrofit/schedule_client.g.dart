@@ -35,13 +35,15 @@ class _ScheduleClient implements ScheduleClient {
   }
 
   @override
-  Future<ScheduleResponse> getSchedules(groupId, page, size) async {
+  Future<ScheduleResponse> getSchedules(
+      groupId, lastScheduleStartDateTime, size) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
       r'groupId': groupId,
-      r'page': page,
+      r'lastScheduleStartDateTime': lastScheduleStartDateTime,
       r'size': size
     };
+    queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     final _result = await _dio.fetch<Map<String, dynamic>>(

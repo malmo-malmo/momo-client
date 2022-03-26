@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:momo_flutter/data/models/group/group_detail_response.dart';
+import 'package:momo_flutter/data/models/management/my_group_response.dart';
 import 'package:momo_flutter/features/main/main_bottom_navigation_bar.dart';
 import 'package:momo_flutter/features/main/my_group/group_request_page.dart';
 import 'package:momo_flutter/features/main/my_group/widgets/manage_group_list.dart';
@@ -49,7 +49,7 @@ class MyGroupPage extends StatelessWidget {
                 GroupRequestPage.routeName,
               );
               if (result != null) {
-                ref.read(myGroupStateProvider.notifier).createGroupCallback(result as GroupDetailResponse);
+                ref.read(myGroupStateProvider.notifier).createGroupCallback(result as MyGroupResponse);
               }
             },
             child: loadAsset(AppIcons.addGroup),

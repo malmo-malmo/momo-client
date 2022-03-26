@@ -52,11 +52,11 @@ class _GroupListPageState extends ConsumerState<GroupListPage> {
   void initState() {
     if (widget.name == AppStrings.myUniversity) {
       _pagingController.addPageRequestListener(
-        (pageKey) => ref.read(groupListStateProvider.notifier).getGroupsByUniversity(pageKey),
+        (_) => ref.read(groupListStateProvider.notifier).getGroupsByUniversity(),
       );
     } else {
       _pagingController.addPageRequestListener(
-        (pageKey) => ref.read(groupListStateProvider.notifier).getGroupsByDistrict(pageKey),
+        (_) => ref.read(groupListStateProvider.notifier).getGroupsByDistrict(),
       );
     }
     super.initState();

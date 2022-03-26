@@ -57,10 +57,10 @@ class ScheduleRepository {
   }
 
   Future<ScheduleResponse> getSchedules({
-    required int page,
+    String? lastScheduleStartDateTime,
     required int groupId,
   }) {
-    return scheduleClient.getSchedules(groupId, page, AppConsts.pageSize);
+    return scheduleClient.getSchedules(groupId, lastScheduleStartDateTime, AppConsts.pageSize);
   }
 
   Future<dynamic> createAttendace(

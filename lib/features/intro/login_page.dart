@@ -2,7 +2,6 @@ import 'dart:developer';
 
 import 'package:kakao_flutter_sdk_user/kakao_flutter_sdk_user.dart';
 import 'package:momo_flutter/app_config.dart';
-import 'package:momo_flutter/data/datasources/remote/retrofit_client_provider.dart';
 import 'package:momo_flutter/data/models/auth/login_request.dart';
 import 'package:momo_flutter/data/repositories/auth_repository.dart';
 import 'package:momo_flutter/features/intro/terms_page.dart';
@@ -57,9 +56,9 @@ class LoginPage extends StatelessWidget {
                                   )
                                   .then(
                                 (value) async {
-                                  AppConfig.categoryCodeNamePair =
-                                      await ref.watch(groupClientProvider).getGroupCategories();
-                                  AppConfig.locationCodeNamePair = await ref.watch(districtClientProvider).getCities();
+                                  // AppConfig.categoryCodeNamePair =
+                                  //     await ref.watch(groupClientProvider).getGroupCategories();
+                                  // AppConfig.locationCodeNamePair = await ref.watch(districtClientProvider).getCities();
                                   final _isFirstLogin = await ref.read(userDataStateProvider.notifier).isFirstLogin();
                                   ref.read(loadingProvider.state).state = false;
                                   if (_isFirstLogin) {

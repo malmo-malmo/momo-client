@@ -32,10 +32,7 @@ class _NoticeHorizontalListViewState extends ConsumerState<NoticeHorizontalListV
   void initState() {
     super.initState();
     _pagingController.addPageRequestListener(
-      (pageKey) => ref.read(noticeListStateProvider(widget.groupId).notifier).getPosts(
-            page: pageKey,
-            postType: PostType.NOTICE,
-          ),
+      (_) => ref.read(noticeListStateProvider(widget.groupId).notifier).getPosts(postType: PostType.NOTICE),
     );
   }
 

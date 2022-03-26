@@ -5,6 +5,7 @@ import 'package:momo_flutter/data/datasources/remote/retrofit/favorite_client.da
 import 'package:momo_flutter/data/datasources/remote/retrofit/group_client.dart';
 import 'package:momo_flutter/data/datasources/remote/retrofit/management_client.dart';
 import 'package:momo_flutter/data/datasources/remote/retrofit_client_provider.dart';
+import 'package:momo_flutter/data/models/group/group_create_response.dart';
 import 'package:momo_flutter/data/models/group/group_detail_response.dart';
 import 'package:momo_flutter/data/models/group/group_like_request.dart';
 import 'package:momo_flutter/data/models/group/group_request.dart';
@@ -54,7 +55,7 @@ class GroupRepository {
     return managementClient.getParticipationGroupSummary();
   }
 
-  Future<GroupDetailResponse> createGroup(GroupRequest groupRequest) {
+  Future<GroupCreateResponse> createGroup(GroupRequest groupRequest) {
     return formDataClient.createGroup(groupRequest);
   }
 
@@ -68,22 +69,29 @@ class GroupRepository {
 
   Future<List<GroupResponse>> getGroupsBySearch(
     int page, {
+    String? groupName,
     List<String>? categories,
     List<String>? cities,
   }) {
-    return groupClient.getGroupsBySearch(page, AppConsts.pageSize, categories ?? [], cities ?? []);
+    return groupClient.getGroupsBySearch(
+      groupName ?? '',
+      page,
+      AppConsts.pageSize,
+      categories ?? [],
+      cities ?? [],
+    );
   }
 
-  Future<List<GroupResponse>> getGroupsByCategories(int page, {int size = AppConsts.pageSize}) {
-    return groupClient.getGroupsByCategories(page, size);
+  Future<List<GroupResponse>> getGroupsByCategories({int? lastGroupId, int size = AppConsts.pageSize}) {
+    return groupClient.getGroupsByCategories(lastGroupId, size);
   }
 
-  Future<List<GroupResponse>> getGroupsByLocation(int page, {int size = AppConsts.pageSize}) {
-    return groupClient.getGroupsByDistrict(page, size);
+  Future<List<GroupResponse>> getGroupsByLocation({int? lastGroupId, int size = AppConsts.pageSize}) {
+    return groupClient.getGroupsByDistrict(lastGroupId, size);
   }
 
-  Future<List<GroupResponse>> getGroupsByUniversity(int page, {int size = AppConsts.pageSize}) {
-    return groupClient.getGroupsByUniversity(page, size);
+  Future<List<GroupResponse>> getGroupsByUniversity({int? lastGroupId, int size = AppConsts.pageSize}) {
+    return groupClient.getGroupsByUniversity(lastGroupId, size);
   }
 
   Future<dynamic> participantGroup(int groupId) {
