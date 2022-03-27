@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:momo_flutter/data/models/post/post_detail_response.dart';
+import 'package:momo_flutter/features/images/full_image_page_view.dart';
 import 'package:momo_flutter/features/post/provider/comment_list_provider.dart';
 import 'package:momo_flutter/resources/resources.dart';
 import 'package:momo_flutter/utils/format/post_card_date_format.dart';
@@ -69,7 +70,16 @@ class PostDetailCard extends StatelessWidget {
                 for (int i = 0; i < post.imageUrls.length; i++)
                   InkWell(
                     borderRadius: BorderRadius.circular(16),
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.pushNamed(
+                        context,
+                        FullImagePageView.routeName,
+                        arguments: FullImagePageViewArg(
+                          initialPage: i,
+                          images: post.imageUrls,
+                        ),
+                      );
+                    },
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(16),
                       child: Image.network(

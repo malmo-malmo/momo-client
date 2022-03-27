@@ -123,8 +123,8 @@ abstract class AppRoutes {
         _page = FullImagePage(image);
         break;
       case FullImagePageView.routeName:
-        final images = settings.arguments as List<String>;
-        _page = FullImagePageView(images);
+        final arg = settings.arguments as FullImagePageViewArg;
+        _page = FullImagePageView(arg);
         break;
       case ReportPage.routeName:
         _page = const ReportPage();
