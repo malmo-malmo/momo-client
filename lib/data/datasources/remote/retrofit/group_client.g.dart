@@ -62,6 +62,7 @@ class _GroupClient implements GroupClient {
       r'categories': categories,
       r'cities': cities
     };
+    queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     final _result = await _dio.fetch<List<dynamic>>(

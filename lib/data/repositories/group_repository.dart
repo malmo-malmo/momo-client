@@ -74,7 +74,7 @@ class GroupRepository {
     List<String>? cities,
   }) {
     return groupClient.getGroupsBySearch(
-      groupName ?? '',
+      groupName,
       page,
       AppConsts.pageSize,
       categories ?? [],

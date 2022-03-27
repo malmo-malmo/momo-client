@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:momo_flutter/data/models/group/group_detail_response.dart';
+import 'package:momo_flutter/features/images/full_image_page.dart';
 import 'package:momo_flutter/resources/resources.dart';
 import 'package:momo_flutter/widgets/card/on_off_card.dart';
 import 'package:momo_flutter/widgets/title/member_date_row.dart';
@@ -17,7 +18,14 @@ class GroupDetailImageCard extends StatelessWidget {
       child: Stack(
         children: [
           InkWell(
-            onTap: () {},
+            onTap: () {
+              Navigator.pushNamed(
+                context,
+                FullImagePage.routeName,
+                arguments:
+                    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSo2lT2My2ZPXDPGCTKi6DvpSDEXB5woZPNDw&usqp=CAU',
+              );
+            },
             child: Image.network(
               'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSo2lT2My2ZPXDPGCTKi6DvpSDEXB5woZPNDw&usqp=CAU',
               height: 280,

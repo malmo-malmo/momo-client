@@ -82,16 +82,12 @@ class Mypage extends StatelessWidget {
                   builder: (context, ref, child) {
                     final recentGroups = ref.watch(searchedDataStateProvider);
                     if (recentGroups.isLoading) {
-                      return const SliverToBoxAdapter(
-                        child: LoadingIndicator(),
-                      );
+                      return const LoadingIndicator();
                     }
                     if (recentGroups.groups.isEmpty) {
-                      return const SliverToBoxAdapter(
-                        child: Padding(
-                          padding: EdgeInsets.only(top: 40),
-                          child: EmptyItemCard(AppErrorString.recentGroupEmpty),
-                        ),
+                      return const Padding(
+                        padding: EdgeInsets.only(top: 40),
+                        child: EmptyItemCard(AppErrorString.recentGroupEmpty),
                       );
                     }
                     return ListView.separated(

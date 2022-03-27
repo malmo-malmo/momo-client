@@ -23,7 +23,7 @@ abstract class GroupClient {
 
   @GET('/groups/search-v2/paging')
   Future<List<GroupResponse>> getGroupsBySearch(
-    @Query('groupName') String groupName,
+    @Query('groupName') String? groupName,
     @Query('page') int page,
     @Query('size') int size,
     @Query('categories') List<String> categories,

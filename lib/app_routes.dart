@@ -16,6 +16,7 @@ import 'package:momo_flutter/features/intro/login_page.dart';
 import 'package:momo_flutter/features/intro/terms_page.dart';
 import 'package:momo_flutter/features/main/main_page.dart';
 import 'package:momo_flutter/features/main/my_group/group_request_page.dart';
+import 'package:momo_flutter/features/notification/notification_page.dart';
 import 'package:momo_flutter/features/onboard/onboard_page.dart';
 import 'package:momo_flutter/features/post/manage_post_page.dart';
 import 'package:momo_flutter/features/post/notice_list_page.dart';
@@ -150,6 +151,9 @@ abstract class AppRoutes {
         break;
       case ChatRoomPage.routeName:
         _page = const ChatRoomPage();
+        break;
+      case NotificationPage.routeName:
+        _page = const NotificationPage();
         break;
       default:
         break;

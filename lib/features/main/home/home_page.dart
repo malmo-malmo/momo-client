@@ -6,6 +6,7 @@ import 'package:momo_flutter/features/main/home/widgets/weekly_top_rate_card.dar
 import 'package:momo_flutter/features/main/main_bottom_navigation_bar.dart';
 import 'package:momo_flutter/resources/resources.dart';
 import 'package:momo_flutter/utils/load_asset.dart';
+import 'package:momo_flutter/widgets/button/header_chat_button.dart';
 import 'package:momo_flutter/widgets/title/main_title.dart';
 import 'package:momo_flutter/widgets/title/sub_title_row.dart';
 
@@ -20,8 +21,11 @@ class HomePage extends StatelessWidget {
       appBar: AppBar(
         automaticallyImplyLeading: false,
         actions: [
-          loadAsset(AppIcons.notification),
-          loadAsset(AppIcons.chat),
+          Padding(
+            padding: const EdgeInsets.only(right: 16),
+            child: loadAsset(AppIcons.notification),
+          ),
+          const HeaderChatButton(),
         ],
       ),
       body: SingleChildScrollView(

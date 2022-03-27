@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:momo_flutter/features/main/search/provider/search_result_provider.dart';
@@ -7,7 +9,12 @@ import 'package:momo_flutter/resources/resources.dart';
 import 'package:momo_flutter/utils/load_asset.dart';
 
 class SearchQueryInputField extends StatefulWidget {
-  const SearchQueryInputField({Key? key}) : super(key: key);
+  const SearchQueryInputField({
+    Key? key,
+    required this.refresh,
+  }) : super(key: key);
+
+  final Function refresh;
 
   @override
   State<SearchQueryInputField> createState() => _SearchQueryInputFieldState();
@@ -36,7 +43,9 @@ class _SearchQueryInputFieldState extends State<SearchQueryInputField> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => const SearchFilterBottomSheet(),
+                  builder: (context) => SearchFilterBottomSheet(
+                    refresh: widget.refresh,
+                  ),
                 ),
               );
             },
@@ -47,11 +56,16 @@ class _SearchQueryInputFieldState extends State<SearchQueryInputField> {
             width: 240,
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 14),
-              child: TextFormField(
-                controller: _controller,
-                decoration: const InputDecoration(
-                  hintText: '검색어를 입력하세요',
-                ),
+              child: Consumer(
+                builder: (context, ref, child) {
+                  return TextFormField(
+                    controller: _controller,
+                    decoration: const InputDecoration(
+                      hintText: '검색어를 입력하세요',
+                    ),
+                    onChanged: (value) => ref.read(searchQueryProvider.state).state = value,
+                  );
+                },
               ),
             ),
           ),
@@ -61,6 +75,8 @@ class _SearchQueryInputFieldState extends State<SearchQueryInputField> {
               return InkWell(
                 onTap: () {
                   FocusScope.of(context).unfocus();
+                  ref.read(searchResultListProvider.notifier).reset();
+                  widget.refresh();
                   ref.read(isSearchedProvider.state).state = true;
                   ref.read(searchedDataStateProvider.notifier).addSearchedWord(_controller.text);
                 },

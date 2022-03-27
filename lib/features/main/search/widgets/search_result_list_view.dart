@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:momo_flutter/data/models/group/group_response.dart';
+import 'package:momo_flutter/features/group/group_detail_page.dart';
 import 'package:momo_flutter/resources/app_error_strings.dart';
 import 'package:momo_flutter/resources/resources.dart';
 import 'package:momo_flutter/widgets/card/empty_item_card.dart';
@@ -9,14 +11,14 @@ import 'package:momo_flutter/widgets/indicator/loading_indicator.dart';
 import 'package:momo_flutter/widgets/title/member_date_row.dart';
 
 class SearchResultListView extends StatelessWidget {
-  const SearchResultListView(this.pagingController, {Key? key}) : super(key: key);
+  const SearchResultListView(this.controller, {Key? key}) : super(key: key);
 
-  final PagingController<int, GroupResponse> pagingController;
+  final PagingController<int, GroupResponse> controller;
 
   @override
   Widget build(BuildContext context) {
     return PagedSliverList.separated(
-      pagingController: pagingController,
+      pagingController: controller,
       builderDelegate: PagedChildBuilderDelegate<GroupResponse>(
         itemBuilder: (context, item, index) => _SearchResultCard(item),
         newPageProgressIndicatorBuilder: (context) => const LoadingIndicator(),
@@ -36,7 +38,13 @@ class _SearchResultCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {},
+      onTap: () {
+        Navigator.pushNamed(
+          context,
+          GroupDetailPage.routeName,
+          arguments: group.id,
+        );
+      },
       child: SizedBox(
         height: 76,
         child: Row(
