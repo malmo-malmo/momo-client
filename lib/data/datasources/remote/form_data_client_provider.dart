@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:momo_flutter/app_config.dart';
 import 'package:momo_flutter/data/datasources/remote/dio_provider.dart';
+import 'package:momo_flutter/data/models/common/image_url_response.dart';
 import 'package:momo_flutter/data/models/group/group_create_response.dart';
 import 'package:momo_flutter/data/models/group/group_request.dart';
 import 'package:momo_flutter/data/models/post/post_detail_response.dart';
@@ -26,7 +27,7 @@ class FormDataClient {
         {
           'name': groupRequest.name,
           'category': groupRequest.category,
-          'isUniversity': groupRequest.isUniversity,
+          'university': groupRequest.university,
           'city': groupRequest.city,
           'district': groupRequest.district,
           'startDate': groupRequest.startDate,
@@ -68,20 +69,29 @@ class FormDataClient {
     return PostDetailResponse.fromJson(response.data);
   }
 
-  Future<UserUpdateResponse> updateUserInfo(UserUpdateRequest updateInfo) async {
-    final response = await dio.put(
-      AppConfig.baseUrl + '/user',
+  Future<ImageUrlResponse> updateProfileImage(String imagePath) async {
+    final response = await dio.patch(
+      AppConfig.baseUrl + '/user/update-image',
       data: FormData.fromMap(
-        {
-          'nickname': updateInfo.nickname,
-          'university': updateInfo.university,
-          'city': updateInfo.city,
-          'district': updateInfo.district,
-          'image': await MultipartFile.fromFile(updateInfo.imagePath),
-        },
+        {'imageFile': await MultipartFile.fromFile(imagePath)},
       ),
     );
 
-    return UserUpdateResponse.fromJson(response.data);
+    return ImageUrlResponse.fromJson(response.data);
+  }
+
+  Future<ImageUrlResponse> updateGroupImage({
+    required int groupId,
+    required String imagePath,
+  }) async {
+    final response = await dio.post(
+      AppConfig.baseUrl + '/group/{groupId}/update-image',
+      data: FormData.fromMap(
+        {'imageFile': await MultipartFile.fromFile(imagePath)},
+      ),
+      queryParameters: {'gropuId': groupId},
+    );
+
+    return ImageUrlResponse.fromJson(response.data);
   }
 }

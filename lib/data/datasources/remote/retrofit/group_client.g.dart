@@ -193,14 +193,14 @@ class _GroupClient implements GroupClient {
   }
 
   @override
-  Future<dynamic> endGroup(id) async {
+  Future<dynamic> endGroup(groupId) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     final _result = await _dio.fetch(_setStreamType<dynamic>(
         Options(method: 'PATCH', headers: _headers, extra: _extra)
-            .compose(_dio.options, '/group/${id}/end',
+            .compose(_dio.options, '/group/${groupId}/end',
                 queryParameters: queryParameters, data: _data)
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = _result.data;
@@ -208,14 +208,29 @@ class _GroupClient implements GroupClient {
   }
 
   @override
-  Future<dynamic> managerGroup(id, userId) async {
+  Future<dynamic> managerGroup(groupId, userId) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     final _result = await _dio.fetch(_setStreamType<dynamic>(
         Options(method: 'PATCH', headers: _headers, extra: _extra)
-            .compose(_dio.options, '/group/${id}/manager/${userId}',
+            .compose(_dio.options, '/group/${groupId}/manager/${userId}',
+                queryParameters: queryParameters, data: _data)
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = _result.data;
+    return value;
+  }
+
+  @override
+  Future<dynamic> deleteGroupImage(groupId) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio.fetch(_setStreamType<dynamic>(
+        Options(method: 'DELETE', headers: _headers, extra: _extra)
+            .compose(_dio.options, '/group/${groupId}/delete-image',
                 queryParameters: queryParameters, data: _data)
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = _result.data;

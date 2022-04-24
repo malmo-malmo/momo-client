@@ -26,14 +26,12 @@ class _$UserUpdateResponseTearOff {
       {required String nickname,
       required CodeNamePair city,
       required String district,
-      required String university,
-      String? imageUrl}) {
+      required String university}) {
     return _UserUpdateReponse(
       nickname: nickname,
       city: city,
       district: district,
       university: university,
-      imageUrl: imageUrl,
     );
   }
 
@@ -51,7 +49,6 @@ mixin _$UserUpdateResponse {
   CodeNamePair get city => throw _privateConstructorUsedError;
   String get district => throw _privateConstructorUsedError;
   String get university => throw _privateConstructorUsedError;
-  String? get imageUrl => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -65,11 +62,7 @@ abstract class $UserUpdateResponseCopyWith<$Res> {
           UserUpdateResponse value, $Res Function(UserUpdateResponse) then) =
       _$UserUpdateResponseCopyWithImpl<$Res>;
   $Res call(
-      {String nickname,
-      CodeNamePair city,
-      String district,
-      String university,
-      String? imageUrl});
+      {String nickname, CodeNamePair city, String district, String university});
 
   $CodeNamePairCopyWith<$Res> get city;
 }
@@ -89,7 +82,6 @@ class _$UserUpdateResponseCopyWithImpl<$Res>
     Object? city = freezed,
     Object? district = freezed,
     Object? university = freezed,
-    Object? imageUrl = freezed,
   }) {
     return _then(_value.copyWith(
       nickname: nickname == freezed
@@ -108,10 +100,6 @@ class _$UserUpdateResponseCopyWithImpl<$Res>
           ? _value.university
           : university // ignore: cast_nullable_to_non_nullable
               as String,
-      imageUrl: imageUrl == freezed
-          ? _value.imageUrl
-          : imageUrl // ignore: cast_nullable_to_non_nullable
-              as String?,
     ));
   }
 
@@ -131,11 +119,7 @@ abstract class _$UserUpdateReponseCopyWith<$Res>
       __$UserUpdateReponseCopyWithImpl<$Res>;
   @override
   $Res call(
-      {String nickname,
-      CodeNamePair city,
-      String district,
-      String university,
-      String? imageUrl});
+      {String nickname, CodeNamePair city, String district, String university});
 
   @override
   $CodeNamePairCopyWith<$Res> get city;
@@ -158,7 +142,6 @@ class __$UserUpdateReponseCopyWithImpl<$Res>
     Object? city = freezed,
     Object? district = freezed,
     Object? university = freezed,
-    Object? imageUrl = freezed,
   }) {
     return _then(_UserUpdateReponse(
       nickname: nickname == freezed
@@ -177,10 +160,6 @@ class __$UserUpdateReponseCopyWithImpl<$Res>
           ? _value.university
           : university // ignore: cast_nullable_to_non_nullable
               as String,
-      imageUrl: imageUrl == freezed
-          ? _value.imageUrl
-          : imageUrl // ignore: cast_nullable_to_non_nullable
-              as String?,
     ));
   }
 }
@@ -192,8 +171,7 @@ class _$_UserUpdateReponse implements _UserUpdateReponse {
       {required this.nickname,
       required this.city,
       required this.district,
-      required this.university,
-      this.imageUrl});
+      required this.university});
 
   factory _$_UserUpdateReponse.fromJson(Map<String, dynamic> json) =>
       _$$_UserUpdateReponseFromJson(json);
@@ -206,12 +184,10 @@ class _$_UserUpdateReponse implements _UserUpdateReponse {
   final String district;
   @override
   final String university;
-  @override
-  final String? imageUrl;
 
   @override
   String toString() {
-    return 'UserUpdateResponse(nickname: $nickname, city: $city, district: $district, university: $university, imageUrl: $imageUrl)';
+    return 'UserUpdateResponse(nickname: $nickname, city: $city, district: $district, university: $university)';
   }
 
   @override
@@ -223,8 +199,7 @@ class _$_UserUpdateReponse implements _UserUpdateReponse {
             const DeepCollectionEquality().equals(other.city, city) &&
             const DeepCollectionEquality().equals(other.district, district) &&
             const DeepCollectionEquality()
-                .equals(other.university, university) &&
-            const DeepCollectionEquality().equals(other.imageUrl, imageUrl));
+                .equals(other.university, university));
   }
 
   @override
@@ -233,8 +208,7 @@ class _$_UserUpdateReponse implements _UserUpdateReponse {
       const DeepCollectionEquality().hash(nickname),
       const DeepCollectionEquality().hash(city),
       const DeepCollectionEquality().hash(district),
-      const DeepCollectionEquality().hash(university),
-      const DeepCollectionEquality().hash(imageUrl));
+      const DeepCollectionEquality().hash(university));
 
   @JsonKey(ignore: true)
   @override
@@ -252,8 +226,7 @@ abstract class _UserUpdateReponse implements UserUpdateResponse {
       {required String nickname,
       required CodeNamePair city,
       required String district,
-      required String university,
-      String? imageUrl}) = _$_UserUpdateReponse;
+      required String university}) = _$_UserUpdateReponse;
 
   factory _UserUpdateReponse.fromJson(Map<String, dynamic> json) =
       _$_UserUpdateReponse.fromJson;
@@ -266,8 +239,6 @@ abstract class _UserUpdateReponse implements UserUpdateResponse {
   String get district;
   @override
   String get university;
-  @override
-  String? get imageUrl;
   @override
   @JsonKey(ignore: true)
   _$UserUpdateReponseCopyWith<_UserUpdateReponse> get copyWith =>

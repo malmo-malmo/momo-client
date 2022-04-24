@@ -71,7 +71,6 @@ class UserDataStateNotifier extends StateNotifier<UserResponse> {
       nickname: response.nickname,
       city: response.city,
       district: response.district,
-      image: response.imageUrl,
       university: response.university,
     );
   }
@@ -92,5 +91,10 @@ class UserDataStateNotifier extends StateNotifier<UserResponse> {
       ],
     );
     return response;
+  }
+
+  Future<void> updateProfileImage(String imagePath) async {
+    final response = await userRepository.updateImage(imagePath);
+    state = state.copyWith(image: response.imageUrl);
   }
 }

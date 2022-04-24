@@ -12,7 +12,6 @@ _$_UserUpdateReponse _$$_UserUpdateReponseFromJson(Map<String, dynamic> json) =>
       city: CodeNamePair.fromJson(json['city'] as Map<String, dynamic>),
       district: json['district'] as String,
       university: json['university'] as String,
-      imageUrl: json['imageUrl'] as String?,
     );
 
 Map<String, dynamic> _$$_UserUpdateReponseToJson(
@@ -22,5 +21,4 @@ Map<String, dynamic> _$$_UserUpdateReponseToJson(
       'city': instance.city,
       'district': instance.district,
       'university': instance.university,
-      'imageUrl': instance.imageUrl,
     };

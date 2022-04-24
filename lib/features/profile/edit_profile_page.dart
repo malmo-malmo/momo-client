@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:momo_flutter/app_consts.dart';
 import 'package:momo_flutter/data/models/user/user_update_request.dart';
 import 'package:momo_flutter/features/gallery/gallery_page.dart';
 import 'package:momo_flutter/features/profile/provider/profile_update_provider.dart';
@@ -12,7 +13,6 @@ import 'package:momo_flutter/resources/resources.dart';
 import 'package:momo_flutter/utils/load_asset.dart';
 import 'package:momo_flutter/widgets/button/action_button.dart';
 import 'package:momo_flutter/widgets/card/profile_image_card.dart';
-import 'package:momo_flutter/widgets/card/profile_image_card_with_file.dart';
 import 'package:momo_flutter/widgets/indicator/custom_loader.dart';
 import 'package:momo_flutter/widgets/input_field/city_input_field.dart';
 import 'package:momo_flutter/widgets/input_field/district_input_field.dart';
@@ -68,9 +68,10 @@ class _EditProfilePageState extends ConsumerState<EditProfilePage> {
                               UserUpdateRequest(
                                 city: updateRequest.city,
                                 district: updateRequest.district,
-                                nickname: validateNickname ? updateRequest.nickname : widget.userUpdateRequest.nickname,
+                                nickname: validateNickname
+                                    ? updateRequest.nickname
+                                    : widget.userUpdateRequest.nickname,
                                 university: updateRequest.university,
-                                imagePath: updateRequest.imagePath,
                               ),
                             );
                         ref.read(loadingProvider.state).state = false;
@@ -98,16 +99,14 @@ class _EditProfilePageState extends ConsumerState<EditProfilePage> {
                           width: 102,
                           child: Consumer(
                             builder: (context, ref, child) {
-                              final fileImage = ref.watch(profileUpdateStateProvider).imagePath;
+                              final imagePath = ref.watch(userDataStateProvider).image;
                               return Stack(
                                 children: [
-                                  fileImage.isEmpty
-                                      ? ProfileImageCard(
-                                          img: widget.userUpdateRequest.imagePath,
-                                          rad: 50,
-                                          backgroundColor: AppColors.purple,
-                                        )
-                                      : ProfileImageCardWithFile(fileImage),
+                                  ProfileImageCard(
+                                    img: imagePath ?? AppConsts.defalutProfile,
+                                    rad: 50,
+                                    backgroundColor: AppColors.purple,
+                                  ),
                                   Positioned(
                                     right: 0,
                                     bottom: 0,
@@ -119,7 +118,11 @@ class _EditProfilePageState extends ConsumerState<EditProfilePage> {
                                           arguments: PhotoRequestType.one,
                                         );
                                         if (result != null) {
-                                          ref.read(profileUpdateStateProvider.notifier).setImagePath(result as String);
+                                          ref.read(loadingProvider.state).state = true;
+                                          ref
+                                              .read(userDataStateProvider.notifier)
+                                              .updateProfileImage(result as String);
+                                          ref.read(loadingProvider.state).state = false;
                                         }
                                       },
                                       child: CircleAvatar(
@@ -169,7 +172,8 @@ class _EditProfilePageState extends ConsumerState<EditProfilePage> {
                               DistrictInputField(
                                 district: updateProfileData.district,
                                 cityCode: updateProfileData.city,
-                                setDistrict: ref.read(profileUpdateStateProvider.notifier).setUserDistrict,
+                                setDistrict:
+                                    ref.read(profileUpdateStateProvider.notifier).setUserDistrict,
                               ),
                             ],
                           );

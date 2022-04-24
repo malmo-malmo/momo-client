@@ -57,14 +57,15 @@ abstract class GroupClient {
   @GET('/group/participants')
   Future<List<ParticipantUserResponse>> getParticipantUsers(@Query('groupId') int groupId);
 
-  @PATCH('/group/{id}/end')
-  Future<dynamic> endGroup(
-    @Path() int id,
-  );
+  @PATCH('/group/{groupId}/end')
+  Future<dynamic> endGroup(@Path() int groupId);
 
-  @PATCH('/group/{id}/manager/{userId}')
+  @PATCH('/group/{groupId}/manager/{userId}')
   Future<dynamic> managerGroup(
-    @Path() int id,
+    @Path() int groupId,
     @Path() int userId,
   );
+
+  @DELETE('/group/{groupId}/delete-image')
+  Future<dynamic> deleteGroupImage(@Path() int groupId);
 }

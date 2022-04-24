@@ -9,6 +9,5 @@ class UserUpdateRequest with _$UserUpdateRequest {
     required String district,
     required String nickname,
     required String university,
-    required String imagePath,
   }) = _UserUpdateInfo;
 }

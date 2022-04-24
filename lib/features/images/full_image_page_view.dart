@@ -28,7 +28,7 @@ class FullImagePageView extends StatefulWidget {
 }
 
 class _FullImagePageViewState extends State<FullImagePageView> {
-  late PageController _controller = PageController(initialPage: widget.arg.initialPage);
+  late final PageController _controller = PageController(initialPage: widget.arg.initialPage);
   late int _currentPage = widget.arg.initialPage;
 
   @override

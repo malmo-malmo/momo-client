@@ -13,7 +13,7 @@ class GroupRequest with _$GroupRequest {
     required String introduction,
     required int recruitmentCnt,
     required String startDate,
-    required bool isUniversity,
+    String? university,
     required bool isOffline,
   }) = _GroupRequest;
 }

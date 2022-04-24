@@ -11,7 +11,6 @@ class UserUpdateResponse with _$UserUpdateResponse {
     required CodeNamePair city,
     required String district,
     required String university,
-    String? imageUrl,
   }) = _UserUpdateReponse;
 
   factory UserUpdateResponse.fromJson(Map<String, dynamic> json) =>

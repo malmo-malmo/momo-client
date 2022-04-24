@@ -22,14 +22,12 @@ class _$UserUpdateRequestTearOff {
       {required String city,
       required String district,
       required String nickname,
-      required String university,
-      required String imagePath}) {
+      required String university}) {
     return _UserUpdateInfo(
       city: city,
       district: district,
       nickname: nickname,
       university: university,
-      imagePath: imagePath,
     );
   }
 }
@@ -43,7 +41,6 @@ mixin _$UserUpdateRequest {
   String get district => throw _privateConstructorUsedError;
   String get nickname => throw _privateConstructorUsedError;
   String get university => throw _privateConstructorUsedError;
-  String get imagePath => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $UserUpdateRequestCopyWith<UserUpdateRequest> get copyWith =>
@@ -55,12 +52,7 @@ abstract class $UserUpdateRequestCopyWith<$Res> {
   factory $UserUpdateRequestCopyWith(
           UserUpdateRequest value, $Res Function(UserUpdateRequest) then) =
       _$UserUpdateRequestCopyWithImpl<$Res>;
-  $Res call(
-      {String city,
-      String district,
-      String nickname,
-      String university,
-      String imagePath});
+  $Res call({String city, String district, String nickname, String university});
 }
 
 /// @nodoc
@@ -78,7 +70,6 @@ class _$UserUpdateRequestCopyWithImpl<$Res>
     Object? district = freezed,
     Object? nickname = freezed,
     Object? university = freezed,
-    Object? imagePath = freezed,
   }) {
     return _then(_value.copyWith(
       city: city == freezed
@@ -97,10 +88,6 @@ class _$UserUpdateRequestCopyWithImpl<$Res>
           ? _value.university
           : university // ignore: cast_nullable_to_non_nullable
               as String,
-      imagePath: imagePath == freezed
-          ? _value.imagePath
-          : imagePath // ignore: cast_nullable_to_non_nullable
-              as String,
     ));
   }
 }
@@ -112,12 +99,7 @@ abstract class _$UserUpdateInfoCopyWith<$Res>
           _UserUpdateInfo value, $Res Function(_UserUpdateInfo) then) =
       __$UserUpdateInfoCopyWithImpl<$Res>;
   @override
-  $Res call(
-      {String city,
-      String district,
-      String nickname,
-      String university,
-      String imagePath});
+  $Res call({String city, String district, String nickname, String university});
 }
 
 /// @nodoc
@@ -137,7 +119,6 @@ class __$UserUpdateInfoCopyWithImpl<$Res>
     Object? district = freezed,
     Object? nickname = freezed,
     Object? university = freezed,
-    Object? imagePath = freezed,
   }) {
     return _then(_UserUpdateInfo(
       city: city == freezed
@@ -156,10 +137,6 @@ class __$UserUpdateInfoCopyWithImpl<$Res>
           ? _value.university
           : university // ignore: cast_nullable_to_non_nullable
               as String,
-      imagePath: imagePath == freezed
-          ? _value.imagePath
-          : imagePath // ignore: cast_nullable_to_non_nullable
-              as String,
     ));
   }
 }
@@ -171,8 +148,7 @@ class _$_UserUpdateInfo implements _UserUpdateInfo {
       {required this.city,
       required this.district,
       required this.nickname,
-      required this.university,
-      required this.imagePath});
+      required this.university});
 
   @override
   final String city;
@@ -182,12 +158,10 @@ class _$_UserUpdateInfo implements _UserUpdateInfo {
   final String nickname;
   @override
   final String university;
-  @override
-  final String imagePath;
 
   @override
   String toString() {
-    return 'UserUpdateRequest(city: $city, district: $district, nickname: $nickname, university: $university, imagePath: $imagePath)';
+    return 'UserUpdateRequest(city: $city, district: $district, nickname: $nickname, university: $university)';
   }
 
   @override
@@ -199,8 +173,7 @@ class _$_UserUpdateInfo implements _UserUpdateInfo {
             const DeepCollectionEquality().equals(other.district, district) &&
             const DeepCollectionEquality().equals(other.nickname, nickname) &&
             const DeepCollectionEquality()
-                .equals(other.university, university) &&
-            const DeepCollectionEquality().equals(other.imagePath, imagePath));
+                .equals(other.university, university));
   }
 
   @override
@@ -209,8 +182,7 @@ class _$_UserUpdateInfo implements _UserUpdateInfo {
       const DeepCollectionEquality().hash(city),
       const DeepCollectionEquality().hash(district),
       const DeepCollectionEquality().hash(nickname),
-      const DeepCollectionEquality().hash(university),
-      const DeepCollectionEquality().hash(imagePath));
+      const DeepCollectionEquality().hash(university));
 
   @JsonKey(ignore: true)
   @override
@@ -223,8 +195,7 @@ abstract class _UserUpdateInfo implements UserUpdateRequest {
       {required String city,
       required String district,
       required String nickname,
-      required String university,
-      required String imagePath}) = _$_UserUpdateInfo;
+      required String university}) = _$_UserUpdateInfo;
 
   @override
   String get city;
@@ -234,8 +205,6 @@ abstract class _UserUpdateInfo implements UserUpdateRequest {
   String get nickname;
   @override
   String get university;
-  @override
-  String get imagePath;
   @override
   @JsonKey(ignore: true)
   _$UserUpdateInfoCopyWith<_UserUpdateInfo> get copyWith =>

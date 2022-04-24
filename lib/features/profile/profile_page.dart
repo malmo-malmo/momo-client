@@ -37,7 +37,6 @@ class ProfilePage extends ConsumerWidget {
                   district: userData.district,
                   nickname: userData.nickname,
                   university: userData.university,
-                  imagePath: userData.image!,
                 ),
               ),
               isEnable: true,

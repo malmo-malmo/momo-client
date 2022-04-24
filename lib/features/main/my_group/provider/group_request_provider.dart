@@ -22,7 +22,8 @@ final groupRequestCheckProvider = Provider.autoDispose<bool>((ref) {
   return false;
 });
 
-final groupRequestStateProvider = StateNotifierProvider.autoDispose<GroupRequestState, GroupRequest>(
+final groupRequestStateProvider =
+    StateNotifierProvider.autoDispose<GroupRequestState, GroupRequest>(
   (ref) {
     final groupRepository = ref.watch(groupRepositoryProvider);
     return GroupRequestState(groupRepository: groupRepository);
@@ -42,7 +43,7 @@ class GroupRequestState extends StateNotifier<GroupRequest> {
             introduction: '',
             recruitmentCnt: 0,
             startDate: '',
-            isUniversity: true,
+            university: null,
             isOffline: true,
           ),
         );
@@ -65,13 +66,15 @@ class GroupRequestState extends StateNotifier<GroupRequest> {
 
   void setOnOff(bool isOffline) => state = state.copyWith(isOffline: isOffline);
 
-  void setRecruitmentCnt(String recruitmentCnt) => state = state.copyWith(recruitmentCnt: int.parse(recruitmentCnt));
+  void setRecruitmentCnt(String recruitmentCnt) =>
+      state = state.copyWith(recruitmentCnt: int.parse(recruitmentCnt));
 
-  void setStartDate(DateTime dateTime) => state = state.copyWith(startDate: DateFormat('yyyy-MM-dd').format(dateTime));
+  void setStartDate(DateTime dateTime) =>
+      state = state.copyWith(startDate: DateFormat('yyyy-MM-dd').format(dateTime));
 
   void setIntroduction(String introduction) => state = state.copyWith(introduction: introduction);
 
-  void setUniversity(bool isUniversity) => state = state.copyWith(isUniversity: isUniversity);
+  void setUniversity(String university) => state = state.copyWith(university: university);
 
   void setDistrict(String district) => state = state.copyWith(district: district);
 

@@ -29,8 +29,10 @@ final dioProvider = Provider<Dio>(
       QueuedInterceptorsWrapper(
         onRequest: (options, handler) {
           final _tokenData = AppDatabase().getTokenData();
-          if (options.headers['Authorization'] != '${_tokenData!.accessTokenType} ${_tokenData.accessToken}') {
-            options.headers['Authorization'] = '${_tokenData.accessTokenType} ${_tokenData.accessToken}';
+          if (options.headers['Authorization'] !=
+              '${_tokenData!.accessTokenType} ${_tokenData.accessToken}') {
+            options.headers['Authorization'] =
+                '${_tokenData.accessTokenType} ${_tokenData.accessToken}';
             handler.next(options);
           } else {
             return handler.next(options);
@@ -40,14 +42,14 @@ final dioProvider = Provider<Dio>(
           final _tokenData = AppDatabase().getTokenData();
           if (error.response?.statusCode == 401) {
             RequestOptions options = error.response!.requestOptions;
-            if (options.headers['Authorization'] != '${_tokenData!.accessTokenType} ${_tokenData.accessToken}') {
-              options.headers['Authorization'] = '${_tokenData.accessTokenType} ${_tokenData.accessToken}';
+            if (options.headers['Authorization'] !=
+                '${_tokenData!.accessTokenType} ${_tokenData.accessToken}') {
+              options.headers['Authorization'] =
+                  '${_tokenData.accessTokenType} ${_tokenData.accessToken}';
               dio.fetch(options).then(
-                (r) => handler.resolve(r),
-                onError: (e) {
-                  handler.reject(e);
-                },
-              );
+                    (r) => handler.resolve(r),
+                    onError: (e) => handler.reject(e),
+                  );
               return;
             }
             authDio.post(
@@ -60,15 +62,12 @@ final dioProvider = Provider<Dio>(
               (response) async {
                 final _tokenData = TokenData.fromJson(response.data);
                 await AppDatabase().setTokenData(_tokenData);
-                options.headers['Authorization'] = '${_tokenData.accessTokenType} ${_tokenData.accessToken}';
+                options.headers['Authorization'] =
+                    '${_tokenData.accessTokenType} ${_tokenData.accessToken}';
               },
             ).then(
-              (_) => dio.fetch(options).then(
-                    (value) => handler.resolve(value),
-                  ),
-              onError: (e) {
-                handler.reject(e);
-              },
+              (_) => dio.fetch(options).then((value) => handler.resolve(value)),
+              onError: (e) => handler.reject(e),
             );
             return;
           }

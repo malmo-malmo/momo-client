@@ -27,7 +27,7 @@ class _$GroupRequestTearOff {
       required String introduction,
       required int recruitmentCnt,
       required String startDate,
-      required bool isUniversity,
+      String? university,
       required bool isOffline}) {
     return _GroupRequest(
       name: name,
@@ -38,7 +38,7 @@ class _$GroupRequestTearOff {
       introduction: introduction,
       recruitmentCnt: recruitmentCnt,
       startDate: startDate,
-      isUniversity: isUniversity,
+      university: university,
       isOffline: isOffline,
     );
   }
@@ -57,7 +57,7 @@ mixin _$GroupRequest {
   String get introduction => throw _privateConstructorUsedError;
   int get recruitmentCnt => throw _privateConstructorUsedError;
   String get startDate => throw _privateConstructorUsedError;
-  bool get isUniversity => throw _privateConstructorUsedError;
+  String? get university => throw _privateConstructorUsedError;
   bool get isOffline => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -79,7 +79,7 @@ abstract class $GroupRequestCopyWith<$Res> {
       String introduction,
       int recruitmentCnt,
       String startDate,
-      bool isUniversity,
+      String? university,
       bool isOffline});
 }
 
@@ -101,7 +101,7 @@ class _$GroupRequestCopyWithImpl<$Res> implements $GroupRequestCopyWith<$Res> {
     Object? introduction = freezed,
     Object? recruitmentCnt = freezed,
     Object? startDate = freezed,
-    Object? isUniversity = freezed,
+    Object? university = freezed,
     Object? isOffline = freezed,
   }) {
     return _then(_value.copyWith(
@@ -137,10 +137,10 @@ class _$GroupRequestCopyWithImpl<$Res> implements $GroupRequestCopyWith<$Res> {
           ? _value.startDate
           : startDate // ignore: cast_nullable_to_non_nullable
               as String,
-      isUniversity: isUniversity == freezed
-          ? _value.isUniversity
-          : isUniversity // ignore: cast_nullable_to_non_nullable
-              as bool,
+      university: university == freezed
+          ? _value.university
+          : university // ignore: cast_nullable_to_non_nullable
+              as String?,
       isOffline: isOffline == freezed
           ? _value.isOffline
           : isOffline // ignore: cast_nullable_to_non_nullable
@@ -165,7 +165,7 @@ abstract class _$GroupRequestCopyWith<$Res>
       String introduction,
       int recruitmentCnt,
       String startDate,
-      bool isUniversity,
+      String? university,
       bool isOffline});
 }
 
@@ -189,7 +189,7 @@ class __$GroupRequestCopyWithImpl<$Res> extends _$GroupRequestCopyWithImpl<$Res>
     Object? introduction = freezed,
     Object? recruitmentCnt = freezed,
     Object? startDate = freezed,
-    Object? isUniversity = freezed,
+    Object? university = freezed,
     Object? isOffline = freezed,
   }) {
     return _then(_GroupRequest(
@@ -225,10 +225,10 @@ class __$GroupRequestCopyWithImpl<$Res> extends _$GroupRequestCopyWithImpl<$Res>
           ? _value.startDate
           : startDate // ignore: cast_nullable_to_non_nullable
               as String,
-      isUniversity: isUniversity == freezed
-          ? _value.isUniversity
-          : isUniversity // ignore: cast_nullable_to_non_nullable
-              as bool,
+      university: university == freezed
+          ? _value.university
+          : university // ignore: cast_nullable_to_non_nullable
+              as String?,
       isOffline: isOffline == freezed
           ? _value.isOffline
           : isOffline // ignore: cast_nullable_to_non_nullable
@@ -249,7 +249,7 @@ class _$_GroupRequest implements _GroupRequest {
       required this.introduction,
       required this.recruitmentCnt,
       required this.startDate,
-      required this.isUniversity,
+      this.university,
       required this.isOffline});
 
   @override
@@ -269,13 +269,13 @@ class _$_GroupRequest implements _GroupRequest {
   @override
   final String startDate;
   @override
-  final bool isUniversity;
+  final String? university;
   @override
   final bool isOffline;
 
   @override
   String toString() {
-    return 'GroupRequest(name: $name, category: $category, city: $city, district: $district, imagePath: $imagePath, introduction: $introduction, recruitmentCnt: $recruitmentCnt, startDate: $startDate, isUniversity: $isUniversity, isOffline: $isOffline)';
+    return 'GroupRequest(name: $name, category: $category, city: $city, district: $district, imagePath: $imagePath, introduction: $introduction, recruitmentCnt: $recruitmentCnt, startDate: $startDate, university: $university, isOffline: $isOffline)';
   }
 
   @override
@@ -294,7 +294,7 @@ class _$_GroupRequest implements _GroupRequest {
                 .equals(other.recruitmentCnt, recruitmentCnt) &&
             const DeepCollectionEquality().equals(other.startDate, startDate) &&
             const DeepCollectionEquality()
-                .equals(other.isUniversity, isUniversity) &&
+                .equals(other.university, university) &&
             const DeepCollectionEquality().equals(other.isOffline, isOffline));
   }
 
@@ -309,7 +309,7 @@ class _$_GroupRequest implements _GroupRequest {
       const DeepCollectionEquality().hash(introduction),
       const DeepCollectionEquality().hash(recruitmentCnt),
       const DeepCollectionEquality().hash(startDate),
-      const DeepCollectionEquality().hash(isUniversity),
+      const DeepCollectionEquality().hash(university),
       const DeepCollectionEquality().hash(isOffline));
 
   @JsonKey(ignore: true)
@@ -328,7 +328,7 @@ abstract class _GroupRequest implements GroupRequest {
       required String introduction,
       required int recruitmentCnt,
       required String startDate,
-      required bool isUniversity,
+      String? university,
       required bool isOffline}) = _$_GroupRequest;
 
   @override
@@ -348,7 +348,7 @@ abstract class _GroupRequest implements GroupRequest {
   @override
   String get startDate;
   @override
-  bool get isUniversity;
+  String? get university;
   @override
   bool get isOffline;
   @override

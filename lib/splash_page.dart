@@ -29,8 +29,6 @@ class _SplashPageState extends ConsumerState<SplashPage> {
 
     if (!_tokenCheck) {
       final _userDataCheck = await _isFirstLogin();
-      // AppConfig.categoryCodeNamePair = await ref.watch(groupClientProvider).getGroupCategories();
-      // AppConfig.locationCodeNamePair = await ref.watch(districtClientProvider).getCities();
       if (!_userDataCheck) {
         Navigator.pushNamed(context, MainPage.routeName);
       } else {

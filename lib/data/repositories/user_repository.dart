@@ -8,6 +8,7 @@ import 'package:momo_flutter/data/datasources/remote/retrofit_client_provider.da
 import 'package:momo_flutter/data/models/common/category_request.dart';
 import 'package:momo_flutter/data/models/common/count_response.dart';
 import 'package:momo_flutter/data/models/common/district_response.dart';
+import 'package:momo_flutter/data/models/common/image_url_response.dart';
 import 'package:momo_flutter/data/models/common/university_response.dart';
 import 'package:momo_flutter/data/models/user/user_response.dart';
 import 'package:momo_flutter/data/models/user/user_update_request.dart';
@@ -67,15 +68,12 @@ class UserRepository {
   }
 
   Future<UserUpdateResponse> updateUserData(UserUpdateRequest updateRequest) {
-    if (updateRequest.imagePath.isEmpty) {
-      return userClient.updateUserInfo(
-        updateRequest.nickname,
-        updateRequest.university,
-        updateRequest.city,
-        updateRequest.district,
-      );
-    }
-    return formDataClient.updateUserInfo(updateRequest);
+    return userClient.updateUserInfo(
+      updateRequest.nickname,
+      updateRequest.university,
+      updateRequest.city,
+      updateRequest.district,
+    );
   }
 
   Future<CountResponse> getFavoriteGroupCount() {
@@ -84,5 +82,13 @@ class UserRepository {
 
   Future<CountResponse> getTotalGroupCount() {
     return managementClient.getParticipationGroupCount();
+  }
+
+  Future<ImageUrlResponse> updateImage(String imagePath) {
+    return formDataClient.updateProfileImage(imagePath);
+  }
+
+  Future<dynamic> deleteImage() {
+    return userClient.deleteImage();
   }
 }

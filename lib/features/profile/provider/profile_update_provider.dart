@@ -15,7 +15,8 @@ final profileUpdateCheckProvider = Provider.autoDispose<bool>((ref) {
 
 final vaildatioinNicknameProvider = StateProvider.autoDispose<bool>((ref) => true);
 
-final profileUpdateStateProvider = StateNotifierProvider.autoDispose<ProfileUpdateState, UserUpdateRequest>(
+final profileUpdateStateProvider =
+    StateNotifierProvider.autoDispose<ProfileUpdateState, UserUpdateRequest>(
   (ref) => ProfileUpdateState(),
 );
 
@@ -27,7 +28,6 @@ class ProfileUpdateState extends StateNotifier<UserUpdateRequest> {
             district: '',
             nickname: '',
             university: '',
-            imagePath: '',
           ),
         );
 
@@ -39,8 +39,6 @@ class ProfileUpdateState extends StateNotifier<UserUpdateRequest> {
       university: userUpdateRequest.university,
     );
   }
-
-  void setImagePath(String imagePath) => state = state.copyWith(imagePath: imagePath);
 
   void setUserNickname(String nickname) => state = state.copyWith(nickname: nickname);
 

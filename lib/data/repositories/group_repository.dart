@@ -5,6 +5,7 @@ import 'package:momo_flutter/data/datasources/remote/retrofit/favorite_client.da
 import 'package:momo_flutter/data/datasources/remote/retrofit/group_client.dart';
 import 'package:momo_flutter/data/datasources/remote/retrofit/management_client.dart';
 import 'package:momo_flutter/data/datasources/remote/retrofit_client_provider.dart';
+import 'package:momo_flutter/data/models/common/image_url_response.dart';
 import 'package:momo_flutter/data/models/group/group_create_response.dart';
 import 'package:momo_flutter/data/models/group/group_detail_response.dart';
 import 'package:momo_flutter/data/models/group/group_like_request.dart';
@@ -82,15 +83,18 @@ class GroupRepository {
     );
   }
 
-  Future<List<GroupResponse>> getGroupsByCategories({int? lastGroupId, int size = AppConsts.pageSize}) {
+  Future<List<GroupResponse>> getGroupsByCategories(
+      {int? lastGroupId, int size = AppConsts.pageSize}) {
     return groupClient.getGroupsByCategories(lastGroupId, size);
   }
 
-  Future<List<GroupResponse>> getGroupsByLocation({int? lastGroupId, int size = AppConsts.pageSize}) {
+  Future<List<GroupResponse>> getGroupsByLocation(
+      {int? lastGroupId, int size = AppConsts.pageSize}) {
     return groupClient.getGroupsByDistrict(lastGroupId, size);
   }
 
-  Future<List<GroupResponse>> getGroupsByUniversity({int? lastGroupId, int size = AppConsts.pageSize}) {
+  Future<List<GroupResponse>> getGroupsByUniversity(
+      {int? lastGroupId, int size = AppConsts.pageSize}) {
     return groupClient.getGroupsByUniversity(lastGroupId, size);
   }
 
@@ -123,5 +127,12 @@ class GroupRepository {
 
   Future<List<ParticipationGroupResponse>> getParticipantGroups() {
     return managementClient.getParticipationGroupDetail();
+  }
+
+  Future<ImageUrlResponse> updateImage({
+    required int groupId,
+    required String imagePath,
+  }) {
+    return formDataClient.updateGroupImage(groupId: groupId, imagePath: imagePath);
   }
 }
