@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:momo_flutter/features/main/my_group/provider/group_request_provider.dart';
+import 'package:momo_flutter/provider/user_provider.dart';
 import 'package:momo_flutter/resources/resources.dart';
 
 class UniversityToggleButton extends ConsumerWidget {
@@ -10,14 +11,15 @@ class UniversityToggleButton extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final check = ref.watch(groupRequestStateProvider).isOffline;
+    final check = ref.watch(groupRequestStateProvider).university != null;
+    final university = ref.watch(userDataStateProvider).university;
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16),
       child: Row(
         children: [
           InkWell(
             borderRadius: BorderRadius.circular(22),
-            onTap: () => ref.read(groupRequestStateProvider.notifier).setOnOff(true),
+            onTap: () => ref.read(groupRequestStateProvider.notifier).setUniversity(university),
             child: Container(
               height: 44,
               width: 91,
@@ -38,7 +40,7 @@ class UniversityToggleButton extends ConsumerWidget {
           const SizedBox(width: 16),
           InkWell(
             borderRadius: BorderRadius.circular(22),
-            onTap: () => ref.read(groupRequestStateProvider.notifier).setOnOff(false),
+            onTap: () => ref.read(groupRequestStateProvider.notifier).setUniversity(null),
             child: Container(
               height: 44,
               width: 106,

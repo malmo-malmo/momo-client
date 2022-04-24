@@ -74,7 +74,7 @@ class GroupRequestState extends StateNotifier<GroupRequest> {
 
   void setIntroduction(String introduction) => state = state.copyWith(introduction: introduction);
 
-  void setUniversity(String university) => state = state.copyWith(university: university);
+  void setUniversity(String? university) => state = state.copyWith(university: university);
 
   void setDistrict(String district) => state = state.copyWith(district: district);
 
