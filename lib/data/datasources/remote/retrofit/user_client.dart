@@ -1,6 +1,5 @@
 import 'package:dio/dio.dart';
 import 'package:momo_flutter/app_config.dart';
-import 'package:momo_flutter/data/models/common/image_url_response.dart';
 import 'package:momo_flutter/data/models/common/university_response.dart';
 import 'package:momo_flutter/data/models/user/user_response.dart';
 import 'package:momo_flutter/data/models/user/user_update_response.dart';

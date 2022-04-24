@@ -7,8 +7,6 @@ import 'package:momo_flutter/data/models/group/group_create_response.dart';
 import 'package:momo_flutter/data/models/group/group_request.dart';
 import 'package:momo_flutter/data/models/post/post_detail_response.dart';
 import 'package:momo_flutter/data/models/post/post_request.dart';
-import 'package:momo_flutter/data/models/user/user_update_request.dart';
-import 'package:momo_flutter/data/models/user/user_update_response.dart';
 
 final formDataClientProvider = Provider<FormDataClient>((ref) {
   final dio = ref.watch(dioProvider);

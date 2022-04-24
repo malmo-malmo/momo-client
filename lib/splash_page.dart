@@ -32,7 +32,7 @@ class _SplashPageState extends ConsumerState<SplashPage> {
       if (!_userDataCheck) {
         Navigator.pushNamed(context, MainPage.routeName);
       } else {
-        Navigator.pushNamed(context, TermsPage.routeName);
+        Navigator.pushNamed(context, LoginPage.routeName);
       }
     } else {
       Navigator.pushNamed(context, LoginPage.routeName);

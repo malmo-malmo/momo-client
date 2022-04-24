@@ -56,15 +56,15 @@ class LoginPage extends StatelessWidget {
                                   )
                                   .then(
                                 (value) async {
-                                  // AppConfig.categoryCodeNamePair =
-                                  //     await ref.watch(groupClientProvider).getGroupCategories();
-                                  // AppConfig.locationCodeNamePair = await ref.watch(districtClientProvider).getCities();
-                                  final _isFirstLogin = await ref.read(userDataStateProvider.notifier).isFirstLogin();
+                                  final _isFirstLogin =
+                                      await ref.read(userDataStateProvider.notifier).isFirstLogin();
                                   ref.read(loadingProvider.state).state = false;
                                   if (_isFirstLogin) {
-                                    Navigator.pushNamedAndRemoveUntil(context, TermsPage.routeName, (route) => false);
+                                    Navigator.pushNamedAndRemoveUntil(
+                                        context, TermsPage.routeName, (route) => false);
                                   } else {
-                                    Navigator.pushNamedAndRemoveUntil(context, MainPage.routeName, (route) => false);
+                                    Navigator.pushNamedAndRemoveUntil(
+                                        context, MainPage.routeName, (route) => false);
                                   }
                                 },
                               );
@@ -119,7 +119,9 @@ class LoginPage extends StatelessWidget {
     String? authCode;
     try {
       final check = await isKakaoTalkInstalled();
-      authCode = check ? await AuthCodeClient.instance.requestWithTalk() : await AuthCodeClient.instance.request();
+      authCode = check
+          ? await AuthCodeClient.instance.requestWithTalk()
+          : await AuthCodeClient.instance.request();
     } on KakaoAuthException catch (e) {
       log('KakaoAuthException: ${e.toString()}');
     } on KakaoClientException catch (e) {
